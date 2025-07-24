@@ -1,0 +1,22 @@
+{
+    "required_fields": {
+        "phone_number": "C",
+        "email": "B",
+        "full_name": "A",
+        "address_takes_up_1_column": true
+    },
+    "address_1_column_format": {
+        "address_format": "street, city, state, postal",
+        "address_separator": ", "
+    },
+    "if_multi_column_address": {
+        "street_address": null,
+        "city": null,
+        "postal": null
+    },
+    "additional_address_information": {
+        "province": null,
+        "country": null
+    },
+    "additional_fields": {}
+}
