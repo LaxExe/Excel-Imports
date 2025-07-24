@@ -3,11 +3,13 @@
         "phone_number": "C",
         "email": "B",
         "full_name": "A",
+        "last_name": null,
         "address_takes_up_1_column": true
     },
     "address_1_column_format": {
+        "address_column": "D",
         "address_format": "street, city, state, postal",
-        "address_separator": ", "
+        "address_separator": ","
     },
     "if_multi_column_address": {
         "street_address": null,

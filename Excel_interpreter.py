@@ -82,6 +82,7 @@ Step-by-step process:
    - **Phone**: Headers containing words like "phone", "tel", "telephone", "mobile", "cell", "contact number"
    - **Email**: Headers containing words like "email", "e-mail", "mail", or containing "@" symbol
    - **Full Name**: Headers containing words like "name", "full name", "contact person", "client name", "customer name" (exclude business/company names)
+   - **Last Name**: Headers containing "last name", "surname", "family name" (optional, can be null if not found)
 
 3. **Analyze address structure**:
    - **Single column**: Look for headers like "address", "full address", "complete address", "location", "mailing address"
@@ -94,6 +95,7 @@ Step-by-step process:
 
 5. **For single-column addresses - CRITICAL ANALYSIS**:
    - Find the single address column and examine 3-4 actual address values from rows 2-5
+   - Inidcate the column the address is in.
    - **Identify the separator**: Look at the actual data to find what character separates components (comma, semicolon, pipe, etc.)
    - **Count components**: Count how many parts each address has when split by the separator
    - **Analyze actual components**: Look at each part of the split addresses to determine what they represent:
@@ -142,9 +144,11 @@ primary_json_structure = """
     "phone_number": "Column Letter",
     "email": "Column Letter",
     "full_name": "Column Letter",
+    "last_name": "Column Letter or null",
     "address_takes_up_1_column": true
   },
   "address_1_column_format": {
+    "address_column": "Column Letter or null",
     "address_format": "",
     "address_separator": ""
   },
