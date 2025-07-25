@@ -1,7 +1,7 @@
 
 from openpyxl import load_workbook
 import json
-from clean import validate_email, filter_full_name, clean_phone_number, extract_country_code
+from clean import validate_email, filter_full_name, clean_phone_number
 
 # Helper Function
 def col_letter_to_index(letter):

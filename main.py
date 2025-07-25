@@ -1,5 +1,11 @@
 from Excel_interpreter import get_first_5_rows_as_dict, AI_generate_json_structure
 import json
+from address import pass_1_column, identify_type
+
+print(pass_1_column)
+
+if pass_1_column == None:
+    identify_type("info.json")
 
 snipit = get_first_5_rows_as_dict("test.xlsx")
 print(snipit)
