@@ -3,6 +3,36 @@ import phonenumbers
 import pycountry
 
 
+
+
+# Validation Function
+def filter_full_name(name, email, lastname):
+  
+  # Case 2
+  if name and lastname:
+    return f"{name.strip().title()} {lastname.strip().title()}"
+ 
+  # Case 1
+  if name and " " in name: # multi part name 
+        name_parts = name.strip().split()
+        return " ".join(part.capitalize() for part in name_parts)
+
+  # Case  3
+  if name == "null" and lastname == "null" and email:
+    name_segments = email.split("@")[0]
+    words = name_segments.replace(".", "").replace("_", " ").split()
+    return " ".join(word.capitalize() for word in words)
+  
+  return None
+
+
+def validate_email(email):
+  if not email or "@" not in email:
+    return None
+  return email.strip().lower()
+
+
+
 def extract_country_code(address):
     """
     Extract the country name from the address and convert to region code.
