@@ -5,8 +5,7 @@ snipit = get_first_5_rows_as_dict("test.xlsx")
 print(snipit)
 AI_generate_json_structure(snipit)
 
-
-from Excel_builder import export_to_excel, gather_row_data
+from excel_builder import export_to_excel, gather_row_data
 
 with open("info.json", "r") as f:
     info_json = json.load(f)

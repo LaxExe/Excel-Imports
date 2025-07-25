@@ -34,8 +34,6 @@ client = OpenAI(
 
 
 def get_first_5_rows_as_dict(file_path):
-    from openpyxl import load_workbook
-    import json
     
     wb = load_workbook(file_path)
     ws = wb.active

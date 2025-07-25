@@ -1,11 +1,9 @@
-
 from openpyxl import load_workbook
 import json
 from clean import validate_email, filter_full_name, clean_phone_number, extract_country_code
 
 # Helper Function
 def col_letter_to_index(letter):
-  
   if not letter or letter == None:
     return None
   total = 0
@@ -16,15 +14,14 @@ def col_letter_to_index(letter):
 
 
 
-
-
-
 def gather_row_data(excel_file, json_structure):
   
   wb = load_workbook(excel_file)
   ws = wb.active
 
   results = []
+
+
 
   col_indexes = {
     "email": col_letter_to_index(json_structure["required_fields"]["email"]),
@@ -39,13 +36,15 @@ def gather_row_data(excel_file, json_structure):
     phone_number = ws.cell(row=i, column=col_indexes["phone_number"]).value
     full_name = ws.cell(row=i, column=col_indexes["full_name"]).value
 
-    if (col_indexes["last_name"] != None):
+    # Case 1: Last Name Provided but None
+    if (col_indexes["last_name"] == None):
+      validate_name = filter_full_name(full_name, email, col_indexes["last_name"])  
+    else:
       last_name = ws.cell(row=i, column=col_indexes["last_name"]).value
+      validate_name = filter_full_name(full_name, email, last_name)
 
-
-    validate_name = filter_full_name(full_name, email, last_name)
+    
     valid_email = validate_email(email)
-
     valid_phone_number = clean_phone_number(phone_number, validate_name, valid_email, None) # Enter the country at none 
 
     results.append({
@@ -62,3 +61,8 @@ def gather_row_data(excel_file, json_structure):
 
   
  
+with open("info.json", "r") as f:
+    info_json = json.load(f)
+
+results = gather_row_data('test.xlsx', info_json)
+print(results)
