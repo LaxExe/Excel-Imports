@@ -34,8 +34,6 @@ client = OpenAI(
 
 
 def get_first_5_rows_as_dict(file_path):
-    from openpyxl import load_workbook
-    import json
     
     wb = load_workbook(file_path)
     ws = wb.active
@@ -92,10 +90,10 @@ Step-by-step process:
    - If single column found: Set `address_takes_up_1_column` to true
    - If multiple address columns found: Set `address_takes_up_1_column` to false
    - If both exist, prioritize the structure that has more complete information
-
+   
 5. **For single-column addresses - CRITICAL ANALYSIS**:
    - Find the single address column and examine 3-4 actual address values from rows 2-5
-   - Inidcate the column the address is in.
+   - Indicate the column the address is in.
    - **Identify the separator**: Look at the actual data to find what character separates components (comma, semicolon, pipe, etc.)
    - **Count components**: Count how many parts each address has when split by the separator
    - **Analyze actual components**: Look at each part of the split addresses to determine what they represent:
@@ -104,13 +102,27 @@ Step-by-step process:
      - Postal/zip codes contain numbers/letters in specific patterns
      - Provinces/states are often 2-3 character codes (ON, CA, NY, etc.)
      - Countries are longer text (Canada, USA, etc.)
-   - **ONLY include components that actually exist**: 
-     - If no country appears in any sample addresses, do NOT include "country" in the format
-     - If no province/state appears, do NOT include "province" in the format
-     - If no postal code appears, do NOT include "postal" in the format
-   - **Format description**: Describe ONLY the components that actually appear in the data
-     - Example: If addresses are "123 Main St, Toronto, ON, M1A1A1" then format is "street, city, province, postal"
-     - Example: If addresses are "456 Oak Ave, Vancouver" then format is "street, city"
+   - **Handle unseparated components with PRIORITY GROUPING**: When multiple address components appear together without the main separator, group them according to this priority order (highest to lowest priority):
+     1. **POSTAL** (highest priority)
+     2. **CITY**
+     3. **STATE**
+     4. **COUNTRY** (lowest priority)
+   - **Priority grouping rules**:
+     - If state and postal code appear together (e.g., "NY 10001"), categorize as "postal" since postal has higher priority
+     - If city and state appear together (e.g., "Toronto ON"), categorize as "city" since city has higher priority
+     - If city and country appear together (e.g., "Vancouver Canada"), categorize as "city" since city has higher priority
+     - If state and country appear together (e.g., "CA USA"), categorize as "state" since state has higher priority
+     - **Maintain parsing integrity**: Don't artificially split components that aren't separated in the source data
+     - **Document the grouping decision**: Note which components are grouped together and under what category
+   - **ONLY include components that actually exist as separate parts**: 
+     - If no country appears as a separate component, do NOT include "country" in the format
+     - If state and postal are combined as one component, classify it as "postal" (higher priority)
+     - If city and state appear together without separation, classify it as "city" (higher priority)
+   - **Format description**: Describe ONLY the components that actually appear as separate parts in the data, using the priority-based grouping
+     - Example: If addresses are "123 Main St, Toronto, ON M1A1A1" then format is "street, city, postal" (ON M1A1A1 grouped as "postal")
+     - Example: If addresses are "456 Oak Ave, Vancouver BC" then format is "street, city" (Vancouver BC grouped as "city")
+     - Example: If addresses are "789 Pine St, Seattle WA 98101" then format is "street, city, postal" (Seattle WA 98101 could be split as city + state_postal, but state_postal gets classified as "postal")
+     - Example: If addresses are "321 Elm Dr, Paris France" then format is "street, city" (Paris France grouped as "city")
 
 6. **For multi-column addresses**:
    - Map each address component to its column letter using flexible matching:

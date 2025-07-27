@@ -1,8 +1,7 @@
-# Identify type of address using the json
 import json
 
 
-def identify_type(filepath):
+def is_1_column_tag(filepath):
 
     with open(filepath, "r") as f:
         info_json = json.load(f)
@@ -11,55 +10,58 @@ def identify_type(filepath):
 
     return is_1_column
 
+def result_format(result, required_format, skip):
+    if skip:
+        return True
+    
+    formatted_parts = []
+
+    for key in required_format:
+        if key in result:
+            formatted_parts.append(result[key])
+        else:
+            return True
+
+    formatted_string = ", ".join(formatted_parts)
+    return formatted_string
 
 
-
-def column_1_address(address, format_str, separator):
+def column_1_address_skip(address, format_str, separator):
     format_parts = [f.strip() for f in format_str.split(separator)]
     address_parts = [a.strip() for a in address.split(separator)]
 
+    required_format = ["postal", "city", "street"]
+
     result = {}
+    skip = False
 
     extra_count = len(address_parts) - len(format_parts)
 
+    if extra_count >= 0:
+        for i, key in enumerate(format_parts):
+            if i == 0:
+                value = separator.join(address_parts[:extra_count + 1]).strip()
+            else:
+                value = address_parts[i + extra_count]
 
-    if extra_count > 0:
-            leftover = address_parts[:extra_count]
-            street_value = separator.join(leftover).strip()
+            if len(value) < 2 or len(value) > 40:
+                skip = True  
+                break
+
+            result[key] = value
     else:
-        #Call on AI
-        print("not enough parts")
-        street_value = "missing"
+        skip = True
 
-    format_without_street = [part for part in format_parts if part != 'street_address']
+    if skip:
+        return skip
 
-    addr_index = extra_count
-    for part in format_without_street:
-        if addr_index < 0 or addr_index >= len(address_parts):
-            result[part] = "missing"
-            #call on ai
-        else:
-            result[part] = address_parts[addr_index]
-        addr_index += 1
-        
-    result['street_address'] = street_value
+    result_string = result_format(result, required_format, skip)
 
-    return result
-
-print(column_1_address("123 Main St, Toronto, ON, M4C 1A1, Canada","street_address, city, province, postal_code, country", "," ))
+    return result_string
 
 
 
 
-
-# Case1: Address takes up 1 column
-    # Using seporators arrange address with address info form json into Unit, Street, City, Province, Postal, Country. make use of seperator and map in reverse
-    # use methods for missing info
-    # case 1, one of the feilds are missing pass to ai
-        # return pass
-    #return Unit, Street, City, Province, Postal, Country if anything is missing fill out address with missing info
-
-
-
+   
 
 

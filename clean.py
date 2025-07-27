@@ -18,7 +18,7 @@ def filter_full_name(name, email, lastname):
         return " ".join(part.capitalize() for part in name_parts)
 
   # Case  3
-  if name == "null" and lastname == "null" and email:
+  if name == None and lastname == None and email:
     name_segments = email.split("@")[0]
     words = name_segments.replace(".", "").replace("_", " ").split()
     return " ".join(word.capitalize() for word in words)

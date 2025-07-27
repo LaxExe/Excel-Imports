@@ -8,7 +8,7 @@
     },
     "address_1_column_format": {
         "address_column": "D",
-        "address_format": "street, city, state, postal",
+        "address_format": "street, city, postal",
         "address_separator": ","
     },
     "if_multi_column_address": {

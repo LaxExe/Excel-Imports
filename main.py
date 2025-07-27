@@ -1,18 +1,13 @@
 from Excel_interpreter import get_first_5_rows_as_dict, AI_generate_json_structure
 import json
-from address import pass_1_column, identify_type
+from row_parsing import gather_row_data
+from Excel_builder import export_to_excel
 
-print(pass_1_column)
-
-if pass_1_column == None:
-    identify_type("info.json")
 
 snipit = get_first_5_rows_as_dict("test.xlsx")
 print(snipit)
 AI_generate_json_structure(snipit)
 
-
-from Excel_builder import export_to_excel, gather_row_data
 
 with open("info.json", "r") as f:
     info_json = json.load(f)
