@@ -21,6 +21,7 @@ def gather_row_data(excel_file, json_structure):
   
   wb = load_workbook(excel_file)
   ws = wb.active
+  good_data = []
 
   results = []
   failed_results = []
@@ -49,7 +50,12 @@ def gather_row_data(excel_file, json_structure):
       
       address = ws.cell(row=i, column=col_indexes["address"]).value
       email = ws.cell(row=i, column=col_indexes["email"]).value
+
+
+      # Get phone number from excel
       phone_number = ws.cell(row=i, column=col_indexes["phone_number"]).value
+      
+      
       full_name = ws.cell(row=i, column=col_indexes["full_name"]).value
 
       # Case 1: Last Name Provided but None
@@ -67,20 +73,27 @@ def gather_row_data(excel_file, json_structure):
       valid_items = ' '.join(items)
 
       valid_email = validate_email(email)
+
+      # call on the valid phone number method
       valid_phone_number = clean_phone_number(phone_number, validate_name, valid_email, None) # Enter the country at none 
+
+
+
       valid_address = column_1_address_skip(address, address_1_column_format, address_1_column_seperator)       
 
 
       if (valid_address == True or valid_email == False or valid_phone_number == False  or validate_name == False):
         failed_results.append (   
-          f"{valid_email},  {valid_phone_number}, {full_name}, {valid_address}, {valid_items}"
+          f"{email}, 416 715 6897, {full_name}, {address}, {valid_items}" # replace with  {valid_phone_number}
         )
 
+
+
       if valid_address != True:
+
         if sample < 5:
-          good_data = []
           good_data.append (   
-          f"{valid_email},  {valid_phone_number}, {full_name}, {valid_address}, {valid_items}"
+          f"{valid_email},  416 715 6897, {validate_name}, {valid_address}, {valid_items}"
         )
           sample = sample + 1
 
@@ -89,7 +102,7 @@ def gather_row_data(excel_file, json_structure):
           "email": valid_email,
           "phone_number": valid_phone_number,
           "full_name": validate_name,
-          "address": address,
+          "address": valid_address,
           "additional_feilds" : valid_items
         })
   

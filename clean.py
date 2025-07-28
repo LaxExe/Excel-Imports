@@ -113,31 +113,65 @@ def clean_ai_response(response_text: str) -> str:
     return text.strip()
 
 
-clean_prompt = """you will be given a list of information that did not meet the cirteria, it may be because there are additional spaces, commas or some incorect charecters,
-                 you will be given a json of how the infomration was supposed to be arranged and a set of data with proper information, your job will be to fix up the list 
-                 and return only the list with no formating or any other informatin formated or explanation provided, just return a list with the corrected information,
-                 the list without mistakes is below, then a list with mistakes is after that"""
+clean_prompt = """
+You will be given two lists of strings containing client information entries.
+
+The first list contains **correctly formatted entries**. 
+The second list contains **entries with formatting issues** such as:
+- missing or extra commas,
+- extra or inconsistent spaces,
+- incorrect word ordering,
+- malformed or abbreviated address parts,
+- or other structure errors.
+
+You will also be given a JSON structure describing the desired field order.
+
+Your task is to correct the formatting of the second list ("bad" entries) to match the **exact style and structure** of the "good" list. Try to infer and apply the same:
+- field order,
+- punctuation (especially commas),
+- capitalization,
+- spacing.
+- Your goal is to make the bad entries to be the same as a the good entries
+
+Be precise and conservative. **Do not invent or replace values**—only clean and rearrange as needed to make them structurally identical to the examples in the good list.
+
+Return **only** a corrected dictionary values in the exact format used in the good list, and nothing else—no extra text, no explanation, no formatting.
+
+        {
+          "email": valid_email,
+          "phone_number": valid_phone_number,
+          "full_name": validate_name,
+          "address": valid_address,
+          "additional_feilds" : valid_items
+        }
+
+The list of correct examples is:
+"""
 
 def AI_check(results, failed_results):
     
-  string_good_data = " ".join(results)
-  string_failed_results = " ".join(failed_results)
+  string_good_data = str(results)
+  string_failed_results = str(failed_results)
 
-  print(string_good_data)
-  print(string_failed_results)
+  print("GOOD " + string_good_data)
+  print("BAD" + string_failed_results)
 
-  response = client.chat.completions.create(
-              model="Llama-3.3-Swallow-70B-Instruct-v0.4",
-              messages=[
-                  {
-                      "role": "user",
-                      "content": clean_prompt + string_good_data + json_string +" list that you need to fix : " + string_failed_results
-                  }
-              ]
-          )
-  
-  response_content = response.choices[0].message.content.strip()
+  if(len(string_failed_results) > 10):
+    full_prompt = clean_prompt + string_good_data + "\n\nHere is the JSON structure for expected formatting:\n" + json_string + "\n\nList to correct:\n" + string_failed_results
 
-  print("\n"*10)
-  print(response_content)
-  return response_content
+
+    response = client.chat.completions.create(
+                model="Llama-3.3-Swallow-70B-Instruct-v0.4",
+                messages=[
+                    {
+                        "role": "user",
+                        "content": full_prompt
+                    }
+                ]
+            )
+    
+    response_content = response.choices[0].message.content.strip()
+
+    print("\n"*10)
+    print(response_content)
+    return response_content
