@@ -1,6 +1,25 @@
 import re
 import phonenumbers
 import pycountry
+from dotenv import load_dotenv
+import os
+from openai import OpenAI
+import json
+
+with open("info.json", "r") as f:
+    data = json.load(f)         
+    json_string = json.dumps(data)  
+
+
+
+
+load_dotenv()
+api_key = os.getenv("OPENAI_API_KEY")
+
+client = OpenAI(
+    api_key=api_key,
+    base_url="https://api.sambanova.ai/v1"
+)
 
 
 
@@ -83,5 +102,42 @@ def clean_phone_number(raw_phone, full_name, email, address):
 
     return ""
 
+def clean_ai_response(response_text: str) -> str:
+    text = response_text.strip()
+    if text.startswith("```"):
+        first_newline = text.find("\n")
+        if first_newline != -1:
+            text = text[first_newline + 1:]
+        if text.endswith("```"):
+            text = text[:-3]
+    return text.strip()
 
 
+clean_prompt = """you will be given a list of information that did not meet the cirteria, it may be because there are additional spaces, commas or some incorect charecters,
+                 you will be given a json of how the infomration was supposed to be arranged and a set of data with proper information, your job will be to fix up the list 
+                 and return only the list with no formating or any other informatin formated or explanation provided, just return a list with the corrected information,
+                 the list without mistakes is below, then a list with mistakes is after that"""
+
+def AI_check(results, failed_results):
+    
+  string_good_data = " ".join(results)
+  string_failed_results = " ".join(failed_results)
+
+  print(string_good_data)
+  print(string_failed_results)
+
+  response = client.chat.completions.create(
+              model="Llama-3.3-Swallow-70B-Instruct-v0.4",
+              messages=[
+                  {
+                      "role": "user",
+                      "content": clean_prompt + string_good_data + json_string +" list that you need to fix : " + string_failed_results
+                  }
+              ]
+          )
+  
+  response_content = response.choices[0].message.content.strip()
+
+  print("\n"*10)
+  print(response_content)
+  return response_content

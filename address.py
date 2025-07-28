@@ -30,7 +30,7 @@ def column_1_address_skip(address, format_str, separator):
     format_parts = [f.strip() for f in format_str.split(separator)]
     address_parts = [a.strip() for a in address.split(separator)]
 
-    required_format = ["postal", "city", "street"]
+    required_format = ["postal"]
 
     result = {}
     skip = False
@@ -58,6 +58,9 @@ def column_1_address_skip(address, format_str, separator):
     result_string = result_format(result, required_format, skip)
 
     return result_string
+
+
+
 
 
 

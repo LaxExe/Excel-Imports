@@ -18,6 +18,7 @@
 from openpyxl import load_workbook, Workbook
 from openai import OpenAI
 from dotenv import load_dotenv
+from clean import clean_ai_response
 import os
 import json
 
@@ -90,7 +91,7 @@ Step-by-step process:
    - If single column found: Set `address_takes_up_1_column` to true
    - If multiple address columns found: Set `address_takes_up_1_column` to false
    - If both exist, prioritize the structure that has more complete information
-   
+
 5. **For single-column addresses - CRITICAL ANALYSIS**:
    - Find the single address column and examine 3-4 actual address values from rows 2-5
    - Indicate the column the address is in.
@@ -181,15 +182,7 @@ primary_json_structure = """
 """
 
 
-def clean_ai_response(response_text: str) -> str:
-    text = response_text.strip()
-    if text.startswith("```"):
-        first_newline = text.find("\n")
-        if first_newline != -1:
-            text = text[first_newline + 1:]
-        if text.endswith("```"):
-            text = text[:-3]
-    return text.strip()
+
 
 
 def AI_generate_json_structure(data):

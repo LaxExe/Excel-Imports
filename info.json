@@ -20,5 +20,8 @@
         "province": null,
         "country": null
     },
-    "additional_fields": {}
+    "additional_fields": {
+        "Unit ID": "E",
+        "Owner": "F"
+    }
 }
