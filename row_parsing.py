@@ -13,8 +13,6 @@ def col_letter_to_index(letter):
   return total
 
 
-
-
 def gather_row_data(excel_file, json_structure):
 
   sample = 0

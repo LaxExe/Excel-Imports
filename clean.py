@@ -20,8 +20,6 @@ client = OpenAI(
 )
 
 
-
-
 # Validation Function
 def filter_full_name(name, email, lastname):
   
