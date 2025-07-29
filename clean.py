@@ -6,11 +6,6 @@ import os
 from openai import OpenAI
 import json
 
-with open("info.json", "r") as f:
-    data = json.load(f)         
-    json_string = json.dumps(data)  
-
-
 
 
 load_dotenv()
@@ -133,36 +128,35 @@ Your task is to correct the formatting of the second list ("bad" entries) to mat
 - spacing.
 - Your goal is to make the bad entries to be the same as a the good entries
 
-Be precise and conservative. Only clean and rearrange as needed to make them structurally identical to the examples in the good list, if there are elements or portions of elements just add a null value for them
-Return **only** a corrected Json in the exact format used in the good list, and nothing else—no extra text, no explanation, no formatting.
+Be precise and conservative. Only clean and rearrange as needed to make them structurally identical to the examples in the good list, if there are elements or portions of elements just add a null value for them.
+
+CRITICAL: Return ONLY valid JSON with no extra text, explanations, or formatting. The JSON must start with { and end with }.
 
 {
-  "clean_items" : [
+  "clean_items": [
     {
-    "missing_parts_of_address" : true,
-    "email": valid_email,
-    "phone_number": valid_phone_number,
-    "full_name": validate_name,
-    "address": [
-    {
-      "street_address" : "string"
-      "postal_code" : "string or null"
-      "city" : "string or null"
-      "province_or_state_name": "string or null"
-      "country" : "string"
+      "missing_parts_of_address": true,
+      "email": "valid_email",
+      "phone_number": "valid_phone_number",
+      "full_name": "validate_name",
+      "address": [
+        {
+          "street_address": "string",
+          "postal_code": "string or null",
+          "city": "string or null",
+          "province_or_state_name": "string or null",
+          "country": "string"
+        }
+      ],
+      "additional_fields": "valid_items"
     }
-    
-    ]
-    "additional_feilds" : valid_items
-  }
   ]
 }
-
 
 The list of correct examples is:
 """
 
-def AI_check(results, failed_results):
+def AI_check(results, failed_results, page):
     
   string_good_data = str(results)
   string_failed_results = str(failed_results)
@@ -171,8 +165,7 @@ def AI_check(results, failed_results):
   print("BAD" + string_failed_results)
 
   if(len(string_failed_results) > 10):
-    full_prompt = clean_prompt + string_good_data + "\n\nHere is the JSON structure for expected formatting:\n" + json_string + "\n\nList to correct:\n" + string_failed_results
-
+    full_prompt = clean_prompt + string_good_data + "\n\nList to correct:\n" + string_failed_results
 
     response = client.chat.completions.create(
                 model="Llama-3.3-Swallow-70B-Instruct-v0.4",
@@ -187,32 +180,40 @@ def AI_check(results, failed_results):
     response_content = response.choices[0].message.content.strip()
 
     try:
-        response_content = clean_ai_response(response_content)
-        remake_json = json.loads(response_content)
+        cleaned_response = clean_ai_response(response_content)
+        
+        if not cleaned_response.startswith('{'):
+            start = cleaned_response.find('{')
+            end = cleaned_response.rfind('}') + 1
+            if start != -1 and end != 0:
+                cleaned_response = cleaned_response[start:end]
+        
+        remake_json = json.loads(cleaned_response)
         required_fields = ["clean_items"]
         all_required_present = True
 
-        required_data = remake_json.get("required_fields", {})
-
-
-
         for field in required_fields:
-            value = required_data.get(field)
-            if value in [None, "", "null"]:
-                print(f"Missing required field '{field}' in the excel file.")
-                print(all_required_present)
+            value = remake_json.get(field)
+            if value is None or value == "" or value == "null":
+                print(f"Missing required field '{field}' in the response.")
+                all_required_present = False
                 break
+            
+            if field == "clean_items":
+                if not isinstance(value, list) or len(value) == 0:
+                    print(f"Field '{field}' must be a non-empty list.")
+                    all_required_present = False
+                    break
 
         if all_required_present:
-            with open(f"remake.json", "w") as f:
+            with open(f"remake{page}.json", "w") as f:
                 json.dump(remake_json, f, indent=4) 
-
 
     except json.JSONDecodeError:
         print("Error decoding JSON response from OpenAI API.")
         pass
 
-    print(response_content)
+    print(cleaned_response)
 
     return "remake.json"
 

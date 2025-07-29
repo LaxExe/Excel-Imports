@@ -22,7 +22,3 @@ def export_to_excel(data, output_file):
     print(f"Excel file saved as: {output_file}")
 
 
-with open("info.json", "r") as f:
-  info_json = json.load(f)
-
-

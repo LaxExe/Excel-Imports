@@ -18,6 +18,8 @@ def col_letter_to_index(letter):
 def gather_row_data(excel_file, json_structure):
 
   sample = 0
+  check = 0
+  page = 0
   
   wb = load_workbook(excel_file)
   ws = wb.active
@@ -84,9 +86,10 @@ def gather_row_data(excel_file, json_structure):
 
       if (valid_address == True or valid_email == False or valid_phone_number == False  or validate_name == False):
         failed_results.append (   
-        f'{{\n  "email": "{email}",\n  "phone_number": "416 715 6897",\n  "full_name": "{full_name}",\n  "address": "{address}",\n  "additional_fields": "{valid_items}"\n}}'
+        f'{{\n  "email": "{email}",\n  "phone_number": "416 715 6897",\n  "full_name": "{full_name}",\n  "address": "{address}",\n  "additional_fields": "{valid_items}"\n}}')
+        check = check + 1
         # replace with  {valid_phone_number}
-        )
+
 
 
 
@@ -107,18 +110,12 @@ def gather_row_data(excel_file, json_structure):
           "additional_feilds" : valid_items
         })
   
-    AI_check(good_data, failed_results)
-
+      if check == 10:
+        AI_check(good_data, failed_results, page)
+        failed_results = []
+        check = 0 
+        page = page + 1
+  
+  AI_check(good_data, failed_results, page)
 
   return results
-
-
-
-
-  
- 
-with open("info.json", "r") as f:
-    info_json = json.load(f)
-
-results = gather_row_data('test.xlsx', info_json)
-print(results)
