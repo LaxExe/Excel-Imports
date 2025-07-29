@@ -1,5 +1,10 @@
 import openpyxl
 import json
+import re
+import pycountry
+from geopy.geocoders import Nominatim
+from geopy.exc import GeocoderTimedOut, GeocoderUnavailable
+import time
 
 
 def is_1_column_tag(filepath):
@@ -155,10 +160,156 @@ def column_multi_address(row, row_number, json_path="info.json"):
     # Example: "123 Main St, Toronto, ON, M4C 1A1, Canada"
     formatted_address = ", ".join(formatted_parts) if formatted_parts else ""
 
+    # Try to fill missing fields using geopy before returning
+    # If geopy can't fill a field, we leave it missing (don't send to AI)
+    if needs_ai:
+        print(f"Attempting to fill missing address fields with geopy for row {row_number}...")
+        geopy_result = fill_missing_address_with_geopy(result, needs_ai, address_fields)
+        
+        if isinstance(geopy_result, tuple) and len(geopy_result) == 2:
+            filled_parts, remaining_missing = geopy_result
+            # Update the result with filled fields
+            result.update(filled_parts)
+            # Only send to AI if there are still missing fields after geopy
+            # If geopy couldn't fill them, we leave them missing for data quality
+            needs_ai = remaining_missing
+        else:
+            # Handle case where geopy function returns unexpected format
+            print("Warning: Geopy function returned unexpected format")
+    
+    # Rebuild formatted address with filled fields
+    formatted_parts = []
+    for field in ordered_fields:
+        if field in result and result[field] and result[field].strip() != " " and result[field].strip() != "":
+            formatted_parts.append(result[field].strip())
+    
+    formatted_address = ", ".join(formatted_parts) if formatted_parts else ""
+    
+    # needs_ai is already updated above with remaining missing fields
+
     # Return both the formatted address and the AI needs information
     # The calling function can use this to know which parts need AI processing
     return {
         "address": formatted_address,  
         "needs_ai": needs_ai           
     }
+
+
+def fill_missing_address_with_geopy(address_parts, missing_fields, address_fields):
+    """
+    Uses geopy to fill missing address fields based on available information.
+    Only fills fields that have columns defined in the JSON configuration.
+    
+    Takes in:
+        address_parts (dict): Available address parts like {"street_address": "123 Main St", "postal_code": "M5V 3A8"}
+        missing_fields (dict): Fields that need to be filled like {"city": True, "country": True}
+        address_fields (dict): Fields that have columns defined like {"street_address": "A", "country": "H"}
+    
+    Returns:
+        dict: Updated address_parts with filled fields, and any remaining missing fields
+    """
+    # If no missing fields, return as is
+    if not missing_fields:
+        return address_parts, {}
+    
+    # Initialize geocoder for address lookup
+    # This will help us find missing address parts using available information
+    geolocator = Nominatim(user_agent="excel_imports_app")
+    
+    # Build search string from available address parts
+    # We combine all the parts we have to create a searchable address
+    search_parts = []
+    for field, value in address_parts.items():
+        if value and value.strip() and value.strip() != " ":
+            search_parts.append(value.strip())
+    
+    # If no search parts available, can't do geocoding
+    if not search_parts:
+        return address_parts, missing_fields
+    
+    # Join parts with commas for geocoding search
+    search_string = ", ".join(search_parts)
+    
+    try:
+        # Delay - geopy rate limits
+        time.sleep(1)
+        
+        # Geocode the address using available parts
+        # This will return location info if found
+        location = geolocator.geocode(search_string, timeout=10)
+        
+        if location:
+            # Get the full address string from geopy result
+            display_name = location.raw.get('display_name', '')
+            
+            # Parse the geocoded address to extract components dynamically
+            
+            # Split the display name into parts for analysis
+            # This gives us individual address components to work with
+            geocoded_parts = display_name.split(', ')
+            
+            # Initialize mapping for dynamic field detection
+            # We'll build this based on what we find in the geocoded address
+            detected_fields = {}
+            
+            # Analyze each part of the address to determine what it represents
+            for part in geocoded_parts:
+                part = part.strip()
+                
+                # Detect country using pycountry library for comprehensive international support
+                # This covers all countries in the world, not just a limited list
+                country_found = False
+                for country in pycountry.countries:
+                    if (country.name.lower() in part.lower() or 
+                        country.alpha_2.lower() in part.lower() or 
+                        country.alpha_3.lower() in part.lower()):
+                        detected_fields['country'] = part
+                        country_found = True
+                        break
+                
+                # Detect postal codes (patterns vary by country but usually contain letters/numbers)
+                if not country_found and any(char.isdigit() for char in part) and any(char.isalpha() for char in part) and len(part) >= 3:
+                    # This could be a postal code - check if it matches common patterns
+                    if re.match(r'^[A-Z0-9\s-]{3,10}$', part.upper()):
+                        detected_fields['postal_code'] = part
+                
+                # Detect provinces/states (usually 2-3 letter codes or full names)
+                elif not country_found and len(part) <= 3 and part.isupper():
+                    # Likely a state/province code (ON, BC, CA, NY, TX, etc.)
+                    detected_fields['province'] = part
+                elif not country_found and len(part) > 3 and not any(char.isdigit() for char in part):
+                    # Could be a city or province name (check if it's not already identified as country)
+                    if 'country' not in detected_fields or part not in detected_fields['country']:
+                        if 'city' not in detected_fields:
+                            detected_fields['city'] = part
+                        elif 'province' not in detected_fields:
+                            detected_fields['province'] = part
+            
+            # Fill missing fields using dynamically detected components
+            # Only fill fields that have columns defined in JSON config
+            updated_parts = address_parts.copy()
+            remaining_missing = missing_fields.copy()
+            
+            for field, is_missing in missing_fields.items():
+                # Only try to fill fields that have columns defined
+                # This prevents adding extra fields that aren't in the Excel structure
+                if is_missing and field in detected_fields and field in address_fields and address_fields[field]:
+                    # Use the dynamically detected value for this field
+                    updated_parts[field] = detected_fields[field]
+                    remaining_missing[field] = False
+                # If geopy couldn't find it, leave it missing (don't send to AI)
+            
+            return updated_parts, remaining_missing
+        else:
+            # No location found 
+            return address_parts, {}
+            
+    except (GeocoderTimedOut, GeocoderUnavailable) as e:
+        # Handle geopy service errors
+        print(f"Geopy error: {e}")
+        return address_parts, {} 
+    except Exception as e:
+        # Handle any unexpected errors
+        print(f"Unexpected error in geopy: {e}")
+        return address_parts, {}  
 
