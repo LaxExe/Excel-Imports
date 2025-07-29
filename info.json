@@ -4,24 +4,24 @@
         "email": "B",
         "full_name": "A",
         "last_name": null,
-        "address_takes_up_1_column": true
+        "address_takes_up_1_column": false
     },
     "address_1_column_format": {
-        "address_column": "D",
-        "address_format": "street, city, postal",
-        "address_separator": ","
+        "address_column": null,
+        "address_format": "",
+        "address_separator": ""
     },
     "if_multi_column_address": {
-        "street_address": null,
-        "city": null,
-        "postal": null
+        "street_address": "D",
+        "city": "E",
+        "postal": "G"
     },
     "additional_address_information": {
-        "province": null,
-        "country": null
+        "province": "F",
+        "country": "H"
     },
     "additional_fields": {
-        "Unit ID": "E",
-        "Owner": "F"
+        "Unit ID": "I",
+        "Owner": "J"
     }
 }

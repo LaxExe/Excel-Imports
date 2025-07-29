@@ -1,7 +1,7 @@
 from Excel_interpreter import get_first_5_rows_as_dict, AI_generate_json_structure
 import json
 from row_parsing import gather_row_data
-from Excel_builder import export_to_excel
+from excel_builder import export_to_excel
 
 
 snipit = get_first_5_rows_as_dict("test.xlsx")

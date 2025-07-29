@@ -1,7 +1,7 @@
 from openpyxl import load_workbook
 import json
 from clean import validate_email, filter_full_name, clean_phone_number, AI_check
-from address import is_1_column_tag, column_1_address_skip
+from address import is_1_column_tag, column_1_address_skip, column_multi_address
 
 # Helper Function
 def col_letter_to_index(letter):
@@ -21,7 +21,7 @@ def gather_row_data(excel_file, json_structure):
   
   wb = load_workbook(excel_file)
   ws = wb.active
-
+  good_data = []
   results = []
   failed_results = []
 
@@ -67,8 +67,15 @@ def gather_row_data(excel_file, json_structure):
       valid_items = ' '.join(items)
 
       valid_email = validate_email(email)
-      valid_phone_number = clean_phone_number(phone_number, validate_name, valid_email, None) # Enter the country at none 
-      valid_address = column_1_address_skip(address, address_1_column_format, address_1_column_seperator)       
+
+      valid_address = column_1_address_skip(address, address_1_column_format, address_1_column_seperator)
+
+      if valid_address == True:
+        address_for_phone = None  # invalid address
+      else:
+        address_for_phone = valid_address  # valid formatted address
+
+      valid_phone_number = clean_phone_number(phone_number, validate_name, valid_email, address_for_phone)
 
 
       if (valid_address == True or valid_email == False or valid_phone_number == False  or validate_name == False):
@@ -92,14 +99,108 @@ def gather_row_data(excel_file, json_structure):
           "address": address,
           "additional_feilds" : valid_items
         })
-  
+
+
+  else:
+    # CASE 2: 
+    # This handles Excel files where address information is spread across multiple columns
+    # Instead of one "Address" column, we have separate columns for street, city, province, etc.
+    
+    for i in range(2, ws.max_row + 1):
+      # Create a dictionary to hold all the cell values for this row
+      # Format: {"A2": "john@email.com", "B2": "123 Main St", "C2": "Toronto", ...}
+      row_dict = {}
+      
+      # Iterate through each column in this specific row
+      # This builds our row_dict with all the cell values for processing
+      for col in ws.iter_cols(min_row=i, max_row=i):
+        cell = col[0]  # Get the cell from this column at row i
+        # Store the cell value with its reference (e.g., "A2", "B2") as the key
+        # Convert to string and strip whitespace, default to empty string if cell is None
+        row_dict[f"{cell.column_letter}{cell.row}"] = str(cell.value).strip() if cell.value else ""
+
+      # Extract the required fields using the JSON structure mapping
+      # The JSON tells us which columns contain email, phone, name, etc.
+      email = row_dict.get(f"{json_structure['required_fields']['email']}{i}", "")
+      phone_number = row_dict.get(f"{json_structure['required_fields']['phone_number']}{i}", "")
+      full_name = row_dict.get(f"{json_structure['required_fields']['full_name']}{i}", "")
+      
+      # Handle last name field - it might not exist in the JSON structure
+      # If last_name is null in JSON, we pass None to the name validation function
+      last_name_val = (
+        row_dict.get(f"{json_structure['required_fields']['last_name']}{i}", "")
+        if json_structure["required_fields"]["last_name"]
+        else None
+      )
+      
+      # Validate and format the full name using the name cleaning function
+      # This handles cases where we have separate first/last name columns
+      validate_name = filter_full_name(full_name, email, last_name_val)
+
+      # Validate the email address using the email cleaning function
+      # This ensures the email is properly formatted and valid
+      valid_email = validate_email(email)
+
+      # Clean and format the address using the multi-column address function
+      # This is the key step for multi-column addresses - it combines separate columns into one address
+      address_result = column_multi_address(row_dict, i, json_path="info.json")
+      formatted_address = address_result["address"]  # The complete formatted address string
+      needs_ai = address_result["needs_ai"]          # Which address parts need AI to fill in
+
+      # Use the formatted address for phone number validation
+      # If the address is complete (no AI needed), we can use it to help validate the phone number
+      # If address needs AI, we pass None so phone validation doesn't rely on incomplete address
+      address_for_phone = formatted_address if not needs_ai else None
+      valid_phone_number = clean_phone_number(phone_number, validate_name, valid_email, address_for_phone)
+
+      # Process additional fields (any columns that aren't email, phone, name, or address)
+      # These might be things like "Unit ID", "Owner", "Department", etc.
+      items = []
+      additional_fields = json_structure.get("additional_fields", {})
+
+      # Loop through each additional field and get its value from the row
+      for key, col_letter in additional_fields.items():
+        cell_key = f"{col_letter}{i}"  
+        val = row_dict.get(cell_key, "")  
+        items.append(f"{key}: {val}")  
+      
+      # Join all additional fields with triple spaces for readability
+      # This creates a string like "Unit ID: asdf123   Owner: Nice"
+      valid_items = '   '.join(items)
+
+      # Determine if this row needs to be sent to AI for processing
+      # A row needs AI if any of these conditions are true:
+      # - Email is invalid
+      # - Phone number is invalid  
+      # - Name is invalid
+      # - Address needs AI (missing or invalid address parts)
+      if not valid_email or not valid_phone_number or not validate_name or bool(needs_ai):
+        # Add to failed results for AI processing
+        # This row will be sent to the AI to fix any issues
+        failed_results.append(f"{valid_email}, {valid_phone_number}, {full_name}, {formatted_address}, {valid_items}")
+      else:
+        # This row is valid and doesn't need AI processing
+        if sample < 5:
+          # Keep first 5 good examples for AI reference
+          # The AI uses these as examples of what correct data should look like
+          good_data.append(f"{valid_email}, {valid_phone_number}, {full_name}, {formatted_address}, {valid_items}")
+          sample += 1
+
+        # Add the cleaned and validated data to our results
+        # This will be exported to the final Excel file
+        results.append({
+          "email": valid_email,
+          "phone_number": valid_phone_number,
+          "full_name": validate_name,
+          "address": formatted_address,
+          "additional_fields": valid_items
+        })
+
+  # Send the good examples and failed results to AI for processing
+  # The AI will try to fix any issues in the failed results using the good examples as reference
   AI_check(good_data, failed_results)
-  
 
   return results
-
-
-
 
   
  

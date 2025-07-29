@@ -11,8 +11,6 @@ with open("info.json", "r") as f:
     json_string = json.dumps(data)  
 
 
-
-
 load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
 
@@ -51,56 +49,146 @@ def validate_email(email):
   return email.strip().lower()
 
 
-
 def extract_country_code(address):
     """
-    Extract the country name from the address and convert to region code.
+    Extracts a region code (e.g., 'US', 'CA') from an address string.
+    First checks common aliases like "USA", "UK", "UAE", then tries pycountry.
     """
     if not address:
         return None
 
+    address = address.lower()
+
+    # Manual alias map to catch common variations
+    alias_map = {
+        "usa": "US",
+        "united states": "US",
+        "us": "US",
+        "uk": "GB",
+        "uae": "AE",
+        "canada": "CA",
+        "india": "IN"
+    }
+
+    for alias, code in alias_map.items():
+        if alias in address:
+            return code
+
+    # Try matching full country names using pycountry
     for country in pycountry.countries:
-        if country.name.lower() in address.lower():
-            return country.alpha_2  # e.g., 'US', 'IN', etc.
+        if country.name.lower() in address:
+            return country.alpha_2
+
     return None
 
 
 def clean_phone_number(raw_phone, full_name, email, address):
     """
     Cleans and standardizes a phone number:
-    - Keeps the country code if present
-    - Infers country code from address if not present
-    - If phone is empty but name and email are present, returns empty string
-    - Returns phone number in +E.164 format if valid
+    - Preserves extensions like 'x123'
+    - Converts numbers like 1.234E+12 from Excel to valid format
+    - Uses address to infer region if country code is missing
+    - If valid, returns number in +E.164 format (e.g., +16135551212)
+    - If no region can be inferred, keeps raw cleaned number
+    - If completely invalid, returns 'INVALID'
     """
 
-    # If phone is empty and name/email present - return ""
+    # If phone is empty but we have name and email, return empty string
+    # This handles cases where phone is optional but other fields are present
     if (not raw_phone or str(raw_phone).strip() == "") and full_name.strip() and email.strip():
         return ""
 
-    phone_str = str(raw_phone).strip()
-    # Remove all non-numeric characters except '+'
-    phone_str = re.sub(r"[^\d+]", "", phone_str)
+    # Convert to string and strip whitespace for consistent processing
+    raw_str = str(raw_phone).strip()
 
-    # If phone starts with '+', parse it directly
-    if phone_str.startswith("+"):
+    # Handle Excel scientific notation (e.g., 1.234E+12)
+    # Excel sometimes converts large numbers to scientific notation, we need to convert back
+    if 'E' in raw_str.upper() or 'e' in raw_str:
         try:
-            parsed = phonenumbers.parse(phone_str, None)
-            if phonenumbers.is_valid_number(parsed):
-                return phonenumbers.format_number(parsed, phonenumbers.PhoneNumberFormat.E164)
-        except phonenumbers.NumberParseException:
-            return ""
+            # Convert scientific notation to regular number
+            # This handles cases like 1.234E+12 becoming 1234000000000
+            raw_str = str(int(float(raw_str)))
+        except (ValueError, OverflowError):
+            # If conversion fails, the number is invalid
+            return "INVALID"
+
+    # Extract extension like x123 or ext. 456
+    # Extensions are important and should be preserved
+    # We look for 'x' or 'ext' followed by numbers
+    ext_match = re.search(r"(x|ext\.?)\s*(\d+)", raw_str, re.IGNORECASE)
+    extension = f" x{ext_match.group(2)}" if ext_match else ""
+
+    # Remove extension from main phone string for cleaning
+    # We clean the main number separately, then add extension back
+    if ext_match:
+        raw_str = raw_str[:ext_match.start()].strip()
+
+    # Clean main part (preserve + if present)
+    # Remove all non-digit characters except + (which indicates country code)
+    phone_str = re.sub(r"[^\d+]", "", raw_str)
+
+    # Handle US country code formatting
+    # This is the key logic for standardizing US phone numbers
+    if phone_str.startswith('+'):
+        # Already has +, keep as is (e.g., +17837799889)
+        pass
+    elif phone_str.startswith('001'):
+        # Convert 001 to +1 (international dialing code to E.164 format)
+        # 001 is the international dialing code for US/Canada, equivalent to +1
+        phone_str = '+1' + phone_str[3:]
+    elif phone_str.startswith('1') and len(phone_str) >= 11:
+        # If it starts with 1 and is long enough to be a US number, add +
+        # This handles cases like 19668270528 becoming +19668270528
+        phone_str = '+' + phone_str
     else:
-        # Try to infer region from address
-        region = extract_country_code(address) or "US"
-        try:
-            parsed = phonenumbers.parse(phone_str, region)
-            if phonenumbers.is_valid_number(parsed):
-                return phonenumbers.format_number(parsed, phonenumbers.PhoneNumberFormat.E164)
-        except phonenumbers.NumberParseException:
-            return ""
+        # Remove leading zeros for other numbers (non-US numbers)
+        # Leading zeros are not valid in international format
+        phone_str = phone_str.lstrip('0')
 
-    return ""
+    # If phone is too short after cleaning, it's invalid
+    # Minimum length for a valid phone number is 7 digits
+    if len(phone_str) < 7:
+        return "INVALID"
+
+    # Extract country code from address to help with validation
+    # This helps determine if it's a US number for better validation
+    region = extract_country_code(address)
+
+    try:
+        # Try parsing with region or default to None
+        # Use the phonenumbers library for proper validation
+        parsed = phonenumbers.parse(phone_str, region or None)
+        if phonenumbers.is_valid_number(parsed):
+            # If valid, format in E.164 international format
+            # E.164 format: +[country code][number] (e.g., +16135551212)
+            formatted = phonenumbers.format_number(parsed, phonenumbers.PhoneNumberFormat.E164)
+            return formatted + extension
+        else:
+            # If not valid but has reasonable length, return cleaned version
+            # Sometimes the library is too strict, so we check length manually
+            digits_only = phone_str.replace('+', '')
+            if 10 <= len(digits_only) <= 15:
+                # Standard phone number length range
+                return phone_str + extension
+            # For US numbers, if it's 9 digits, it might be missing area code
+            # Some valid US numbers might be missing the area code
+            elif len(digits_only) == 9 and region == "US":
+                # Could be a valid number missing area code, return as is
+                return phone_str + extension
+            return "INVALID"
+    except phonenumbers.NumberParseException:
+        # Last resort: if it's all digits and 10–15 digits, treat as raw
+        # If the library can't parse it, we do basic validation ourselves
+        digits_only = phone_str.replace('+', '')
+        if re.fullmatch(r"\d{10,15}", digits_only):
+            # Standard phone number length, accept it
+            return phone_str + extension
+        # For US numbers, also accept 9 digits as they might be valid
+        # Some US numbers might be missing area code but still valid
+        elif re.fullmatch(r"\d{9}", digits_only) and region == "US":
+            return phone_str + extension
+        return "INVALID"
+
 
 def clean_ai_response(response_text: str) -> str:
     text = response_text.strip()
