@@ -133,17 +133,31 @@ Your task is to correct the formatting of the second list ("bad" entries) to mat
 - spacing.
 - Your goal is to make the bad entries to be the same as a the good entries
 
-Be precise and conservative. **Do not invent or replace values**—only clean and rearrange as needed to make them structurally identical to the examples in the good list.
+Be precise and conservative. Only clean and rearrange as needed to make them structurally identical to the examples in the good list, if there are elements or portions of elements just add a null value for them
+Return **only** a corrected Json in the exact format used in the good list, and nothing else—no extra text, no explanation, no formatting.
 
-Return **only** a corrected dictionary values in the exact format used in the good list, and nothing else—no extra text, no explanation, no formatting.
+{
+  "clean_items" : [
+    {
+    "missing_parts_of_address" : true,
+    "email": valid_email,
+    "phone_number": valid_phone_number,
+    "full_name": validate_name,
+    "address": [
+    {
+      "street_address" : "string"
+      "postal_code" : "string or null"
+      "city" : "string or null"
+      "province_or_state_name": "string or null"
+      "country" : "string"
+    }
+    
+    ]
+    "additional_feilds" : valid_items
+  }
+  ]
+}
 
-        {
-          "email": valid_email,
-          "phone_number": valid_phone_number,
-          "full_name": validate_name,
-          "address": valid_address,
-          "additional_feilds" : valid_items
-        }
 
 The list of correct examples is:
 """
@@ -172,6 +186,33 @@ def AI_check(results, failed_results):
     
     response_content = response.choices[0].message.content.strip()
 
-    print("\n"*10)
+    try:
+        response_content = clean_ai_response(response_content)
+        remake_json = json.loads(response_content)
+        required_fields = ["clean_items"]
+        all_required_present = True
+
+        required_data = remake_json.get("required_fields", {})
+
+
+
+        for field in required_fields:
+            value = required_data.get(field)
+            if value in [None, "", "null"]:
+                print(f"Missing required field '{field}' in the excel file.")
+                print(all_required_present)
+                break
+
+        if all_required_present:
+            with open(f"remake.json", "w") as f:
+                json.dump(remake_json, f, indent=4) 
+
+
+    except json.JSONDecodeError:
+        print("Error decoding JSON response from OpenAI API.")
+        pass
+
     print(response_content)
-    return response_content
+
+    return "remake.json"
+

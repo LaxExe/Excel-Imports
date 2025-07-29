@@ -84,7 +84,8 @@ def gather_row_data(excel_file, json_structure):
 
       if (valid_address == True or valid_email == False or valid_phone_number == False  or validate_name == False):
         failed_results.append (   
-          f"{email}, 416 715 6897, {full_name}, {address}, {valid_items}" # replace with  {valid_phone_number}
+        f'{{\n  "email": "{email}",\n  "phone_number": "416 715 6897",\n  "full_name": "{full_name}",\n  "address": "{address}",\n  "additional_fields": "{valid_items}"\n}}'
+        # replace with  {valid_phone_number}
         )
 
 
@@ -93,8 +94,8 @@ def gather_row_data(excel_file, json_structure):
 
         if sample < 5:
           good_data.append (   
-          f"{valid_email},  416 715 6897, {validate_name}, {valid_address}, {valid_items}"
-        )
+          f'{{\n  "email": "{email}",\n  "phone_number": "416 715 6897",\n  "full_name": "{full_name}",\n  "address": "{address}",\n  "additional_fields": "{valid_items}"\n}}'
+          )
           sample = sample + 1
 
 
@@ -106,8 +107,8 @@ def gather_row_data(excel_file, json_structure):
           "additional_feilds" : valid_items
         })
   
-  AI_check(good_data, failed_results)
-  
+    AI_check(good_data, failed_results)
+
 
   return results
 

@@ -1,0 +1,36 @@
+{
+    "clean_items": [
+        {
+            "missing_parts_of_address": false,
+            "email": "daniel.williams@example.com",
+            "phone_number": "416 715 6897",
+            "full_name": "Daniel Williams",
+            "address": [
+                {
+                    "street_address": "766 Birch Blvd.",
+                    "postal_code": "Q2Q 3M1",
+                    "city": "Charletown",
+                    "province_or_state_name": "PE",
+                    "country": "Canada"
+                }
+            ],
+            "additional_fields": "Unit ID : unit-4970    Unit Type : Apartment    Owner : Great   "
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "laura.garcia@example.com",
+            "phone_number": "416 715 6897",
+            "full_name": "Laura Garcia",
+            "address": [
+                {
+                    "street_address": "2789 Oak St.",
+                    "postal_code": null,
+                    "city": "Calgary",
+                    "province_or_state_name": null,
+                    "country": "Canada"
+                }
+            ],
+            "additional_fields": "Unit ID : unit-8981    Unit Type : Condo    Owner : Nice   "
+        }
+    ]
+}
