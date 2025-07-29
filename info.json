@@ -7,9 +7,9 @@
         "address_takes_up_1_column": false
     },
     "address_1_column_format": {
-        "address_column": null,
-        "address_format": "",
-        "address_separator": ""
+        "address_column": "D",
+        "address_format": "Street, City, Province, Postal Code",
+        "address_separator": ", "
     },
     "if_multi_column_address": {
         "street_address": "D",
@@ -21,7 +21,8 @@
         "country": "H"
     },
     "additional_fields": {
-        "Unit ID": "I",
-        "Owner": "J"
+        "Unit ID": "E",
+        "Unit Type": "F",
+        "Owner": "G"
     }
 }

@@ -92,38 +92,35 @@ Step-by-step process:
    - If multiple address columns found: Set `address_takes_up_1_column` to false
    - If both exist, prioritize the structure that has more complete information
 
-5. **For single-column addresses - CRITICAL ANALYSIS**:
+5. **For single-column addresses - DETAILED COMPONENT ANALYSIS**:
    - Find the single address column and examine 3-4 actual address values from rows 2-5
    - Indicate the column the address is in.
    - **Identify the separator**: Look at the actual data to find what character separates components (comma, semicolon, pipe, etc.)
-   - **Count components**: Count how many parts each address has when split by the separator
-   - **Analyze actual components**: Look at each part of the split addresses to determine what they represent:
-     - Street numbers/names are usually first
-     - Cities are typically text without numbers
-     - Postal/zip codes contain numbers/letters in specific patterns
-     - Provinces/states are often 2-3 character codes (ON, CA, NY, etc.)
-     - Countries are longer text (Canada, USA, etc.)
-   - **Handle unseparated components with PRIORITY GROUPING**: When multiple address components appear together without the main separator, group them according to this priority order (highest to lowest priority):
-     1. **POSTAL** (highest priority)
-     2. **CITY**
-     3. **STATE**
-     4. **COUNTRY** (lowest priority)
-   - **Priority grouping rules**:
-     - If state and postal code appear together (e.g., "NY 10001"), categorize as "postal" since postal has higher priority
-     - If city and state appear together (e.g., "Toronto ON"), categorize as "city" since city has higher priority
-     - If city and country appear together (e.g., "Vancouver Canada"), categorize as "city" since city has higher priority
-     - If state and country appear together (e.g., "CA USA"), categorize as "state" since state has higher priority
-     - **Maintain parsing integrity**: Don't artificially split components that aren't separated in the source data
-     - **Document the grouping decision**: Note which components are grouped together and under what category
-   - **ONLY include components that actually exist as separate parts**: 
-     - If no country appears as a separate component, do NOT include "country" in the format
-     - If state and postal are combined as one component, classify it as "postal" (higher priority)
-     - If city and state appear together without separation, classify it as "city" (higher priority)
-   - **Format description**: Describe ONLY the components that actually appear as separate parts in the data, using the priority-based grouping
-     - Example: If addresses are "123 Main St, Toronto, ON M1A1A1" then format is "street, city, postal" (ON M1A1A1 grouped as "postal")
-     - Example: If addresses are "456 Oak Ave, Vancouver BC" then format is "street, city" (Vancouver BC grouped as "city")
-     - Example: If addresses are "789 Pine St, Seattle WA 98101" then format is "street, city, postal" (Seattle WA 98101 could be split as city + state_postal, but state_postal gets classified as "postal")
-     - Example: If addresses are "321 Elm Dr, Paris France" then format is "street, city" (Paris France grouped as "city")
+   - **Split each address**: Break down each sample address using the identified separator
+   - **Component identification rules**:
+     - **Street**: Usually contains numbers followed by street names, may include apartment/unit numbers
+     - **City**: Typically text-only names without numbers or postal code patterns
+     - **State/Province**: Usually 2-3 character codes or full state/province names
+     - **Postal Code**: Contains specific patterns:
+       - Canadian: Letter-Number-Letter Number-Letter-Number format
+       - US: 5 digits or 5+4 format (##### or #####-####)
+       - Other countries: Various numeric or alphanumeric patterns
+     - **Country**: Full country names or standard country codes
+   
+   - **Sequential component analysis**: For each address component position:
+     - First component: Almost always street address
+     - Middle components: Analyze based on content patterns
+     - Last component: Often postal code (check for postal patterns first)
+     - Second-to-last component: Often state/province if last is postal code
+   
+   - **Pattern-based identification**: 
+     - If a component matches postal code patterns, classify as "postal"
+     - If a component is 2-3 characters and appears before postal code, classify as "state"
+     - If a component is text-only and appears between street and state/postal, classify as "city"
+     - If a component contains street indicators (St, Ave, Blvd, Rd, etc.) or starts with numbers, classify as "street"
+   
+   - **Only include components that exist**: Count the actual separated components and describe only those that appear
+   - **No artificial grouping**: If components are clearly separated by the main separator, treat them as separate components
 
 6. **For multi-column addresses**:
    - Map each address component to its column letter using flexible matching:
@@ -138,7 +135,12 @@ Step-by-step process:
    - Include any remaining columns that weren't mapped to name, phone, email, or address components
    - Use the exact header name as it appears in the data
 
-**CRITICAL: For single-column addresses, you MUST examine the actual data values, not make assumptions. Only describe components that actually exist in the sample addresses.**
+**CRITICAL RULES**:
+- Examine actual data values, not assumptions
+- Use pattern recognition for postal codes and state/province codes
+- Respect the natural separation of components by the main separator
+- Count components accurately based on actual splits
+- Identify each component based on its content pattern, not just position
 
 **Matching Guidelines**:
 - Use partial, case-insensitive string matching
