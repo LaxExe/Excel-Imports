@@ -1,0 +1,148 @@
+{
+    "clean_items": [
+        {
+            "missing_parts_of_address": true,
+            "email": "jane.davis@example.com",
+            "phone_number": "416 715 6897",
+            "full_name": "Jane Davis",
+            "address": [
+                {
+                    "street_address": "4966 Maple St.",
+                    "postal_code": null,
+                    "city": "Regina",
+                    "province_or_state_name": "SK",
+                    "country": null
+                }
+            ],
+            "additional_fields": "Unit ID : unit-4512    Unit Type : Apartment    Owner : Average   "
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "jane.davis@example.com",
+            "phone_number": "416 715 6897",
+            "full_name": "Jane Davis",
+            "address": [
+                {
+                    "street_address": "4967 Maple St.",
+                    "postal_code": null,
+                    "city": "Regina",
+                    "province_or_state_name": "SK",
+                    "country": null
+                }
+            ],
+            "additional_fields": "Unit ID : unit-4513    Unit Type : Apartment    Owner : Average   "
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "jane.davis@example.com",
+            "phone_number": "416 715 6897",
+            "full_name": "Jane Davis",
+            "address": [
+                {
+                    "street_address": "4968 Maple St.",
+                    "postal_code": null,
+                    "city": "Regina",
+                    "province_or_state_name": "SK",
+                    "country": null
+                }
+            ],
+            "additional_fields": "Unit ID : unit-4514    Unit Type : Apartment    Owner : Average   "
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "jane.davis@example.com",
+            "phone_number": "416 715 6897",
+            "full_name": "Jane Davis",
+            "address": [
+                {
+                    "street_address": "4969 Maple St.",
+                    "postal_code": null,
+                    "city": "Regina",
+                    "province_or_state_name": "SK",
+                    "country": null
+                }
+            ],
+            "additional_fields": "Unit ID : unit-4515    Unit Type : Apartment    Owner : Average   "
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "jane.davis@example.com",
+            "phone_number": "416 715 6897",
+            "full_name": "Jane Davis",
+            "address": [
+                {
+                    "street_address": "4970 Maple St.",
+                    "postal_code": null,
+                    "city": "Regina",
+                    "province_or_state_name": "SK",
+                    "country": null
+                }
+            ],
+            "additional_fields": "Unit ID : unit-4516    Unit Type : Apartment    Owner : Average   "
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "jane.davis@example.com",
+            "phone_number": "416 715 6897",
+            "full_name": "Jane Davis",
+            "address": [
+                {
+                    "street_address": "4971 Maple St.",
+                    "postal_code": null,
+                    "city": "Regina",
+                    "province_or_state_name": "SK",
+                    "country": null
+                }
+            ],
+            "additional_fields": "Unit ID : unit-4517    Unit Type : Apartment    Owner : Average   "
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "jane.davis@example.com",
+            "phone_number": "416 715 6897",
+            "full_name": "Jane Davis",
+            "address": [
+                {
+                    "street_address": "4972 Maple St.",
+                    "postal_code": null,
+                    "city": "Regina",
+                    "province_or_state_name": "SK",
+                    "country": null
+                }
+            ],
+            "additional_fields": "Unit ID : unit-4518    Unit Type : Apartment    Owner : Average   "
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "jane.davis@example.com",
+            "phone_number": "416 715 6897",
+            "full_name": "Jane Davis",
+            "address": [
+                {
+                    "street_address": "4973 Maple St.",
+                    "postal_code": null,
+                    "city": "Regina",
+                    "province_or_state_name": "SK",
+                    "country": null
+                }
+            ],
+            "additional_fields": "Unit ID : unit-4519    Unit Type : Apartment    Owner : Average   "
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "jane.davis@example.com",
+            "phone_number": "416 715 6897",
+            "full_name": "Jane Davis",
+            "address": [
+                {
+                    "street_address": "4974 Maple St.",
+                    "postal_code": null,
+                    "city": "Regina",
+                    "province_or_state_name": "SK",
+                    "country": null
+                }
+            ],
+            "additional_fields": "Unit ID : unit-4520    Unit Type : Apartment    Owner : Average   "
+        }
+    ]
+}
