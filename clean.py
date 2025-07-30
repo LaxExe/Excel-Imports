@@ -14,9 +14,6 @@ client = OpenAI(
     base_url="https://api.sambanova.ai/v1"
 )
 
-
-
-
 # Validation Function
 # Validation Function
 def filter_full_name(name, email, lastname):
@@ -37,7 +34,6 @@ def filter_full_name(name, email, lastname):
     return " ".join(word.capitalize() for word in words)
   
   return None
-
 
 def validate_email(email):
   if not email or "@" not in email:

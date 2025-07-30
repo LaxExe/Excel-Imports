@@ -171,6 +171,8 @@ primary_json_structure = """
     "street_address": "Column Letter or null",
     "city": "Column Letter or null",
     "postal": "Column Letter or null"
+    "province_or_statename": this feild is optional only include it when province or statename is present
+    "country" : this feild is optional only include it when present
   },
   "additional_address_information": {
     "province": "Column Letter or null",

@@ -3,6 +3,7 @@ import os
 import re 
 from openpyxl import Workbook, load_workbook
 from openpyxl.styles import PatternFill
+from address import street_and_postal_code, street_and_city, fill_missing_address_with_geopy
 
 def find_last_row_with_data(ws):
   for row in reversed(range(2, ws.max_row + 1)):
@@ -56,24 +57,41 @@ def append_cleaned_json_to_excel(directory, output_excel):
     # Get clean items list
     clean_items = data.get("clean_items", []) # -> Fall back to empty list if not found
     for item in clean_items:
+
+      address_info = item.get("address")[0]
+      street = address_info.get("street_address", "")
+      city = address_info.get("city", "")
+      postal = address_info.get("postal_code", "")
+
       if not item.get("missing_parts_of_address", True):
         address_info = item.get("address")[0]
-        full_address = f"{address_info.get('street_address')}, {address_info.get('postal_code')}, {address_info.get('city')}, {address_info.get('province_or_state_name')}, {address_info.get('country')}"
-  
-        row_data = {
-          "email": item.get("email", "value-missing"),
-          "phone_number": item.get("phone_number", "value-missing"),
-          "full_name": item.get("full_name", "value-missing"),
-          "address": full_address,
-          "additional_feilds" : item.get("additional_fields", "value-missing")
-        }
+        full_address = f"{street}, {postal}, {city}, {address_info.get('province_or_state_name')}, {address_info.get('country')}"
+      
+      # Else we're dealing with missing items in Address feild 
+      else:
 
-        
-        ws.append([row_data.get(header, "") for header in headers])
-        results.append(row_data)
-        next_row += 1
+        if street == None:
+          full_address = ""
+        elif city == None & street == True & len(postal) > 5:
+          full_address = street_and_postal_code(street, postal)
+        elif postal == None & street == True & len(city) > 3:
+          full_address = street_and_city(street, city)
+
+
+      row_data = {
+        "email": item.get("email", "value-missing"),
+        "phone_number": item.get("phone_number", "value-missing"),
+        "full_name": item.get("full_name", "value-missing"),
+        "address": full_address,
+        "additional_feilds" : item.get("additional_fields", "value-missing")
+      }
+
+      ws.append([row_data.get(header, "") for header in headers])
+      results.append(row_data)
+      next_row += 1
 
   wb.save(output_excel)
   print(results)
   print(f"Data appended to {output_excel} successfully from {len(sorted_files)} remake files.")
 
+fill_missing_address_with_geopy()

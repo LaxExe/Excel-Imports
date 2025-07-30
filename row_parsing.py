@@ -52,12 +52,8 @@ def gather_row_data(excel_file, json_structure):
       
       address = ws.cell(row=i, column=col_indexes["address"]).value
       email = ws.cell(row=i, column=col_indexes["email"]).value
-
-
       # Get phone number from excel
       phone_number = ws.cell(row=i, column=col_indexes["phone_number"]).value
-      
-      
       full_name = ws.cell(row=i, column=col_indexes["full_name"]).value
 
       # Case 1: Last Name Provided but None
@@ -73,14 +69,9 @@ def gather_row_data(excel_file, json_structure):
         items.append(key + " : "+ (ws.cell(row=i, column=col_indexes[key])).value + "   ")
 
       valid_items = ' '.join(items)
-
       valid_email = validate_email(email)
-
       # call on the valid phone number method
       valid_phone_number = clean_phone_number(phone_number, validate_name, valid_email, None) # Enter the country at none 
-
-
-
       valid_address = column_1_address_skip(address, address_1_column_format, address_1_column_seperator)       
 
 
@@ -91,15 +82,13 @@ def gather_row_data(excel_file, json_structure):
         # replace with  {valid_phone_number}
 
 
-
-
       if valid_address != True:
 
         if sample < 5:
           good_data.append (   
           f'{{\n  "email": "{email}",\n  "phone_number": "416 715 6897",\n  "full_name": "{full_name}",\n  "address": "{address}",\n  "additional_fields": "{valid_items}"\n}}'
           )
-          sample = sample + 1
+          sample += 1 
 
 
         results.append({
@@ -115,33 +104,30 @@ def gather_row_data(excel_file, json_structure):
         failed_results = []
         check = 0 
         page = page + 1
-  
 
-
-    else:
-    # CASE 2: 
-    # This handles Excel files where address information is spread across multiple columns
-    # Instead of one "Address" column, we have separate columns for street, city, province, etc.
-    
-      for i in range(2, ws.max_row + 1):
-        # Create a dictionary to hold all the cell values for this row
-        # Format: {"A2": "john@email.com", "B2": "123 Main St", "C2": "Toronto", ...}
-        row_dict = {}
+  else:
+  # CASE 2: 
+  # This handles Excel files where address information is spread across multiple columns
+  # Instead of one "Address" column, we have separate columns for street, city, province, etc.
+    for i in range(2, ws.max_row + 1):
+       # Create a dictionary to hold all the cell values for this row
+      # Format: {"A2": "john@email.com", "B2": "123 Main St", "C2": "Toronto", ...}
+      row_dict = {}
         
-        # Iterate through each column in this specific row
-        # This builds our row_dict with all the cell values for processing
-        for col in ws.iter_cols(min_row=i, max_row=i):
-          cell = col[0]  # Get the cell from this column at row i
-          # Store the cell value with its reference (e.g., "A2", "B2") as the key
-          # Convert to string and strip whitespace, default to empty string if cell is None
-          row_dict[f"{cell.column_letter}{cell.row}"] = str(cell.value).strip() if cell.value else ""
+      # Iterate through each column in this specific row
+      # This builds our row_dict with all the cell values for processing
+      for col in ws.iter_cols(min_row=i, max_row=i):
+        cell = col[0]  # Get the cell from this column at row i
+        # Store the cell value with its reference (e.g., "A2", "B2") as the key
+        # Convert to string and strip whitespace, default to empty string if cell is None
+        row_dict[f"{cell.column_letter}{cell.row}"] = str(cell.value).strip() if cell.value else ""
 
         # Extract the required fields using the JSON structure mapping
         # The JSON tells us which columns contain email, phone, name, etc.
         email = row_dict.get(f"{json_structure['required_fields']['email']}{i}", "")
         phone_number = row_dict.get(f"{json_structure['required_fields']['phone_number']}{i}", "")
         full_name = row_dict.get(f"{json_structure['required_fields']['full_name']}{i}", "")
-        
+          
         # Handle last name field - it might not exist in the JSON structure
         # If last_name is null in JSON, we pass None to the name validation function
         last_name_val = (
@@ -218,10 +204,4 @@ def gather_row_data(excel_file, json_structure):
   
   
   AI_check(good_data, failed_results, page)
-  return results
-
-
-
-
-
   return results
