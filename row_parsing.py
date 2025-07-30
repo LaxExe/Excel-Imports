@@ -86,18 +86,16 @@ def gather_row_data(excel_file, json_structure):
 
       if (valid_address == True or valid_email == False or valid_phone_number == False  or validate_name == False):
         failed_results.append (   
-        f'{{\n  "email": "{email}",\n  "phone_number": "416 715 6897",\n  "full_name": "{full_name}",\n  "address": "{address}",\n  "additional_fields": "{valid_items}"\n}}')
+        f'{{\n  "email": "{email}",\n  "phone_number": {valid_phone_number},\n  "full_name": "{full_name}",\n  "address": "{address}",\n  "additional_fields": "{valid_items}"\n}}')
         check = check + 1
-        # replace with  {valid_phone_number}
-
 
 
 
       if valid_address != True:
 
-        if sample < 5:
+        if sample < 3:
           good_data.append (   
-          f'{{\n  "email": "{email}",\n  "phone_number": "416 715 6897",\n  "full_name": "{full_name}",\n  "address": "{address}",\n  "additional_fields": "{valid_items}"\n}}'
+          f'{{\n  "email": "{email}",\n  "phone_number": {valid_phone_number},\n  "full_name": "{full_name}",\n  "address": "{address}",\n  "additional_fields": "{valid_items}"\n}}'
           )
           sample = sample + 1
 
@@ -116,9 +114,7 @@ def gather_row_data(excel_file, json_structure):
         check = 0 
         page = page + 1
   
-
-
-    else:
+  else:
     # CASE 2: 
     # This handles Excel files where address information is spread across multiple columns
     # Instead of one "Address" column, we have separate columns for street, city, province, etc.
@@ -191,37 +187,41 @@ def gather_row_data(excel_file, json_structure):
         # - Phone number is invalid  
         # - Name is invalid
         # - Address needs AI (missing or invalid address parts)
-        if not valid_email or not valid_phone_number or not validate_name or bool(needs_ai):
-          # Add to failed results for AI processing
-          # This row will be sent to the AI to fix any issues
-          failed_results.append(f"{valid_email}, {valid_phone_number}, {full_name}, {formatted_address}, {valid_items}")
-        else:
-          # This row is valid and doesn't need AI processing
-          if sample < 5:
-            # Keep first 5 good examples for AI reference
-            # The AI uses these as examples of what correct data should look like
-            good_data.append(f"{valid_email}, {valid_phone_number}, {full_name}, {formatted_address}, {valid_items}")
-            sample += 1
 
-          # Add the cleaned and validated data to our results
-          # This will be exported to the final Excel file
-          results.append({
-            "email": valid_email,
-            "phone_number": valid_phone_number,
-            "full_name": validate_name,
-            "address": formatted_address,
-            "additional_fields": valid_items
-          })
+        if (valid_address == True or valid_email == False or valid_phone_number == False  or validate_name == False):
+          failed_results.append (   
+          f'{{\n  "email": "{email}",\n  "phone_number": "416 715 6897",\n  "full_name": "{full_name}",\n  "address": "{address}",\n  "additional_fields": "{valid_items}"\n}}')
+          check = check + 1
+          # replace with  {valid_phone_number}
+
+
+      if valid_address != True:
+        if sample < 3:
+          good_data.append (   
+          f'{{\n  "email": "{email}",\n  "phone_number": "416 715 6897",\n  "full_name": "{full_name}",\n  "address": "{address}",\n  "additional_fields": "{valid_items}"\n}}'
+          )
+          sample = sample + 1
+
+        results.append({
+          "email": valid_email,
+          "phone_number": valid_phone_number,
+          "full_name": validate_name,
+          "address": valid_address,
+          "additional_feilds" : valid_items
+        })
+
+      if check == 10:
+        AI_check(good_data, failed_results, page)
+        failed_results = []
+        check = 0 
+        page = page + 1
+  
 
     # Send the good examples and failed results to AI for processing
     # The AI will try to fix any issues in the failed results using the good examples as reference
-  
-  
   AI_check(good_data, failed_results, page)
   return results
 
 
 
 
-
-  return results

@@ -36,7 +36,7 @@ def filter_full_name(name, email, lastname):
     words = name_segments.replace(".", "").replace("_", " ").split()
     return " ".join(word.capitalize() for word in words)
   
-  return None
+  return name
 
 
 def validate_email(email):
@@ -267,8 +267,8 @@ CRITICAL: Return ONLY valid JSON with no extra text, explanations, or formatting
           "street_address": "string",
           "postal_code": "string or null",
           "city": "string or null",
-          "province_or_state_name": "string or null",
-          "country": "string"
+          "province_or_state_name": "string or null or do not include feild if not present in the good examples",
+          "country": "string or do not include feild if not present in the good examples"
         }
       ],
       "additional_fields": "valid_items"

@@ -3,8 +3,7 @@ import json
 import re
 import pycountry
 from geopy.geocoders import Nominatim
-from geopy.exc import GeocoderTimedOut, GeocoderUnavailable
-
+from geopy.exc import GeocoderTimedOut, GeocoderUnavailable, GeocoderServiceError
 import time
 
 
@@ -321,9 +320,6 @@ def fill_missing_address_with_geopy(address_parts, missing_fields, address_field
 
 
 
-   
-
-
 
  
 geolocator = Nominatim(user_agent="address_locator")
@@ -365,10 +361,3 @@ def street_and_city(street, city):
   except Exception as e:
     return "No Results Found"
  
- 
-address = street_and_postal_code("123 Main street", "K1S 1B9")
-addresss = street_and_city("585 twain ", "mississauga")
- 
- 
-print(address)
-print(addresss)
