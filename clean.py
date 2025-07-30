@@ -6,8 +6,6 @@ import os
 from openai import OpenAI
 import json
 
-
-
 load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
 
