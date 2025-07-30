@@ -1,0 +1,116 @@
+{
+    "clean_items": [
+        {
+            "missing_parts_of_address": true,
+            "email": "daniel.williams@example.com",
+            "phone_number": "416 715 6897",
+            "full_name": "Daniel Williams",
+            "address": [
+                {
+                    "street_address": "766 Birch Blvd.",
+                    "postal_code": "L8K7J6",
+                    "city": "charletown",
+                    "province_or_state_name": "PE",
+                    "country": null
+                }
+            ],
+            "additional_fields": "Unit ID : unit-4970    Unit Type : Apartment    Owner : Great   "
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "jane.davis@example.com",
+            "phone_number": "416 715 6897",
+            "full_name": "Jane Davis",
+            "address": [
+                {
+                    "street_address": "4947 Maple St.",
+                    "postal_code": null,
+                    "city": "Regina",
+                    "province_or_state_name": "SK",
+                    "country": null
+                }
+            ],
+            "additional_fields": "Unit ID : unit-4493    Unit Type : Apartment    Owner : Average   "
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "jane.davis@example.com",
+            "phone_number": "416 715 6897",
+            "full_name": "Jane Davis",
+            "address": [
+                {
+                    "street_address": "4948 Maple St.",
+                    "postal_code": null,
+                    "city": "Regina",
+                    "province_or_state_name": "SK",
+                    "country": null
+                }
+            ],
+            "additional_fields": "Unit ID : unit-4494    Unit Type : Apartment    Owner : Average   "
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "jane.davis@example.com",
+            "phone_number": "416 715 6897",
+            "full_name": "Jane Davis",
+            "address": [
+                {
+                    "street_address": "4949 Maple St.",
+                    "postal_code": null,
+                    "city": "Regina",
+                    "province_or_state_name": "SK",
+                    "country": null
+                }
+            ],
+            "additional_fields": "Unit ID : unit-4495    Unit Type : Apartment    Owner : Average   "
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "jane.davis@example.com",
+            "phone_number": "416 715 6897",
+            "full_name": "Jane Davis",
+            "address": [
+                {
+                    "street_address": "4950 Maple St.",
+                    "postal_code": null,
+                    "city": "Regina",
+                    "province_or_state_name": "SK",
+                    "country": null
+                }
+            ],
+            "additional_fields": "Unit ID : unit-4496    Unit Type : Apartment    Owner : Average   "
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "jane.davis@example.com",
+            "phone_number": null,
+            "full_name": "Jane Davis",
+            "address": [
+                {
+                    "street_address": null,
+                    "postal_code": null,
+                    "city": null,
+                    "province_or_state_name": null,
+                    "country": null
+                }
+            ],
+            "additional_fields": "Unit ID : unit-4494    Unit Type : Apartment    Owner : Average   "
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "jane.davis@example.com",
+            "phone_number": null,
+            "full_name": "Jane Davis",
+            "address": [
+                {
+                    "street_address": null,
+                    "postal_code": null,
+                    "city": null,
+                    "province_or_state_name": null,
+                    "country": null
+                }
+            ],
+            "additional_fields": "Unit ID : unit-4495    Unit Type : Apartment    Owner : Average   "
+        }
+    ]
+}
