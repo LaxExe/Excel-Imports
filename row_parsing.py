@@ -28,6 +28,8 @@ def gather_row_data(excel_file, json_structure):
   results = []
   failed_results = []
 
+  required_format = json_structure["address_1_column_format"]["ideal_address_format"]
+
   if is_1_column_tag("info.json"):
 
     additional_feilds = json_structure["additional_fields"]
@@ -80,8 +82,8 @@ def gather_row_data(excel_file, json_structure):
       valid_phone_number = clean_phone_number(phone_number, validate_name, valid_email, None) # Enter the country at none 
 
 
-
-      valid_address = column_1_address_skip(address, address_1_column_format, address_1_column_seperator)       
+      
+      valid_address = column_1_address_skip(address, address_1_column_format, address_1_column_seperator, required_format)       
 
 
       if (valid_address == True or valid_email == False or valid_phone_number == False  or validate_name == False):
@@ -188,33 +190,14 @@ def gather_row_data(excel_file, json_structure):
         # - Name is invalid
         # - Address needs AI (missing or invalid address parts)
 
-        if (valid_address == True or valid_email == False or valid_phone_number == False  or validate_name == False):
-          failed_results.append (   
-          f'{{\n  "email": "{email}",\n  "phone_number": "416 715 6897",\n  "full_name": "{full_name}",\n  "address": "{address}",\n  "additional_fields": "{valid_items}"\n}}')
-          check = check + 1
-          # replace with  {valid_phone_number}
-
-
-      if valid_address != True:
-        if sample < 3:
-          good_data.append (   
-          f'{{\n  "email": "{email}",\n  "phone_number": "416 715 6897",\n  "full_name": "{full_name}",\n  "address": "{address}",\n  "additional_fields": "{valid_items}"\n}}'
-          )
-          sample = sample + 1
 
         results.append({
           "email": valid_email,
           "phone_number": valid_phone_number,
           "full_name": validate_name,
-          "address": valid_address,
+          "address": formatted_address,
           "additional_feilds" : valid_items
         })
-
-      if check == 10:
-        AI_check(good_data, failed_results, page)
-        failed_results = []
-        check = 0 
-        page = page + 1
   
 
     # Send the good examples and failed results to AI for processing

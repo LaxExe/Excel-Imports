@@ -17,25 +17,31 @@ def is_1_column_tag(filepath):
     return is_1_column
 
 def result_format(result, required_format, skip):
+    required_format = [f.strip() for f in required_format.split(",")]
+
+    print(required_format)
+    print(result)
     if skip:
         return True
-    
+
     formatted_parts = []
 
     for key in required_format:
         if key in result:
             formatted_parts.append(result[key])
         else:
+            print(f"Missing key: {key}")
             return True
 
     formatted_string = ", ".join(formatted_parts)
     return formatted_string
 
-def column_1_address_skip(address, format_str, separator):
+
+
+def column_1_address_skip(address, format_str, separator, required_format):
     format_parts = [f.strip() for f in format_str.split(separator)]
     address_parts = [a.strip() for a in address.split(separator)]
 
-    required_format = [ "Postal Code", "Street", "City", "Province"]
 
     result = {}
     skip = False
@@ -104,7 +110,7 @@ def column_multi_address(row, row_number, json_path="info.json"):
     address_fields = {
         "street_address": address_cols.get("street_address"),      
         "city": address_cols.get("city"),                         
-        "province": additional_cols.get("province"),               
+        "province": additional_cols.get("province_or_state_name"),               
         "postal_code": address_cols.get("postal"),                
         "country": additional_cols.get("country")                  
     }

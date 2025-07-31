@@ -1,0 +1,30 @@
+{
+    "required_fields": {
+        "phone_number": "I",
+        "email": "J",
+        "full_name": "C",
+        "last_name": "null",
+        "address_takes_up_1_column": false
+    },
+    "address_1_column_format": {
+        "address_column": "null",
+        "address_format": "",
+        "ideal_address_format": "",
+        "address_separator": ""
+    },
+    "if_multi_column_address": {
+        "street_address": "D",
+        "city": "E",
+        "postal": "G"
+    },
+    "additional_address_information": {
+        "province": "F",
+        "country": "null"
+    },
+    "additional_fields": {
+        "Type": "A",
+        "ID": "B",
+        "Date Created": "K",
+        "Tags": "L"
+    }
+}

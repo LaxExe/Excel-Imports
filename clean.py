@@ -253,7 +253,7 @@ Your task is to correct the formatting of the second list ("bad" entries) to mat
 
 Be precise and conservative. Only clean and rearrange as needed to make them structurally identical to the examples in the good list, if there are elements or portions of elements just add a null value for them.
 
-CRITICAL: Return ONLY valid JSON with no extra text, explanations, or formatting. The JSON must start with { and end with }.
+CRITICAL: Return ONLY valid JSON with no extra text, explanations, or formatting. you have flexibility over the address components but no other feilds, maining if there is a country within in the good data you can add a country feild, if there is no provice or state name within the good data you can remove it.
 
 {
   "clean_items": [
@@ -267,8 +267,7 @@ CRITICAL: Return ONLY valid JSON with no extra text, explanations, or formatting
           "street_address": "string",
           "postal_code": "string or null",
           "city": "string or null",
-          "province_or_state_name": "string or null or do not include feild if not present in the good examples",
-          "country": "string or do not include feild if not present in the good examples"
+          "province_or_state_name":  Do not include this feild in the data if it is not present in the good data examples,
         }
       ],
       "additional_fields": "valid_items"

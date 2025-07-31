@@ -85,7 +85,7 @@ Step-by-step process:
 
 3. **Analyze address structure**:
    - **Single column**: Look for headers like "address", "full address", "complete address", "location", "mailing address"
-   - **Multiple columns**: Look for separate headers like "street", "street address", "address line", "city", "town", "state", "province", "region", "postal code", "zip code", "zip", "country"
+   - **Multiple columns**: Look for separate headers in any language that contain items like "street", "street address", "address line", "city", "town", "state", "province", "region", "postal code", "zip code", "zip", "country"
 
 4. **Determine address format**:
    - If single column found: Set `address_takes_up_1_column` to true
@@ -121,6 +121,12 @@ Step-by-step process:
    
    - **Only include components that exist**: Count the actual separated components and describe only those that appear
    - **No artificial grouping**: If components are clearly separated by the main separator, treat them as separate components
+
+
+   - Once you have identified the address format you must arrange the elements in a manner that makes it close to this, "Postal, Province or State, Country, Street, City"
+   - Most times you will not have all of those feilds if present in the address format make the ideal address format close to this with what data is avialable in address format
+   - For example,         "address_format": "Street, City, Province, Postal Code",    "ideal_address_format": "Postal Code, Province, Street, City" using what is available in the format to match it with the ideal version. 
+   - You must ensure that the parts in the ideal address fomrat must exactly match the parts in address format, with the same spelling and captilization
 
 6. **For multi-column addresses**:
    - Map each address component to its column letter using flexible matching:
@@ -165,6 +171,7 @@ primary_json_structure = """
   "address_1_column_format": {
     "address_column": "Column Letter or null",
     "address_format": "",
+    "ideal_address_format": "",
     "address_separator": ""
   },
   "if_multi_column_address": {
@@ -174,7 +181,7 @@ primary_json_structure = """
   },
   "additional_address_information": {
     "province": "Column Letter or null",
-    "country": "Column Letter or null"
+    "country": "Column Letter" or null""
   },
   "additional_fields": {
     "Column Name 1": "Column Letter",
