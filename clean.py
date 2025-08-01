@@ -41,7 +41,7 @@ def filter_full_name(name, email, lastname):
 
 def validate_email(email):
   if not email or "@" not in email:
-    return None
+    return "MISSING"
   return email.strip().lower()
 
 
@@ -132,8 +132,8 @@ def clean_phone_number(raw_phone, full_name, email, address):
         # Convert 001 to +1 (international dialing code to E.164 format)
         # 001 is the international dialing code for US/Canada, equivalent to +1
         phone_str = '+1' + phone_str[3:]
-    elif phone_str.startswith('1') and len(phone_str) >= 11:
-        # If it starts with 1 and is long enough to be a US number, add +
+    elif phone_str.startswith('1') and len(phone_str) >= 11:        # If it starts with 1 and is long enough to be a US number, add +
+
         # This handles cases like 19668270528 becoming +19668270528
         phone_str = '+' + phone_str
     else:
@@ -183,7 +183,6 @@ def clean_phone_number(raw_phone, full_name, email, address):
         # Some US numbers might be missing area code but still valid
         elif re.fullmatch(r"\d{9}", digits_only) and region == "US":
             return phone_str + extension
-        return "INVALID"
     """
     Cleans and standardizes a phone number:
     - Keeps the country code if present
@@ -218,7 +217,7 @@ def clean_phone_number(raw_phone, full_name, email, address):
         except phonenumbers.NumberParseException:
             return ""
 
-    return ""
+    return "MISSING"
 
 def clean_ai_response(response_text: str) -> str:
     text = response_text.strip()
@@ -336,6 +335,9 @@ def AI_check(results, failed_results, page):
         pass
 
     print(cleaned_response)
+
+
+    
 
     return "remake.json"
 

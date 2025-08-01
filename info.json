@@ -1,30 +1,27 @@
 {
     "required_fields": {
-        "phone_number": "I",
-        "email": "J",
-        "full_name": "C",
-        "last_name": "null",
-        "address_takes_up_1_column": false
+        "phone_number": "B",
+        "email": "C",
+        "full_name": "A",
+        "last_name": null,
+        "address_takes_up_1_column": true
     },
     "address_1_column_format": {
-        "address_column": "null",
-        "address_format": "",
-        "ideal_address_format": "",
-        "address_separator": ""
+        "address_column": "E",
+        "address_format": "Street, City, Province, Postal Code",
+        "ideal_address_format": "Postal Code, Province, Street, City",
+        "address_separator": ", "
     },
     "if_multi_column_address": {
-        "street_address": "D",
-        "city": "E",
-        "postal": "G"
+        "street_address": null,
+        "city": null,
+        "postal": null
     },
     "additional_address_information": {
-        "province": "F",
-        "country": "null"
+        "province": null,
+        "country": null
     },
     "additional_fields": {
-        "Type": "A",
-        "ID": "B",
-        "Date Created": "K",
-        "Tags": "L"
+        "Customer": "G"
     }
 }

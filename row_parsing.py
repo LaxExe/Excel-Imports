@@ -2,6 +2,7 @@ from openpyxl import load_workbook
 import json
 from clean import validate_email, filter_full_name, clean_phone_number, AI_check
 from address import is_1_column_tag, column_1_address_skip, column_multi_address
+from jsons_to_excel import find_last_row_with_data
 
 # Helper Function
 def col_letter_to_index(letter):
@@ -28,6 +29,8 @@ def gather_row_data(excel_file, json_structure):
   results = []
   failed_results = []
 
+  last_row = find_last_row_with_data(ws)
+
   required_format = json_structure["address_1_column_format"]["ideal_address_format"]
 
   if is_1_column_tag("info.json"):
@@ -50,7 +53,7 @@ def gather_row_data(excel_file, json_structure):
     address_1_column_format = json_structure["address_1_column_format"]["address_format"]
     address_1_column_seperator = json_structure["address_1_column_format"]["address_separator"]
 
-    for i in range(2, ws.max_row + 1):
+    for i in range(2, last_row + 1):
       
       address = ws.cell(row=i, column=col_indexes["address"]).value
       email = ws.cell(row=i, column=col_indexes["email"]).value
@@ -72,7 +75,8 @@ def gather_row_data(excel_file, json_structure):
       items = []
 
       for key in additional_feilds:
-        items.append(key + " : "+ (ws.cell(row=i, column=col_indexes[key])).value + "   ")
+        if additional_feilds != None:
+          items.append(key + " : "+ (ws.cell(row=i, column=col_indexes[key])).value + "   ")
 
       valid_items = ' '.join(items)
 
@@ -86,9 +90,9 @@ def gather_row_data(excel_file, json_structure):
       valid_address = column_1_address_skip(address, address_1_column_format, address_1_column_seperator, required_format)       
 
 
-      if (valid_address == True or valid_email == False or valid_phone_number == False  or validate_name == False):
+      if (valid_address == True or valid_email == "Missing" or valid_phone_number == False  or validate_name == False):
         failed_results.append (   
-        f'{{\n  "email": "{email}",\n  "phone_number": {valid_phone_number},\n  "full_name": "{full_name}",\n  "address": "{address}",\n  "additional_fields": "{valid_items}"\n}}')
+        f'{{\n  "email": "{email}",\n  "phone_number": {valid_phone_number},\n  "full_name": "{validate_name}",\n  "address": "{address}",\n  "additional_fields": "{valid_items}"\n}}')
         check = check + 1
 
 
@@ -97,7 +101,7 @@ def gather_row_data(excel_file, json_structure):
 
         if sample < 3:
           good_data.append (   
-          f'{{\n  "email": "{email}",\n  "phone_number": {valid_phone_number},\n  "full_name": "{full_name}",\n  "address": "{address}",\n  "additional_fields": "{valid_items}"\n}}'
+          f'{{\n  "email": "{email}",\n  "phone_number": {valid_phone_number},\n  "full_name": "{validate_name}",\n  "address": "{address}",\n  "additional_fields": "{valid_items}"\n}}'
           )
           sample = sample + 1
 
@@ -121,7 +125,7 @@ def gather_row_data(excel_file, json_structure):
     # This handles Excel files where address information is spread across multiple columns
     # Instead of one "Address" column, we have separate columns for street, city, province, etc.
     
-      for i in range(2, ws.max_row + 1):
+      for i in range(2, last_row + 1):
         # Create a dictionary to hold all the cell values for this row
         # Format: {"A2": "john@email.com", "B2": "123 Main St", "C2": "Toronto", ...}
         row_dict = {}

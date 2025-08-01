@@ -20,9 +20,9 @@ def append_cleaned_json_to_excel(directory, output_excel):
  
   results = []
   # If output_excel doesn't exist, exit the function
-  if not os.path.exists(output_excel):
-    print(f"Output file {output_excel} does not exist. Exiting function.")
-    return
+
+
+
  
   # Otherwise, load the existing workbook
   wb = load_workbook(output_excel)
@@ -65,7 +65,9 @@ def append_cleaned_json_to_excel(directory, output_excel):
  
       if not item.get("missing_parts_of_address", True):
         address_info = item.get("address")[0]
-        full_address = f"{street}, {postal}, {city}, {address_info.get('province_or_state_name')}, {address_info.get('country')}"
+        full_address = f"{street}, {postal}, {city}, {address_info.get('province_or_state_name')}, {address_info.get('country', "")}"
+
+      # TODO Fix this as it returns none, when the feild is null
      
       # Else we're dealing with missing items in Address feild
       else:
@@ -74,6 +76,10 @@ def append_cleaned_json_to_excel(directory, output_excel):
           full_address = street_and_postal_code(street, postal)
         elif postal == None and street and city:
           full_address = street_and_city(street, city)
+        elif street and city and street:
+          full_address = street_and_postal_code(street, postal)
+          if full_address == None:
+            full_address = street_and_city(street, city)
         else:
           full_address = "Missing"
  
