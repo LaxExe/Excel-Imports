@@ -137,7 +137,13 @@ Step-by-step process:
      - **country**: "country", "nation"
    - Use "null" if a component cannot be found
 
-7. **Additional fields**:
+7. ** Shipping Address and Billing Address**:
+    - If both shipping and billing addresses exist and have there own columns, identify them separately
+    - The Assumptions is that both billing and shipping address occupy a single column each, not multiple columns each
+    - If only address exists as a single column, set both shipping and billing address to that column
+    - If address exists as multiple columns, set both shipping and billing address to null in all capitals
+    
+8. **Additional fields**:
    - Include any remaining columns that weren't mapped to name, phone, email, or address components
    - Use the exact header name as it appears in the data
 
@@ -182,6 +188,10 @@ primary_json_structure = """
   "additional_address_information": {
     "province": "Column Letter or null",
     "country": "Column Letter" or null""
+  },
+  "separate_shipping_and_billing_addresses": {
+    "shipping_address_column": "Column Letter or null",
+    "billing_address_column": "Column Letter or null"
   },
   "additional_fields": {
     "Column Name 1": "Column Letter",

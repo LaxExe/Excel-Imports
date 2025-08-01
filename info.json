@@ -8,8 +8,8 @@
     },
     "address_1_column_format": {
         "address_column": "E",
-        "address_format": "Street, City, Province, Postal Code",
-        "ideal_address_format": "Postal Code, Province, Street, City",
+        "address_format": "Street, City, Province, Postal Code, Country",
+        "ideal_address_format": "Postal Code, Province, Street, City, Country",
         "address_separator": ", "
     },
     "if_multi_column_address": {
@@ -20,6 +20,10 @@
     "additional_address_information": {
         "province": null,
         "country": null
+    },
+    "separate_shipping_and_billing_addresses": {
+        "shipping_address_column": "F",
+        "billing_address_column": "E"
     },
     "additional_fields": {
         "Customer": "G"

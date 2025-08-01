@@ -261,7 +261,15 @@ CRITICAL: Return ONLY valid JSON with no extra text, explanations, or formatting
       "email": "valid_email",
       "phone_number": "valid_phone_number",
       "full_name": "validate_name",
-      "address": [
+      "shipping_address": [
+        {
+          "street_address": "string",
+          "postal_code": "string or null",
+          "city": "string or null",
+          "province_or_state_name":  Do not include this feild in the data if it is not present in the good data examples,
+        }
+      ],
+      "billing_address": [
         {
           "street_address": "string",
           "postal_code": "string or null",

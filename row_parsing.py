@@ -42,11 +42,12 @@ def gather_row_data(excel_file, json_structure):
       "phone_number": col_letter_to_index(json_structure["required_fields"]["phone_number"]),
       "full_name": col_letter_to_index(json_structure["required_fields"]["full_name"]),
       "last_name": col_letter_to_index(json_structure["required_fields"]["last_name"]),
-      "address" : col_letter_to_index(json_structure["address_1_column_format"]["address_column"])
+      "address" : col_letter_to_index(json_structure["address_1_column_format"]["address_column"]),
+      "shipping_address": col_letter_to_index(json_structure["separate_shipping_and_billing_addresses"]["shipping_address_column"]),
+      "billing_address": col_letter_to_index(json_structure["separate_shipping_and_billing_addresses"]["billing_address_column"])
     }
 
     additional_fields = json_structure.get("additional_fields", {})
-
     for key, col_letter in additional_fields.items():
         col_indexes[key] = col_letter_to_index(col_letter)
 
@@ -55,14 +56,9 @@ def gather_row_data(excel_file, json_structure):
 
     for i in range(2, last_row + 1):
       
-      address = ws.cell(row=i, column=col_indexes["address"]).value
+    
       email = ws.cell(row=i, column=col_indexes["email"]).value
-
-
-      # Get phone number from excel
       phone_number = ws.cell(row=i, column=col_indexes["phone_number"]).value
-      
-      
       full_name = ws.cell(row=i, column=col_indexes["full_name"]).value
 
       # Case 1: Last Name Provided but None
@@ -77,31 +73,58 @@ def gather_row_data(excel_file, json_structure):
       for key in additional_feilds:
         if additional_feilds != None:
           items.append(key + " : "+ (ws.cell(row=i, column=col_indexes[key])).value + "   ")
-
       valid_items = ' '.join(items)
 
       valid_email = validate_email(email)
-
-      # call on the valid phone number method
       valid_phone_number = clean_phone_number(phone_number, validate_name, valid_email, None) # Enter the country at none 
-
-
       
+      # DEAL WITH SHIPPING AND BILLING ADDRESS
+      # Get adddress feild
+      # 1. If address exists as a single column, use that value for both shipping and billing address
+      # 2. If both shipping and billing address exist, use those values instead
+
+      # Address == billing address
+      address = ws.cell(row=i, column=col_indexes["address"]).value
       valid_address = column_1_address_skip(address, address_1_column_format, address_1_column_seperator, required_format)       
 
+      shipping_col = col_indexes.get("shipping_address")
+      billing_col = col_indexes.get("billing_address")
+      
+      # Defaults
+      shipping_address = address
+      billing_address = address
 
-      if (valid_address == True or valid_email == "Missing" or valid_phone_number == False  or validate_name == False):
+      if shipping_col is not None and billing_col is not None:
+        # Override the default case if both values exists
+        shipping_val = ws.cell(row=i, column=shipping_col).value
+        billing_val = ws.cell(row=i, column=billing_col).value
+        
+        # If both values are distinct
+        if shipping_val and billing_val and shipping_val != billing_val:
+          # Update the default case
+          shipping_address = shipping_val
+          billing_address = billing_val
+        else:
+          # Fall back to defualt case + exception if one exists and the other doesn't
+          shipping_address = address or shipping_val
+          billing_address = address or billing_val
+      
+      # At this point, either the single address is updated to two new columns or both shipping and billing address are considered
+      validate_shipping_address = column_1_address_skip(shipping_address, address_1_column_format, address_1_column_seperator, required_format)
+      validate_billing_address = column_1_address_skip(billing_address, address_1_column_format, address_1_column_seperator, required_format)
+      
+
+      if (validate_shipping_address == True or validate_billing_address or valid_email == "Missing" or valid_phone_number == False  or validate_name == False):
         failed_results.append (   
-        f'{{\n  "email": "{email}",\n  "phone_number": {valid_phone_number},\n  "full_name": "{validate_name}",\n  "address": "{address}",\n  "additional_fields": "{valid_items}"\n}}')
+        f'{{\n  "email": "{email}",\n  "phone_number": {valid_phone_number},\n  "full_name": "{validate_name}",\n  "shipping_address": "{shipping_address}",\n "billing_address": "{billing_address}",\n "additional_fields": "{valid_items}"\n}}')
         check = check + 1
 
 
 
       if valid_address != True:
-
         if sample < 3:
           good_data.append (   
-          f'{{\n  "email": "{email}",\n  "phone_number": {valid_phone_number},\n  "full_name": "{validate_name}",\n  "address": "{address}",\n  "additional_fields": "{valid_items}"\n}}'
+          f'{{\n  "email": "{email}",\n  "phone_number": {valid_phone_number},\n  "full_name": "{validate_name}",\n  "shipping_address": "{shipping_address}",\n "billing_address": "{billing_address}",\n "additional_fields": "{valid_items}"\n}}'
           )
           sample = sample + 1
 
@@ -110,7 +133,8 @@ def gather_row_data(excel_file, json_structure):
           "email": valid_email,
           "phone_number": valid_phone_number,
           "full_name": validate_name,
-          "address": valid_address,
+          "shipping_address": shipping_address,
+          "billing_address": billing_address,
           "additional_feilds" : valid_items
         })
   
