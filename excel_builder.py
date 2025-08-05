@@ -1,6 +1,10 @@
 from openpyxl import Workbook
 import json 
-from row_parsing import gather_row_data
+
+def safe_str(val):
+    if isinstance(val, (dict, list)):
+        return json.dumps(val)
+    return str(val) if val is not None else ""
 
 def export_to_excel(data, output_file):
     wb = Workbook()
@@ -13,9 +17,9 @@ def export_to_excel(data, output_file):
 
         # Write the row values
         for row_dict in data:
-            ws.append([row_dict.get(header, "") for header in headers])
+            ws.append([safe_str(row_dict.get(header, "")) for header in headers])
     else:
-        headers = ["email", "phone_number", "full_name", "address", "additional_fields"]
+        headers = ["email", "phone_number", "full_name", "shipping_address", "billing_address", "additional_fields"]
         ws.append(headers)
 
     wb.save(output_file)

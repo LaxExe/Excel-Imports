@@ -28,8 +28,8 @@ with open("info.json", "r") as f:
 results = gather_row_data('test.xlsx', info_json)
 print("Results:", results)
 
-# # 4. Validated Data is exported to the excel
-# export_to_excel(results, "output.xlsx")
+# 4. Validated Data is exported to the excel
+export_to_excel(results, "output.xlsx")
 
-# # 5. Iterate through remake.json, fix addresses with Geopy, append to existing output excel
-# append_cleaned_json_to_excel(directory=".", output_excel="output.xlsx")
+# 5. Iterate through remake.json, fix addresses with Geopy, append to existing output excel
+append_cleaned_json_to_excel(directory=".", output_excel="output.xlsx")

@@ -15,7 +15,32 @@ def extract_remake_number(filename):
     # Extract number from remake#.json to sort numerically
     match = re.search(r'remake(\d+)\.json', filename)
     return int(match.group(1)) if match else float('inf')
- 
+
+def build_full_address(address_info):
+    if not address_info:
+        return "Missing"
+
+    street = address_info.get("street_address", "")
+    city = address_info.get("city", "")
+    postal = address_info.get("postal_code", "")
+    province = address_info.get("province_or_state_name", "")
+    country = address_info.get("country", "")
+
+    if street and city and postal:
+        return f"{street}, {city}, {province}, {country}, {postal}"
+
+    # Geopy fallback logic
+    if not city and street and postal:
+        return street_and_postal_code(street, postal)
+    elif not postal and street and city:
+        return street_and_city(street, city)
+    elif street and (city or postal):
+        return street_and_postal_code(street, postal or "")
+    
+    return "Missing"
+
+
+
 def append_cleaned_json_to_excel(directory, output_excel):
  
   results = []
@@ -50,41 +75,33 @@ def append_cleaned_json_to_excel(directory, output_excel):
   for file in sorted_files:
     with open(os.path.join(directory, file), "r") as f:
       data = json.load(f)
- 
+    print(f"Processing {file}...")
+
+    count = 0
     # Get clean items list
     clean_items = data.get("clean_items", []) # -> Fall back to empty list if not found
     for item in clean_items:
- 
-      address_info = item.get("address")[0]
-      street = address_info.get("street_address", None)
-      city = address_info.get("city", None)
-      postal = address_info.get("postal_code", None)
- 
-      if not item.get("missing_parts_of_address", True):
-        address_info = item.get("address")[0]
-        full_address = f"{street}, {postal}, {city}, {address_info.get('province_or_state_name')}, {address_info.get('country', '')}"
+      print("Processing row:", count) 
+      count += 1
+      shipping_address_info = (item.get("shipping_address") or [{}])[0]
+      billing_address_info = (item.get("billing_address") or [{}])[0]
 
-      # TODO Fix this as it returns none, when the feild is null
-     
-      # Else we're dealing with missing items in Address feild
-      else:
+      if shipping_address_info != billing_address_info: 
         
-        if city == None and street and postal:
-          full_address = street_and_postal_code(street, postal)
-        elif postal == None and street and city:
-          full_address = street_and_city(street, city)
-        elif street and city and street:
-          full_address = street_and_postal_code(street, postal)
-          if full_address == None:
-            full_address = street_and_city(street, city)
-        else:
-          full_address = "Missing"
- 
+        full_shipping_address = build_full_address(shipping_address_info)
+        full_billing_address = build_full_address(billing_address_info)
+      
+      else:
+        full_shipping_address = shipping_address_info.get("full_address") or build_full_address(shipping_address_info)
+        full_billing_address = billing_address_info.get("full_address") or build_full_address(billing_address_info)
+
+
       row_data = {
         "email": item.get("email", "value-missing"),
         "phone_number": item.get("phone_number", "value-missing"),
         "full_name": item.get("full_name", "value-missing"),
-        "address": full_address,
+        "shipping_address": full_shipping_address,
+        "billing_address": full_billing_address,
         "additional_feilds" : item.get("additional_fields", "value-missing")
       }
  

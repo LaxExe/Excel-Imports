@@ -25,7 +25,6 @@ def gather_row_data(excel_file, json_structure):
   wb = load_workbook(excel_file)
   ws = wb.active
   good_data = []
-
   results = []
   failed_results = []
 

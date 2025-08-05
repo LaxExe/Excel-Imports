@@ -250,14 +250,24 @@ Your task is to correct the formatting of the second list ("bad" entries) to mat
 - spacing.
 - Your goal is to make the bad entries to be the same as a the good entries
 
-Be precise and conservative. Only clean and rearrange as needed to make them structurally identical to the examples in the good list, if there are elements or portions of elements just add a null value for them.
+You second task is to set the field `missing_parts_of_address` to true ONLY IF any of the following address sub-fields are missing (null or empty) in EITHER shipping or billing address:
+- street_address
+- postal_code
+- city
+- province_or_state_name (only if it's present in the good data)
+- country (only if it's present in the good data)
 
-CRITICAL: Return ONLY valid JSON with no extra text, explanations, or formatting. you have flexibility over the address components but no other feilds, maining if there is a country within in the good data you can add a country feild, if there is no provice or state name within the good data you can remove it.
+DO NOT consider `email`, `phone_number`, or any other fields when deciding this.
+
+Be precise and conservative. Only clean and rearrange as needed to make them structurally identical to the examples in the good list, if there are elements or portions of elements just add a null value for them.
+Complete Both Tasks. 
+
+CRITICAL: Return ONLY valid JSON with no extra text, explanations, or formatting.
 
 {
   "clean_items": [
     {
-      "missing_parts_of_address": true,
+      "missing_parts_of_address": true or false,
       "email": "valid_email",
       "phone_number": "valid_phone_number",
       "full_name": "validate_name",
@@ -267,6 +277,7 @@ CRITICAL: Return ONLY valid JSON with no extra text, explanations, or formatting
           "postal_code": "string or null",
           "city": "string or null",
           "province_or_state_name":  Do not include this feild in the data if it is not present in the good data examples,
+          "country":  Do not include this feild in the data if it is not present in the good data examples
         }
       ],
       "billing_address": [
@@ -275,6 +286,7 @@ CRITICAL: Return ONLY valid JSON with no extra text, explanations, or formatting
           "postal_code": "string or null",
           "city": "string or null",
           "province_or_state_name":  Do not include this feild in the data if it is not present in the good data examples,
+          "country":  Do not include this feild in the data if it is not present in the good data examples
         }
       ],
       "additional_fields": "valid_items"
