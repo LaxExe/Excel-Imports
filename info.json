@@ -1,15 +1,15 @@
 {
     "required_fields": {
         "phone_number": "B",
-        "email": "C",
-        "full_name": "A",
+        "email": "A",
+        "full_name": "C",
         "last_name": null,
         "address_takes_up_1_column": true
     },
     "address_1_column_format": {
-        "address_column": "E",
-        "address_format": "Street, City, Province, Postal Code, Country",
-        "ideal_address_format": "Postal Code, Province, Street, City, Country",
+        "address_column": "D",
+        "address_format": "Street, City, Postal Code",
+        "ideal_address_format": "Postal Code, Street, City",
         "address_separator": ", "
     },
     "if_multi_column_address": {
@@ -22,10 +22,10 @@
         "country": null
     },
     "separate_shipping_and_billing_addresses": {
-        "shipping_address_column": "F",
-        "billing_address_column": "E"
+        "shipping_address_column": "D",
+        "billing_address_column": "D"
     },
     "additional_fields": {
-        "Customer": "G"
+        "additional_fields": "E"
     }
 }

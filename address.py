@@ -39,6 +39,10 @@ def result_format(result, required_format, skip):
 
 
 def column_1_address_skip(address, format_str, separator, required_format):
+    # Check if address is None or empty
+    if address is None or address == "":
+        return True
+    
     format_parts = [f.strip() for f in format_str.split(separator)]
     address_parts = [a.strip() for a in address.split(separator)]
 

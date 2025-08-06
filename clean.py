@@ -86,7 +86,7 @@ def clean_phone_number(raw_phone, full_name, email, address):
     - Uses address to infer region if country code is missing
     - If valid, returns number in +E.164 format (e.g., +16135551212)
     - If no region can be inferred, keeps raw cleaned number
-    - If completely invalid, returns 'INVALID'
+    - If completely invalid, returns original input 
     """
 
     # If phone is empty but we have name and email, return empty string
@@ -97,6 +97,11 @@ def clean_phone_number(raw_phone, full_name, email, address):
     # Convert to string and strip whitespace for consistent processing
     raw_str = str(raw_phone).strip()
 
+    # Check if the input contains any text (like "Phone:", "Mobile:", etc.)
+    # If it has text, return the original data completely unchanged
+    if re.search(r"[a-zA-Z]", raw_str):
+        return raw_str
+
     # Handle Excel scientific notation (e.g., 1.234E+12)
     # Excel sometimes converts large numbers to scientific notation, we need to convert back
     if 'E' in raw_str.upper() or 'e' in raw_str:
@@ -105,8 +110,8 @@ def clean_phone_number(raw_phone, full_name, email, address):
             # This handles cases like 1.234E+12 becoming 1234000000000
             raw_str = str(int(float(raw_str)))
         except (ValueError, OverflowError):
-            # If conversion fails, the number is invalid
-            return "INVALID"
+            # If conversion fails, return original 
+            return raw_str
 
     # Extract extension like x123 or ext. 456
     # Extensions are important and should be preserved
@@ -118,8 +123,8 @@ def clean_phone_number(raw_phone, full_name, email, address):
     # We clean the main number separately, then add extension back
     if ext_match:
         raw_str = raw_str[:ext_match.start()].strip()
-
-    # Clean main part (preserve + if present)
+    
+    # Clean main part (preserve + if present) - for regular numbers without text
     # Remove all non-digit characters except + (which indicates country code)
     phone_str = re.sub(r"[^\d+]", "", raw_str)
 
@@ -132,7 +137,7 @@ def clean_phone_number(raw_phone, full_name, email, address):
         # Convert 001 to +1 (international dialing code to E.164 format)
         # 001 is the international dialing code for US/Canada, equivalent to +1
         phone_str = '+1' + phone_str[3:]
-    elif phone_str.startswith('1') and len(phone_str) >= 11:        # If it starts with 1 and is long enough to be a US number, add +
+    elif phone_str.startswith('1') and len(phone_str) >= 11:        
 
         # This handles cases like 19668270528 becoming +19668270528
         phone_str = '+' + phone_str
@@ -141,10 +146,10 @@ def clean_phone_number(raw_phone, full_name, email, address):
         # Leading zeros are not valid in international format
         phone_str = phone_str.lstrip('0')
 
-    # If phone is too short after cleaning, it's invalid
+    # If phone is too short after cleaning, return original instead of "INVALID"
     # Minimum length for a valid phone number is 7 digits
     if len(phone_str) < 7:
-        return "INVALID"
+        return raw_str
 
     # Extract country code from address to help with validation
     # This helps determine if it's a US number for better validation
@@ -171,7 +176,8 @@ def clean_phone_number(raw_phone, full_name, email, address):
             elif len(digits_only) == 9 and region == "US":
                 # Could be a valid number missing area code, return as is
                 return phone_str + extension
-            return "INVALID"
+            return raw_str  # Return original instead of "INVALID"
+            
     except phonenumbers.NumberParseException:
         # Last resort: if it's all digits and 10–15 digits, treat as raw
         # If the library can't parse it, we do basic validation ourselves
@@ -183,6 +189,7 @@ def clean_phone_number(raw_phone, full_name, email, address):
         # Some US numbers might be missing area code but still valid
         elif re.fullmatch(r"\d{9}", digits_only) and region == "US":
             return phone_str + extension
+            
     """
     Cleans and standardizes a phone number:
     - Keeps the country code if present
@@ -249,6 +256,8 @@ Your task is to correct the formatting of the second list ("bad" entries) to mat
 - capitalization,
 - spacing.
 - Your goal is to make the bad entries to be the same as a the good entries
+
+**IMPORTANT: For phone numbers, preserve any descriptive text (like "Phone:", "Mobile:", etc.) exactly as they appear in the original data. Do not clean or remove this text.**
 
 You second task is to set the field `missing_parts_of_address` to true ONLY IF any of the following address sub-fields are missing (null or empty) in EITHER shipping or billing address:
 - street_address
