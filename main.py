@@ -19,7 +19,6 @@ print(snipit)
 # 2. Send the snipit to Ai - creates info.json - maps each category to its respective Column Letter
 AI_generate_json_structure(snipit)
 
-
 # 3. If the cell data are validated and formatted without returning null -> Process them in a list of dictionaries 
     # 3b. Store any failed results and send to AI -> Ai makes remake.json
 with open("info.json", "r") as f:
