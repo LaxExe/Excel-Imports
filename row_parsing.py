@@ -4,7 +4,7 @@ from clean import validate_email, filter_full_name, clean_phone_number, AI_check
 from address import is_1_column_tag, column_1_address_skip, column_multi_address
 from jsons_to_excel import find_last_row_with_data
 
-# Helper Function
+# Helper function to extract column letter from new structure
 def col_letter_to_index(letter):
   if not letter or letter == None:
     return None
@@ -12,8 +12,6 @@ def col_letter_to_index(letter):
   for i, c in enumerate(reversed(letter.upper())):
     total += (ord(c) - 64) * (26 ** i)
   return total
-
-
 
 
 def gather_row_data(excel_file, json_structure):
@@ -30,31 +28,61 @@ def gather_row_data(excel_file, json_structure):
 
   last_row = find_last_row_with_data(ws)
 
-  required_format = json_structure["address_1_column_format"]["ideal_address_format"]
+  # Helper function to extract column letter from new structure
+  def get_column_letter(field_data):
+      if field_data is None:
+          return None
+      if isinstance(field_data, dict) and "column_letter" in field_data:
+          return field_data["column_letter"]
+      return None
+
+  # Helper function to extract non-column-letter fields from new structure
+  def get_field_value(field_data):
+      if field_data is None:
+          return None
+      if isinstance(field_data, dict):
+          # For new structure, return the value directly (not column_letter)
+          if "column_letter" in field_data:
+              # This is a column field, return None for non-column fields
+              return None
+          else:
+              # This is a value field, return the first non-column_letter value
+              for key, value in field_data.items():
+                  if key != "column_letter" and key != "column_name" and key != "column_example_data":
+                      return value
+              return None
+      return field_data
+
+  # Get required format 
+  required_format = get_field_value(json_structure["address_1_column_format"]["ideal_address_format"])
 
   if is_1_column_tag("info.json"):
 
-    additional_feilds = json_structure["additional_fields"]
+    # Handle additional fields with new structure
+    additional_fields = json_structure.get("additional_fields", {})
 
     col_indexes = {
-      "email": col_letter_to_index(json_structure["required_fields"]["email"]),
-      "phone_number": col_letter_to_index(json_structure["required_fields"]["phone_number"]),
-      "full_name": col_letter_to_index(json_structure["required_fields"]["full_name"]),
-      "last_name": col_letter_to_index(json_structure["required_fields"]["last_name"]),
-      "address" : col_letter_to_index(json_structure["address_1_column_format"]["address_column"]),
-      "shipping_address": col_letter_to_index(json_structure["separate_shipping_and_billing_addresses"]["shipping_address_column"]),
-      "billing_address": col_letter_to_index(json_structure["separate_shipping_and_billing_addresses"]["billing_address_column"])
+      "email": col_letter_to_index(get_column_letter(json_structure["required_fields"]["email"])),
+      "phone_number": col_letter_to_index(get_column_letter(json_structure["required_fields"]["phone_number"])),
+      "full_name": col_letter_to_index(get_column_letter(json_structure["required_fields"]["full_name"])),
+      "last_name": col_letter_to_index(get_column_letter(json_structure["required_fields"]["last_name"])),
+      "address" : col_letter_to_index(get_column_letter(json_structure["address_1_column_format"]["address_column"])),
+      "shipping_address": col_letter_to_index(get_column_letter(json_structure["separate_shipping_and_billing_addresses"]["shipping_address_column"])),
+      "billing_address": col_letter_to_index(get_column_letter(json_structure["separate_shipping_and_billing_addresses"]["billing_address_column"]))
     }
 
-    additional_fields = json_structure.get("additional_fields", {})
-    for key, col_letter in additional_fields.items():
-        col_indexes[key] = col_letter_to_index(col_letter)
+    # Handle additional fields with new structure
+    for key, field_data in additional_fields.items():
+        if field_data is not None:  # Check if field exists
+            col_letter = get_column_letter(field_data)
+            if col_letter:
+                col_indexes[key] = col_letter_to_index(col_letter)
 
-    address_1_column_format = json_structure["address_1_column_format"]["address_format"]
-    address_1_column_seperator = json_structure["address_1_column_format"]["address_separator"]
+    address_1_column_format = get_field_value(json_structure["address_1_column_format"]["address_format"])
+    address_1_column_seperator = get_field_value(json_structure["address_1_column_format"]["address_separator"])
 
+    # Iterates through each data row and extracts the basic information (email, phone, name).
     for i in range(2, last_row + 1):
-      
     
       email = ws.cell(row=i, column=col_indexes["email"]).value
       phone_number = ws.cell(row=i, column=col_indexes["phone_number"]).value
@@ -67,18 +95,19 @@ def gather_row_data(excel_file, json_structure):
         last_name = ws.cell(row=i, column=col_indexes["last_name"]).value
         validate_name = filter_full_name(full_name, email, last_name)
 
-      items = []
 
-      for key in additional_feilds:
-        if additional_feilds != None:
+      # Get Additional Fields
+      items = []
+      for key in additional_fields:
+        if additional_fields != None:
           items.append(key + " : "+ (ws.cell(row=i, column=col_indexes[key])).value + "   ")
       valid_items = ' '.join(items)
 
+      # Validate Email and Phone Number
       valid_email = validate_email(email)
       valid_phone_number = clean_phone_number(phone_number, validate_name, valid_email, None) # Enter the country at none 
       
-      # DEAL WITH SHIPPING AND BILLING ADDRESS
-      # Get adddress feild
+      # Get adddress field
       # 1. If address exists as a single column, use that value for both shipping and billing address
       # 2. If both shipping and billing address exist, use those values instead
 
@@ -112,14 +141,14 @@ def gather_row_data(excel_file, json_structure):
       validate_shipping_address = column_1_address_skip(shipping_address, address_1_column_format, address_1_column_seperator, required_format)
       validate_billing_address = column_1_address_skip(billing_address, address_1_column_format, address_1_column_seperator, required_format)
       
-
+      # Validate Shipping and Billing Address
       if (validate_shipping_address == True or validate_billing_address or valid_email == "Missing" or valid_phone_number == False  or validate_name == False):
         failed_results.append (   
         f'{{\n  "email": "{email}",\n  "phone_number": {valid_phone_number},\n  "full_name": "{validate_name}",\n  "shipping_address": "{shipping_address}",\n "billing_address": "{billing_address}",\n "additional_fields": "{valid_items}"\n}}')
         check = check + 1
 
 
-
+      # Validate Address
       if valid_address != True:
         if sample < 3:
           good_data.append (   
@@ -134,7 +163,7 @@ def gather_row_data(excel_file, json_structure):
           "full_name": validate_name,
           "shipping_address": shipping_address,
           "billing_address": billing_address,
-          "additional_feilds" : valid_items
+          "additional_fields" : valid_items
         })
   
       if check == 10:
@@ -161,19 +190,32 @@ def gather_row_data(excel_file, json_structure):
           # Convert to string and strip whitespace, default to empty string if cell is None
           row_dict[f"{cell.column_letter}{cell.row}"] = str(cell.value).strip() if cell.value else ""
 
+        # Helper function to extract column letter from new structure
+        def get_column_letter(field_data):
+            if field_data is None:
+                return None
+            if isinstance(field_data, dict) and "column_letter" in field_data:
+                return field_data["column_letter"]
+            elif isinstance(field_data, str):
+                return field_data  # Handle old format for backward compatibility
+            return None
+
         # Extract the required fields using the JSON structure mapping
         # The JSON tells us which columns contain email, phone, name, etc.
-        email = row_dict.get(f"{json_structure['required_fields']['email']}{i}", "")
-        phone_number = row_dict.get(f"{json_structure['required_fields']['phone_number']}{i}", "")
-        full_name = row_dict.get(f"{json_structure['required_fields']['full_name']}{i}", "")
+        email_col = get_column_letter(json_structure['required_fields']['email'])
+        phone_col = get_column_letter(json_structure['required_fields']['phone_number'])
+        full_name_col = get_column_letter(json_structure['required_fields']['full_name'])
+        last_name_col = get_column_letter(json_structure['required_fields']['last_name'])
+        
+        email = row_dict.get(f"{email_col}{i}", "") if email_col else ""
+        phone_number = row_dict.get(f"{phone_col}{i}", "") if phone_col else ""
+        full_name = row_dict.get(f"{full_name_col}{i}", "") if full_name_col else ""
         
         # Handle last name field - it might not exist in the JSON structure
         # If last_name is null in JSON, we pass None to the name validation function
-        last_name_val = (
-          row_dict.get(f"{json_structure['required_fields']['last_name']}{i}", "")
-          if json_structure["required_fields"]["last_name"]
-          else None
-        )
+        last_name_val = None
+        if last_name_col:
+            last_name_val = row_dict.get(f"{last_name_col}{i}", "")
         
         # Validate and format the full name using the name cleaning function
         # This handles cases where we have separate first/last name columns
@@ -201,10 +243,13 @@ def gather_row_data(excel_file, json_structure):
         additional_fields = json_structure.get("additional_fields", {})
 
         # Loop through each additional field and get its value from the row
-        for key, col_letter in additional_fields.items():
-          cell_key = f"{col_letter}{i}"  
-          val = row_dict.get(cell_key, "")  
-          items.append(f"{key}: {val}")  
+        for key, field_data in additional_fields.items():
+            if field_data is not None:  # Check if field exists
+                col_letter = get_column_letter(field_data)
+                if col_letter:
+                    cell_key = f"{col_letter}{i}"  
+                    val = row_dict.get(cell_key, "")  
+                    items.append(f"{key}: {val}")
         
         # Join all additional fields with triple spaces for readability
         # This creates a string like "Unit ID: asdf123   Owner: Nice"
@@ -217,13 +262,12 @@ def gather_row_data(excel_file, json_structure):
         # - Name is invalid
         # - Address needs AI (missing or invalid address parts)
 
-
         results.append({
           "email": valid_email,
           "phone_number": valid_phone_number,
           "full_name": validate_name,
           "address": formatted_address,
-          "additional_feilds" : valid_items
+          "additional_fields" : valid_items
         })
   
 

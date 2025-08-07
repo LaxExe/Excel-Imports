@@ -12,7 +12,24 @@ def is_1_column_tag(filepath):
     with open(filepath, "r") as f:
         info_json = json.load(f)
 
-    is_1_column = info_json["required_fields"]["address_takes_up_1_column"]
+    # Helper function to extract field value from new structure
+    def get_field_value(field_data):
+        if field_data is None:
+            return None
+        if isinstance(field_data, dict):
+            # For new structure, return the value directly (not column_letter)
+            if "column_letter" in field_data:
+                # This is a column field, return None for non-column fields
+                return None
+            else:
+                # This is a value field, return the first non-column_letter value
+                for key, value in field_data.items():
+                    if key != "column_letter" and key != "column_name" and key != "column_example_data":
+                        return value
+                return None
+        return field_data
+
+    is_1_column = get_field_value(info_json["required_fields"]["address_takes_up_1_column"])
 
     return is_1_column
 
@@ -100,6 +117,16 @@ def column_multi_address(row, row_number, json_path="info.json"):
     with open(json_path, "r") as f:
         info_json = json.load(f)
 
+    # Helper function to extract column letter from new structure
+    def get_column_letter(field_data):
+        if field_data is None:
+            return None
+        if isinstance(field_data, dict) and "column_letter" in field_data:
+            return field_data["column_letter"]
+        elif isinstance(field_data, str):
+            return field_data  # Handle old format for backward compatibility
+        return None
+
     # Get the main address columns from the JSON configuration
     # These are the primary address fields like street, city, postal code
     address_cols = info_json.get("if_multi_column_address", {})
@@ -112,11 +139,11 @@ def column_multi_address(row, row_number, json_path="info.json"):
     # This creates a single dictionary that maps field names to their column letters
     # Example: {"street_address": "A", "city": "B", "province": "C", "postal_code": "D", "country": "E"}
     address_fields = {
-        "street_address": address_cols.get("street_address"),      
-        "city": address_cols.get("city"),                         
-        "province": additional_cols.get("province_or_state_name"),               
-        "postal_code": address_cols.get("postal"),                
-        "country": additional_cols.get("country")                  
+        "street_address": get_column_letter(address_cols.get("street_address")),      
+        "city": get_column_letter(address_cols.get("city")),                         
+        "province": get_column_letter(additional_cols.get("province")),               
+        "postal_code": get_column_letter(address_cols.get("postal")),                
+        "country": get_column_letter(additional_cols.get("country"))                  
     }
 
     # Initialize result dictionary to store the actual address values

@@ -1,13 +1,33 @@
 {
     "required_fields": {
-        "phone_number": "B",
-        "email": "A",
-        "full_name": "C",
-        "last_name": null,
+        "phone_number": {
+            "column_letter": "B",
+            "column_name": "Phone numbers",
+            "column_example_data": "Phone:613-875-5275, Phone:819-243-3306, Phone:613-224-4488"
+        },
+        "email": {
+            "column_letter": "C",
+            "column_name": "Email",
+            "column_example_data": "invoices@tphinc.ca, david@stoneworks.ca, karl@lakadd.com"
+        },
+        "full_name": {
+            "column_letter": "A",
+            "column_name": "Customer full name",
+            "column_example_data": "1070452 Ontario Inc., 110213354 Canada Inc., 11445251 Canada Inc."
+        },
+        "last_name": {
+            "column_letter": "D",
+            "column_name": "Full name",
+            "column_example_data": "1150107 Ontario Inc., No Name"
+        },
         "address_takes_up_1_column": true
     },
     "address_1_column_format": {
-        "address_column": "D",
+        "address_column": {
+            "column_letter": "E",
+            "column_name": "Bill address",
+            "column_example_data": "1528 Startop Road, Unit # 7 Ottawa Ontario K1B 3W6, 5586 Pettapiece Crescent Manotick Ontario K4M 1C5"
+        },
         "address_format": "Street, City, Postal Code",
         "ideal_address_format": "Postal Code, Street, City",
         "address_separator": ", "
@@ -22,10 +42,22 @@
         "country": null
     },
     "separate_shipping_and_billing_addresses": {
-        "shipping_address_column": "D",
-        "billing_address_column": "D"
+        "shipping_address_column": {
+            "column_letter": "F",
+            "column_name": "Ship address",
+            "column_example_data": "2742 ST.Joseph Blvd Orleans Ontario Canada, 1755 Stamp Road Limoges Ontario Canada"
+        },
+        "billing_address_column": {
+            "column_letter": "E",
+            "column_name": "Bill address",
+            "column_example_data": "1528 Startop Road, Unit # 7 Ottawa Ontario K1B 3W6, 5586 Pettapiece Crescent Manotick Ontario K4M 1C5"
+        }
     },
     "additional_fields": {
-        "additional_fields": "E"
+        "additional_field_1": {
+            "column_letter": "G",
+            "column_name": "Customer",
+            "column_example_data": "1070452 Ontario Inc., 110213354 Canada Inc., 11445251 Canada Inc."
+        }
     }
 }

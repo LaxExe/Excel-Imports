@@ -1,0 +1,154 @@
+{
+    "clean_items": [
+        {
+            "missing_parts_of_address": true,
+            "email": "l.aprile1947@gmail.com",
+            "phone_number": null,
+            "full_name": "1618212 Ontario Ltd.",
+            "shipping_address": [
+                {
+                    "street_address": "1539 Arnhem St.",
+                    "postal_code": "K2C 1T9",
+                    "city": "Ottawa",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "1539 Arnhem St.",
+                    "postal_code": "K2C 1T9",
+                    "city": "Ottawa",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "additional_fields": "additional_field_1 : 1618212 Ontario Ltd."
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "kaichen5@gmail.com",
+            "phone_number": "Phone:416-520-4898",
+            "full_name": "175 Mcarthur Ave.",
+            "shipping_address": [
+                {
+                    "street_address": "175 McArthur Ave.",
+                    "postal_code": null,
+                    "city": "Vanier",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "20 Rolark Dr. Unit 1",
+                    "postal_code": "M1R 4G2",
+                    "city": "Scarborough",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "additional_fields": "additional_field_1 : 175 McArthur Ave."
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "scottlanecan@hotmail.com",
+            "phone_number": "Phone:613-295-3954",
+            "full_name": "1786073 Ontario Inc.",
+            "shipping_address": [
+                {
+                    "street_address": "23 King St West",
+                    "postal_code": null,
+                    "city": "Brockville",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "23 King St West",
+                    "postal_code": null,
+                    "city": "Brockville",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "additional_fields": "additional_field_1 : 1786073 Ontario Inc."
+        },
+        {
+            "missing_parts_of_address": false,
+            "email": "govind@kionas.ca",
+            "phone_number": "Phone:613-596-9663 Mobile:613-482-2810",
+            "full_name": "1897365 Ontario Inc",
+            "shipping_address": [
+                {
+                    "street_address": "692 McKay St",
+                    "postal_code": "K7M 7G2",
+                    "city": "Kingston",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "692 McKay St",
+                    "postal_code": "K7M 7G2",
+                    "city": "Kingston",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "additional_fields": "additional_field_1 : 1897365 Ontario Inc"
+        },
+        {
+            "missing_parts_of_address": false,
+            "email": "90kinggan@gmail.com",
+            "phone_number": "Phone:343-364-9005",
+            "full_name": "1972528 Ontario Ltd. C/o Lesley Poole",
+            "shipping_address": [
+                {
+                    "street_address": "502-50 Market St.",
+                    "postal_code": "K7G 2M3",
+                    "city": "Gananoque",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "502-50 Market St.",
+                    "postal_code": "K7G 2M3",
+                    "city": "Gananoque",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "additional_fields": "additional_field_1 : 1972528 Ontario Ltd. C/O Lesley Poole"
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "dbourdon@carefor.ca",
+            "phone_number": null,
+            "full_name": "205 Amelia Street, K6H 3P3 1 No Name",
+            "shipping_address": [
+                {
+                    "street_address": "1026 Laurier St.",
+                    "postal_code": null,
+                    "city": "Rockland",
+                    "province_or_state_name": "Ontario",
+                    "country": null
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "205 Amelia Street",
+                    "postal_code": "K6H 3P3",
+                    "city": "Cornwall",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "additional_fields": "additional_field_1 : 205 Amelia Street, K6H 3P3 1"
+        }
+    ]
+}
