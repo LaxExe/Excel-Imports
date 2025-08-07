@@ -19,7 +19,7 @@ def export_to_excel(data, output_file):
         for row_dict in data:
             ws.append([safe_str(row_dict.get(header, "")) for header in headers])
     else:
-        headers = ["email", "phone_number", "full_name", "shipping_address", "billing_address", "additional_fields"]
+        headers = ["Full Name", "Phone Number", "Email", "Billing Address", "Shipping Address", "Additional Feilds"]
         ws.append(headers)
 
     wb.save(output_file)

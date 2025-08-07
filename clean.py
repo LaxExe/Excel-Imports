@@ -40,7 +40,7 @@ def filter_full_name(name, email, lastname):
 
 
 def validate_email(email):
-  if not email or "@" not in email:
+  if not email or "@" not in email or email == None:
     return "MISSING"
   return email.strip().lower()
 

@@ -77,7 +77,7 @@
         },
         {
             "missing_parts_of_address": false,
-            "email": "None",
+            "email": "MISSING",
             "phone_number": "",
             "full_name": "1150107 Ontario Inc.",
             "shipping_address": [
@@ -152,7 +152,7 @@
         },
         {
             "missing_parts_of_address": false,
-            "email": "SWood@pattenhomes.com",
+            "email": "swood@pattenhomes.com",
             "phone_number": "Phone:613-831-5674",
             "full_name": "Swood",
             "shipping_address": [

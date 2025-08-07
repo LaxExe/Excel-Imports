@@ -2,7 +2,7 @@
     "clean_items": [
         {
             "missing_parts_of_address": true,
-            "email": "None",
+            "email": "MISSING",
             "phone_number": "None",
             "full_name": "None",
             "shipping_address": [
@@ -16,16 +16,16 @@
             "billing_address": [
                 {
                     "street_address": "None",
-                    "postal_code": "None",
-                    "city": "None",
-                    "country": "None"
+                    "postal_code": null,
+                    "city": null,
+                    "country": null
                 }
             ],
             "additional_fields": "Customer: None"
         },
         {
             "missing_parts_of_address": true,
-            "email": "None",
+            "email": "MISSING",
             "phone_number": "Phone:(613) 523-7479",
             "full_name": "2950-2960 Bank St. Retail Centre",
             "shipping_address": [
@@ -33,7 +33,7 @@
                     "street_address": "2950 Bank St.",
                     "postal_code": "K1T 1N8",
                     "city": "Ottawa",
-                    "country": "None"
+                    "country": null
                 }
             ],
             "billing_address": [
@@ -41,14 +41,14 @@
                     "street_address": "2950 Bank St.",
                     "postal_code": "K1T 1N8",
                     "city": "Ottawa",
-                    "country": "None"
+                    "country": null
                 }
             ],
             "additional_fields": "Customer: 2950-2960 Bank St. Retail Centre"
         },
         {
             "missing_parts_of_address": true,
-            "email": "None",
+            "email": "MISSING",
             "phone_number": "None",
             "full_name": "2c London",
             "shipping_address": [
@@ -56,7 +56,7 @@
                     "street_address": "102 Bank St., Suite  300",
                     "postal_code": "K1P 5N4",
                     "city": "Ottawa",
-                    "country": "None"
+                    "country": null
                 }
             ],
             "billing_address": [
@@ -64,7 +64,7 @@
                     "street_address": "102 Bank St., Suite  300",
                     "postal_code": "K1P 5N4",
                     "city": "Ottawa",
-                    "country": "None"
+                    "country": null
                 }
             ],
             "additional_fields": "Customer: 2C London"
@@ -94,7 +94,7 @@
         },
         {
             "missing_parts_of_address": true,
-            "email": "None",
+            "email": "MISSING",
             "phone_number": "Phone:(613) 796-2307",
             "full_name": "3181642 Canada Inc.",
             "shipping_address": [
@@ -102,7 +102,7 @@
                     "street_address": "PO Box 620",
                     "postal_code": "K0A 1M0",
                     "city": "Casselman",
-                    "country": "None"
+                    "country": null
                 }
             ],
             "billing_address": [
@@ -110,7 +110,7 @@
                     "street_address": "PO Box 620",
                     "postal_code": "K0A 1M0",
                     "city": "Casselman",
-                    "country": "None"
+                    "country": null
                 }
             ],
             "additional_fields": "Customer: 3181642 Canada Inc."
@@ -125,7 +125,7 @@
                     "street_address": "720 Belfast Rd., Unit 106",
                     "postal_code": "K1G 0Z5",
                     "city": "Ottawa",
-                    "country": "None"
+                    "country": null
                 }
             ],
             "billing_address": [
@@ -133,14 +133,14 @@
                     "street_address": "720 Belfast Rd., Unit 106",
                     "postal_code": "K1G 0Z5",
                     "city": "Ottawa",
-                    "country": "None"
+                    "country": null
                 }
             ],
             "additional_fields": "Customer: 360 Advanced Security Corp."
         },
         {
             "missing_parts_of_address": true,
-            "email": "None",
+            "email": "MISSING",
             "phone_number": "None",
             "full_name": "3673928 Canada Inc.",
             "shipping_address": [
@@ -148,7 +148,7 @@
                     "street_address": "McGill Manor",
                     "postal_code": "K6A 1P9",
                     "city": "Hawkesbury",
-                    "country": "None"
+                    "country": null
                 }
             ],
             "billing_address": [
@@ -156,7 +156,7 @@
                     "street_address": "McGill Manor",
                     "postal_code": "K6A 1P9",
                     "city": "Hawkesbury",
-                    "country": "None"
+                    "country": null
                 }
             ],
             "additional_fields": "Customer: 3673928 Canada Inc."
@@ -169,17 +169,17 @@
             "shipping_address": [
                 {
                     "street_address": "3541 Dalmac Rd",
-                    "postal_code": "None",
+                    "postal_code": null,
                     "city": "Osgoode",
-                    "country": "None"
+                    "country": null
                 }
             ],
             "billing_address": [
                 {
                     "street_address": "3541 Dalmac Rd",
-                    "postal_code": "None",
+                    "postal_code": null,
                     "city": "Osgoode",
-                    "country": "None"
+                    "country": null
                 }
             ],
             "additional_fields": "Customer: 3 F"
@@ -215,17 +215,17 @@
             "shipping_address": [
                 {
                     "street_address": "40 Sunset Blvd.",
-                    "postal_code": "None",
-                    "city": "None",
-                    "country": "None"
+                    "postal_code": null,
+                    "city": null,
+                    "country": null
                 }
             ],
             "billing_address": [
                 {
                     "street_address": "40 Sunset Blvd.",
-                    "postal_code": "None",
+                    "postal_code": null,
                     "city": "Perth",
-                    "country": "None"
+                    "country": null
                 }
             ],
             "additional_fields": "Customer: 40 Sunset Blvd."

@@ -148,7 +148,7 @@ def gather_row_data(excel_file, json_structure):
           # Validate Shipping and Billing Address
           if (validate_shipping_address == True or validate_billing_address or valid_email == "Missing" or valid_phone_number == False  or validate_name == False):
             failed_results.append (   
-            f'{{\n  "email": "{email}",\n  "phone_number": {valid_phone_number},\n  "full_name": "{validate_name}",\n  "shipping_address": "{shipping_address}",\n "billing_address": "{billing_address}",\n "additional_fields": "{valid_items}"\n}}')
+            f'{{\n  "email": "{valid_email}",\n  "phone_number": {valid_phone_number},\n  "full_name": "{validate_name}",\n  "shipping_address": "{shipping_address}",\n "billing_address": "{billing_address}",\n "additional_fields": "{valid_items}"\n}}')
             check = check + 1
 
 
@@ -156,19 +156,20 @@ def gather_row_data(excel_file, json_structure):
           if valid_address != True:
             if sample < 3:
               good_data.append (   
-              f'{{\n  "email": "{email}",\n  "phone_number": {valid_phone_number},\n  "full_name": "{validate_name}",\n  "shipping_address": "{shipping_address}",\n "billing_address": "{billing_address}",\n "additional_fields": "{valid_items}"\n}}'
+              f'{{\n  "email": "{valid_email}",\n  "phone_number": {valid_phone_number},\n  "full_name": "{validate_name}",\n  "shipping_address": "{shipping_address}",\n "billing_address": "{billing_address}",\n "additional_fields": "{valid_items}"\n}}'
               )
               sample = sample + 1
 
 
             results.append({
-              "email": valid_email,
-              "phone_number": valid_phone_number,
-              "full_name": validate_name,
-              "shipping_address": shipping_address,
-              "billing_address": billing_address,
-              "additional_fields" : valid_items
+              "Email": valid_email,
+              "Phone Number": valid_phone_number,
+              "Full Name": validate_name,
+              "Shipping Address": shipping_address,
+              "Billing Address": billing_address,
+              "Additional Feilds" : valid_items
             })
+  
     
           if check == 10:
             AI_check(good_data, failed_results, page)
@@ -228,12 +229,16 @@ def gather_row_data(excel_file, json_structure):
                   items.append(f"{column_name}: {val}")
       valid_items = '   '.join(items)
 
+      shipping_address = formatted_address
+      billing_address = formatted_address
+
       results.append({
-        "email": valid_email,
-        "phone_number": valid_phone_number,
-        "full_name": validate_name,
-        "address": formatted_address,
-        "additional_fields": valid_items
+        "Email": valid_email,
+        "Phone Number": valid_phone_number,
+        "Full Name": validate_name,
+        "Shipping Address": shipping_address,
+        "Billing Address": billing_address,
+        "Additional feilds" : valid_items
       })
 
     AI_check(good_data, failed_results, page)

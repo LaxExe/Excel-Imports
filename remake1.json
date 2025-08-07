@@ -1,9 +1,9 @@
 {
     "clean_items": [
         {
-            "missing_parts_of_address": true,
+            "missing_parts_of_address": false,
             "email": "l.aprile1947@gmail.com",
-            "phone_number": null,
+            "phone_number": "",
             "full_name": "Laprile1947",
             "shipping_address": [
                 {
@@ -26,7 +26,7 @@
             "additional_fields": "Customer: 1618212 Ontario Ltd."
         },
         {
-            "missing_parts_of_address": true,
+            "missing_parts_of_address": false,
             "email": "kaichen5@gmail.com",
             "phone_number": "Phone:416-520-4898",
             "full_name": "Kaichen5",
@@ -51,7 +51,7 @@
             "additional_fields": "Customer: 175 McArthur Ave."
         },
         {
-            "missing_parts_of_address": true,
+            "missing_parts_of_address": false,
             "email": "scottlanecan@hotmail.com",
             "phone_number": "Phone:613-295-3954",
             "full_name": "Scottlanecan",
@@ -128,7 +128,7 @@
         {
             "missing_parts_of_address": true,
             "email": "dbourdon@carefor.ca",
-            "phone_number": null,
+            "phone_number": "",
             "full_name": "No Name",
             "shipping_address": [
                 {
@@ -152,7 +152,7 @@
         },
         {
             "missing_parts_of_address": false,
-            "email": "None",
+            "email": "MISSING",
             "phone_number": "Phone:(613) 263-0301 Fax:(613) 260-7313",
             "full_name": "2075227 Ontario Inc.",
             "shipping_address": [
@@ -177,8 +177,8 @@
         },
         {
             "missing_parts_of_address": true,
-            "email": "Demers.realspace@rogers.com",
-            "phone_number": null,
+            "email": "demers.realspace@rogers.com",
+            "phone_number": "",
             "full_name": "Demersrealspace",
             "shipping_address": [
                 {
@@ -202,7 +202,7 @@
         },
         {
             "missing_parts_of_address": false,
-            "email": "None",
+            "email": "MISSING",
             "phone_number": "Phone:(613) 523-2066 Fax:(613) 733-7233",
             "full_name": "20 Vic Management Inc.",
             "shipping_address": [
@@ -227,8 +227,8 @@
         },
         {
             "missing_parts_of_address": false,
-            "email": "None",
-            "phone_number": null,
+            "email": "MISSING",
+            "phone_number": "",
             "full_name": "2135560 Ontario Limited",
             "shipping_address": [
                 {

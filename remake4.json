@@ -2,7 +2,7 @@
     "clean_items": [
         {
             "missing_parts_of_address": true,
-            "email": "None",
+            "email": "MISSING",
             "phone_number": "None",
             "full_name": "None",
             "shipping_address": [
@@ -16,7 +16,7 @@
             ],
             "billing_address": [
                 {
-                    "street_address": null,
+                    "street_address": "None",
                     "postal_code": null,
                     "city": null,
                     "province_or_state_name": null,
@@ -27,7 +27,7 @@
         },
         {
             "missing_parts_of_address": true,
-            "email": "None",
+            "email": "MISSING",
             "phone_number": "None",
             "full_name": "415 Legget Leaseholds Inc.",
             "shipping_address": [
@@ -52,7 +52,7 @@
         },
         {
             "missing_parts_of_address": true,
-            "email": "None",
+            "email": "MISSING",
             "phone_number": "None",
             "full_name": "4site Retail Services Inc.",
             "shipping_address": [
@@ -76,7 +76,7 @@
             "additional_fields": "Customer: 4Site Retail Services Inc."
         },
         {
-            "missing_parts_of_address": true,
+            "missing_parts_of_address": false,
             "email": "ottawahandymanservices.ca@gmail.com",
             "phone_number": "None",
             "full_name": "Ottawahandymanservicesca",

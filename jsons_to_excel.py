@@ -97,12 +97,12 @@ def append_cleaned_json_to_excel(directory, output_excel):
 
 
       row_data = {
-        "email": item.get("email", "value-missing"),
-        "phone_number": item.get("phone_number", "value-missing"),
-        "full_name": item.get("full_name", "value-missing"),
-        "shipping_address": full_shipping_address,
-        "billing_address": full_billing_address,
-        "additional_fields" : item.get("additional_fields", "value-missing")
+        "Full Name": item.get("full_name", "value-missing"),
+        "Phone Number": item.get("phone_number", "value-missing"),
+        "Email": item.get("email", "value-missing"),
+        "Billing Address": full_billing_address,
+        "Shipping Address": full_shipping_address,
+        "Additional Feilds" : item.get("additional_fields", "value-missing")
       }
  
       ws.append([row_data.get(header, "") for header in headers])

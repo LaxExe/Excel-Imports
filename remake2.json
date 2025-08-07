@@ -2,8 +2,8 @@
     "clean_items": [
         {
             "missing_parts_of_address": true,
-            "email": "None",
-            "phone_number": "None",
+            "email": "MISSING",
+            "phone_number": "Phone:",
             "full_name": "2164613 Ontario Inc.",
             "shipping_address": [
                 {
@@ -52,7 +52,7 @@
         },
         {
             "missing_parts_of_address": true,
-            "email": "Rodayotte@yahoo.ca, sveta@elmdevelopments.com, d.osypowich@elmdevelopments.com",
+            "email": "rodayotte@yahoo.ca, sveta@elmdevelopments.com, d.osypowich@elmdevelopments.com",
             "phone_number": "Phone:(613) 227-7997 - Rod Fax:(613) 256-8998",
             "full_name": "Rodayotte",
             "shipping_address": [
@@ -66,7 +66,7 @@
             ],
             "billing_address": [
                 {
-                    "street_address": "c/o 2241497 Ontario Limited Concord Ontario L4K 1V5 c/o Jason D'Elia",
+                    "street_address": "c/o 2241497 Ontario Limited Concord Ontario L4K 1V5 c/o Jason D'Elia                      Attention: Accounts Payable",
                     "postal_code": "L4K 1V5",
                     "city": "Concord",
                     "province_or_state_name": "Ontario",
@@ -102,7 +102,7 @@
         },
         {
             "missing_parts_of_address": true,
-            "email": "None",
+            "email": "MISSING",
             "phone_number": "None",
             "full_name": "None",
             "shipping_address": [
@@ -116,7 +116,7 @@
             ],
             "billing_address": [
                 {
-                    "street_address": null,
+                    "street_address": "None",
                     "postal_code": null,
                     "city": null,
                     "province_or_state_name": null,
@@ -127,8 +127,8 @@
         },
         {
             "missing_parts_of_address": true,
-            "email": "None",
-            "phone_number": "None",
+            "email": "MISSING",
+            "phone_number": "Phone:",
             "full_name": "2553395 Ontario Inc.",
             "shipping_address": [
                 {
@@ -153,7 +153,7 @@
         {
             "missing_parts_of_address": true,
             "email": "invoices@hein.ca",
-            "phone_number": "None",
+            "phone_number": "Phone:",
             "full_name": "No Name",
             "shipping_address": [
                 {
@@ -177,12 +177,12 @@
         },
         {
             "missing_parts_of_address": true,
-            "email": "None",
+            "email": "MISSING",
             "phone_number": "None",
             "full_name": "None",
             "shipping_address": [
                 {
-                    "street_address": null,
+                    "street_address": "None",
                     "postal_code": null,
                     "city": null,
                     "province_or_state_name": null,
@@ -191,7 +191,7 @@
             ],
             "billing_address": [
                 {
-                    "street_address": null,
+                    "street_address": "None",
                     "postal_code": null,
                     "city": null,
                     "province_or_state_name": null,
@@ -202,7 +202,7 @@
         },
         {
             "missing_parts_of_address": true,
-            "email": "None",
+            "email": "MISSING",
             "phone_number": "None",
             "full_name": "None",
             "shipping_address": [
@@ -216,7 +216,7 @@
             ],
             "billing_address": [
                 {
-                    "street_address": null,
+                    "street_address": "None",
                     "postal_code": null,
                     "city": null,
                     "province_or_state_name": null,
@@ -227,12 +227,12 @@
         },
         {
             "missing_parts_of_address": true,
-            "email": "None",
+            "email": "MISSING",
             "phone_number": "None",
             "full_name": "None",
             "shipping_address": [
                 {
-                    "street_address": null,
+                    "street_address": "None",
                     "postal_code": null,
                     "city": null,
                     "province_or_state_name": null,
@@ -241,7 +241,7 @@
             ],
             "billing_address": [
                 {
-                    "street_address": null,
+                    "street_address": "None",
                     "postal_code": null,
                     "city": null,
                     "province_or_state_name": null,

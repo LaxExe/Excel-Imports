@@ -27,7 +27,7 @@
         },
         {
             "missing_parts_of_address": true,
-            "email": "Tania@premium-construction.ca, sabbi@premium-construction.ca, admin@premium-construction.ca",
+            "email": "tania@premium-construction.ca, sabbi@premium-construction.ca, admin@premium-construction.ca",
             "phone_number": null,
             "full_name": "Tania",
             "shipping_address": [
@@ -52,7 +52,7 @@
         },
         {
             "missing_parts_of_address": true,
-            "email": "Tania@premium-construction.ca, sabbi@premium-construction.ca, admin@premium-construction.ca",
+            "email": "tania@premium-construction.ca, sabbi@premium-construction.ca, admin@premium-construction.ca",
             "phone_number": null,
             "full_name": "Tania",
             "shipping_address": [
@@ -227,7 +227,7 @@
         },
         {
             "missing_parts_of_address": true,
-            "email": "None",
+            "email": "MISSING",
             "phone_number": null,
             "full_name": "None",
             "shipping_address": [
