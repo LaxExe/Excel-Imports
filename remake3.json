@@ -1,0 +1,234 @@
+{
+    "clean_items": [
+        {
+            "missing_parts_of_address": true,
+            "email": "None",
+            "phone_number": "None",
+            "full_name": "None",
+            "shipping_address": [
+                {
+                    "street_address": "705 Mackay St",
+                    "postal_code": "K8A 1G8",
+                    "city": "Pembroke",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "None",
+                    "postal_code": "None",
+                    "city": "None",
+                    "country": "None"
+                }
+            ],
+            "additional_fields": "Customer: None"
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "None",
+            "phone_number": "Phone:(613) 523-7479",
+            "full_name": "2950-2960 Bank St. Retail Centre",
+            "shipping_address": [
+                {
+                    "street_address": "2950 Bank St.",
+                    "postal_code": "K1T 1N8",
+                    "city": "Ottawa",
+                    "country": "None"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "2950 Bank St.",
+                    "postal_code": "K1T 1N8",
+                    "city": "Ottawa",
+                    "country": "None"
+                }
+            ],
+            "additional_fields": "Customer: 2950-2960 Bank St. Retail Centre"
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "None",
+            "phone_number": "None",
+            "full_name": "2c London",
+            "shipping_address": [
+                {
+                    "street_address": "102 Bank St., Suite  300",
+                    "postal_code": "K1P 5N4",
+                    "city": "Ottawa",
+                    "country": "None"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "102 Bank St., Suite  300",
+                    "postal_code": "K1P 5N4",
+                    "city": "Ottawa",
+                    "country": "None"
+                }
+            ],
+            "additional_fields": "Customer: 2C London"
+        },
+        {
+            "missing_parts_of_address": false,
+            "email": "payables@sentinelmanagement.com",
+            "phone_number": "Phone:613-736-7807 ext 121",
+            "full_name": "Payables",
+            "shipping_address": [
+                {
+                    "street_address": "310 Centrum Blvd",
+                    "postal_code": "K1E 3W8",
+                    "city": "Orleans",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "5832 Bank Street",
+                    "postal_code": "K4P 1B9",
+                    "city": "Ottawa",
+                    "country": "Canada"
+                }
+            ],
+            "additional_fields": "Customer: 310 Centrum Blvd"
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "None",
+            "phone_number": "Phone:(613) 796-2307",
+            "full_name": "3181642 Canada Inc.",
+            "shipping_address": [
+                {
+                    "street_address": "PO Box 620",
+                    "postal_code": "K0A 1M0",
+                    "city": "Casselman",
+                    "country": "None"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "PO Box 620",
+                    "postal_code": "K0A 1M0",
+                    "city": "Casselman",
+                    "country": "None"
+                }
+            ],
+            "additional_fields": "Customer: 3181642 Canada Inc."
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "serviceottawa@360asc.com",
+            "phone_number": "None",
+            "full_name": "360 Advanced Security Corp.",
+            "shipping_address": [
+                {
+                    "street_address": "720 Belfast Rd., Unit 106",
+                    "postal_code": "K1G 0Z5",
+                    "city": "Ottawa",
+                    "country": "None"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "720 Belfast Rd., Unit 106",
+                    "postal_code": "K1G 0Z5",
+                    "city": "Ottawa",
+                    "country": "None"
+                }
+            ],
+            "additional_fields": "Customer: 360 Advanced Security Corp."
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "None",
+            "phone_number": "None",
+            "full_name": "3673928 Canada Inc.",
+            "shipping_address": [
+                {
+                    "street_address": "McGill Manor",
+                    "postal_code": "K6A 1P9",
+                    "city": "Hawkesbury",
+                    "country": "None"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "McGill Manor",
+                    "postal_code": "K6A 1P9",
+                    "city": "Hawkesbury",
+                    "country": "None"
+                }
+            ],
+            "additional_fields": "Customer: 3673928 Canada Inc."
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "schryver3f@hotmail.ca",
+            "phone_number": "None",
+            "full_name": "Schryver3f",
+            "shipping_address": [
+                {
+                    "street_address": "3541 Dalmac Rd",
+                    "postal_code": "None",
+                    "city": "Osgoode",
+                    "country": "None"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "3541 Dalmac Rd",
+                    "postal_code": "None",
+                    "city": "Osgoode",
+                    "country": "None"
+                }
+            ],
+            "additional_fields": "Customer: 3 F"
+        },
+        {
+            "missing_parts_of_address": false,
+            "email": "me@me.com",
+            "phone_number": "Phone:613-342-6042",
+            "full_name": "Me",
+            "shipping_address": [
+                {
+                    "street_address": "20 Cowan Ave.",
+                    "postal_code": "K6V 6E6",
+                    "city": "Brockville",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "20 Cowan Ave.",
+                    "postal_code": "K6V 6E6",
+                    "city": "Brockville",
+                    "country": "Canada"
+                }
+            ],
+            "additional_fields": "Customer: 401 Electric"
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "info@rgss-ventures.com",
+            "phone_number": "Phone:613-264-6135  - Earl Kerr",
+            "full_name": "Info",
+            "shipping_address": [
+                {
+                    "street_address": "40 Sunset Blvd.",
+                    "postal_code": "None",
+                    "city": "None",
+                    "country": "None"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "40 Sunset Blvd.",
+                    "postal_code": "None",
+                    "city": "Perth",
+                    "country": "None"
+                }
+            ],
+            "additional_fields": "Customer: 40 Sunset Blvd."
+        }
+    ]
+}

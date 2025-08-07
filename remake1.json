@@ -4,7 +4,7 @@
             "missing_parts_of_address": true,
             "email": "l.aprile1947@gmail.com",
             "phone_number": null,
-            "full_name": "1618212 Ontario Ltd.",
+            "full_name": "Laprile1947",
             "shipping_address": [
                 {
                     "street_address": "1539 Arnhem St.",
@@ -23,13 +23,13 @@
                     "country": "Canada"
                 }
             ],
-            "additional_fields": "additional_field_1 : 1618212 Ontario Ltd."
+            "additional_fields": "Customer: 1618212 Ontario Ltd."
         },
         {
             "missing_parts_of_address": true,
             "email": "kaichen5@gmail.com",
             "phone_number": "Phone:416-520-4898",
-            "full_name": "175 Mcarthur Ave.",
+            "full_name": "Kaichen5",
             "shipping_address": [
                 {
                     "street_address": "175 McArthur Ave.",
@@ -48,13 +48,13 @@
                     "country": "Canada"
                 }
             ],
-            "additional_fields": "additional_field_1 : 175 McArthur Ave."
+            "additional_fields": "Customer: 175 McArthur Ave."
         },
         {
             "missing_parts_of_address": true,
             "email": "scottlanecan@hotmail.com",
             "phone_number": "Phone:613-295-3954",
-            "full_name": "1786073 Ontario Inc.",
+            "full_name": "Scottlanecan",
             "shipping_address": [
                 {
                     "street_address": "23 King St West",
@@ -73,13 +73,13 @@
                     "country": "Canada"
                 }
             ],
-            "additional_fields": "additional_field_1 : 1786073 Ontario Inc."
+            "additional_fields": "Customer: 1786073 Ontario Inc."
         },
         {
             "missing_parts_of_address": false,
             "email": "govind@kionas.ca",
             "phone_number": "Phone:613-596-9663 Mobile:613-482-2810",
-            "full_name": "1897365 Ontario Inc",
+            "full_name": "Govind",
             "shipping_address": [
                 {
                     "street_address": "692 McKay St",
@@ -98,13 +98,13 @@
                     "country": "Canada"
                 }
             ],
-            "additional_fields": "additional_field_1 : 1897365 Ontario Inc"
+            "additional_fields": "Customer: 1897365 Ontario Inc"
         },
         {
             "missing_parts_of_address": false,
             "email": "90kinggan@gmail.com",
             "phone_number": "Phone:343-364-9005",
-            "full_name": "1972528 Ontario Ltd. C/o Lesley Poole",
+            "full_name": "90kinggan",
             "shipping_address": [
                 {
                     "street_address": "502-50 Market St.",
@@ -123,13 +123,13 @@
                     "country": "Canada"
                 }
             ],
-            "additional_fields": "additional_field_1 : 1972528 Ontario Ltd. C/O Lesley Poole"
+            "additional_fields": "Customer: 1972528 Ontario Ltd. C/O Lesley Poole"
         },
         {
             "missing_parts_of_address": true,
             "email": "dbourdon@carefor.ca",
             "phone_number": null,
-            "full_name": "205 Amelia Street, K6H 3P3 1 No Name",
+            "full_name": "No Name",
             "shipping_address": [
                 {
                     "street_address": "1026 Laurier St.",
@@ -148,7 +148,107 @@
                     "country": "Canada"
                 }
             ],
-            "additional_fields": "additional_field_1 : 205 Amelia Street, K6H 3P3 1"
+            "additional_fields": "Customer: 205 Amelia Street, K6H 3P3 1"
+        },
+        {
+            "missing_parts_of_address": false,
+            "email": "None",
+            "phone_number": "Phone:(613) 263-0301 Fax:(613) 260-7313",
+            "full_name": "2075227 Ontario Inc.",
+            "shipping_address": [
+                {
+                    "street_address": "2211 Riverside Dr., Suite B1",
+                    "postal_code": "K1H 7X5",
+                    "city": "Ottawa",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "2211 Riverside Dr., Suite B1",
+                    "postal_code": "K1H 7X5",
+                    "city": "Ottawa",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "additional_fields": "Customer: 2075227 Ontario Inc."
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "Demers.realspace@rogers.com",
+            "phone_number": null,
+            "full_name": "Demersrealspace",
+            "shipping_address": [
+                {
+                    "street_address": "c/o Realspace Mgmt. Group",
+                    "postal_code": "M2H 3H7",
+                    "city": "Toronto",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "c/o Realspace Mgmt. Group",
+                    "postal_code": "M2H 3H7",
+                    "city": "Toronto",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "additional_fields": "Customer: 20 Fitzgerald Rd. Holdings Ltd."
+        },
+        {
+            "missing_parts_of_address": false,
+            "email": "None",
+            "phone_number": "Phone:(613) 523-2066 Fax:(613) 733-7233",
+            "full_name": "20 Vic Management Inc.",
+            "shipping_address": [
+                {
+                    "street_address": "Billings Bridge Centre",
+                    "postal_code": "K1H 7X6",
+                    "city": "Ottawa",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "Billings Bridge Centre",
+                    "postal_code": "K1H 7X6",
+                    "city": "Ottawa",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "additional_fields": "Customer: 20 Vic Management Inc."
+        },
+        {
+            "missing_parts_of_address": false,
+            "email": "None",
+            "phone_number": null,
+            "full_name": "2135560 Ontario Limited",
+            "shipping_address": [
+                {
+                    "street_address": "1931 Highway # 7",
+                    "postal_code": "L4K 1V5",
+                    "city": "Concord",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "1931 Highway # 7",
+                    "postal_code": "L4K 1V5",
+                    "city": "Concord",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "additional_fields": "Customer: 2135560 Ontario Limited"
         }
     ]
 }

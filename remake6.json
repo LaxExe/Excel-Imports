@@ -1,0 +1,254 @@
+{
+    "clean_items": [
+        {
+            "missing_parts_of_address": false,
+            "email": "sabbi@premium-construction.ca",
+            "phone_number": "Phone:613-804-9028",
+            "full_name": "No Name",
+            "shipping_address": [
+                {
+                    "street_address": "Unit #30 - 174 Colonnade Rd.",
+                    "postal_code": "K2E 7J3",
+                    "city": "Ottawa",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "Unit #30 - 174 Colonnade Rd.",
+                    "postal_code": "K2E 7J3",
+                    "city": "Ottawa",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "additional_fields": "Customer: 613-804-9028 1"
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "Tania@premium-construction.ca, sabbi@premium-construction.ca, admin@premium-construction.ca",
+            "phone_number": null,
+            "full_name": "Tania",
+            "shipping_address": [
+                {
+                    "street_address": "A & W -  Winchester , Main Street West",
+                    "postal_code": null,
+                    "city": "Winchester",
+                    "province_or_state_name": "North Dundas",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "P.O. Box 45057",
+                    "postal_code": "K2M 2Y1",
+                    "city": "Kanata South",
+                    "province_or_state_name": "Kanata",
+                    "country": "Canada"
+                }
+            ],
+            "additional_fields": "Customer: A & W  - Winchester"
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "Tania@premium-construction.ca, sabbi@premium-construction.ca, admin@premium-construction.ca",
+            "phone_number": null,
+            "full_name": "Tania",
+            "shipping_address": [
+                {
+                    "street_address": "Christian Horizon School1335 Carling Ave.",
+                    "postal_code": null,
+                    "city": "Ottawa",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "P.O. Box 45057",
+                    "postal_code": "K2M 2Y1",
+                    "city": "Kanata South",
+                    "province_or_state_name": "Kanata",
+                    "country": "Canada"
+                }
+            ],
+            "additional_fields": "Customer: Christian Horizon School"
+        },
+        {
+            "missing_parts_of_address": false,
+            "email": "kyle@blackforestcontractor.ca",
+            "phone_number": "Phone:613-822-6594",
+            "full_name": "No Name",
+            "shipping_address": [
+                {
+                    "street_address": "770 Snake Island Road",
+                    "postal_code": "K0A 2P0",
+                    "city": "Ottawa",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "770 Snake Island Road",
+                    "postal_code": "K0A 2P0",
+                    "city": "Ottawa",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "additional_fields": "Customer: 613-822-6594"
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "goulbourn@bellnet.ca",
+            "phone_number": "Phone:613-831-2383",
+            "full_name": "No Name",
+            "shipping_address": [
+                {
+                    "street_address": "1 Carleton Cathcart St",
+                    "postal_code": null,
+                    "city": "Stittsville",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "1 Carleton Cathcart St",
+                    "postal_code": null,
+                    "city": "Ottawa",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "additional_fields": "Customer: 613-831-2383"
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "goulbourn@bellnet.ca",
+            "phone_number": "Phone:613-831-2383",
+            "full_name": "No Name",
+            "shipping_address": [
+                {
+                    "street_address": "126 Hamilton St",
+                    "postal_code": null,
+                    "city": "Richmond",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "1 Carleton Cathcart St",
+                    "postal_code": null,
+                    "city": "Ottawa",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "additional_fields": "Customer: 613-831-2383 1"
+        },
+        {
+            "missing_parts_of_address": false,
+            "email": "billing.6172199canadainc@gmail.com",
+            "phone_number": "Phone:613-323-5914",
+            "full_name": "Billing6172199canadainc",
+            "shipping_address": [
+                {
+                    "street_address": "1675 Merivale Rd.",
+                    "postal_code": "K2G 3K2",
+                    "city": "Ottawa",
+                    "province_or_state_name": "Ontario",
+                    "country": null
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "1675 Merivale Rd.",
+                    "postal_code": "K2G 3K2",
+                    "city": "Ottawa",
+                    "province_or_state_name": "Ontario",
+                    "country": null
+                }
+            ],
+            "additional_fields": "Customer: 6172199 Canada Inc."
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "billing.6172199canadainc@gmail.com",
+            "phone_number": "Phone:613-723-5719",
+            "full_name": "Billing6172199canadainc",
+            "shipping_address": [
+                {
+                    "street_address": "McDonalds Restaurant 1850 Baseline Rd",
+                    "postal_code": null,
+                    "city": "Ottawa",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "1675 Merivale Rd",
+                    "postal_code": "K2G 3K2",
+                    "city": "Ottawa",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "additional_fields": "Customer: McDonalds - Baseline Rd."
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "billing.6172199canadainc@gmail.com",
+            "phone_number": "Phone:613-323-5914",
+            "full_name": "Billing6172199canadainc",
+            "shipping_address": [
+                {
+                    "street_address": "McDonalds Restaurant",
+                    "postal_code": null,
+                    "city": null,
+                    "province_or_state_name": null,
+                    "country": null
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "1675 Merivale Rd.",
+                    "postal_code": "K2G 3K2",
+                    "city": "Ottawa",
+                    "province_or_state_name": "Ontario",
+                    "country": null
+                }
+            ],
+            "additional_fields": "Customer: McDonalds - Bronson"
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "None",
+            "phone_number": null,
+            "full_name": "None",
+            "shipping_address": [
+                {
+                    "street_address": "670 Bronson St.",
+                    "postal_code": null,
+                    "city": "Ottawa",
+                    "province_or_state_name": "Ontario",
+                    "country": null
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": null,
+                    "postal_code": null,
+                    "city": null,
+                    "province_or_state_name": null,
+                    "country": null
+                }
+            ],
+            "additional_fields": "Customer: None"
+        }
+    ]
+}

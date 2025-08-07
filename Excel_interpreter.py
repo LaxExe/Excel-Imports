@@ -88,6 +88,7 @@ Step-by-step process:
    - **Multiple columns**: Look for separate headers in any language that contain items like "street", "street address", "address line", "city", "town", "state", "province", "region", "postal code", "zip code", "zip", "country"
 
 4. **Determine address format**:
+    - UNDERSTAND THAT THERE MAY BE SHIPING AND BILLING ADDRESSES, IN THAT CASE ONLY LOOK AT THE BILLLING ADDRESS and set `address_takes_up_1_column` to true
    - If single column found: Set `address_takes_up_1_column` to true
    - If multiple address columns found: Set `address_takes_up_1_column` to false
    - If both exist, prioritize the structure that has more complete information
@@ -138,6 +139,7 @@ Step-by-step process:
    - Use "null" if a component cannot be found
 
 7. ** Shipping Address and Billing Address**:
+
     - If both shipping and billing addresses exist and have there own columns, identify them separately
     - The Assumptions is that both billing and shipping address occupy a single column each, not multiple columns each
     - If only address exists as a single column, set both shipping and billing address to that column
@@ -160,6 +162,8 @@ Step-by-step process:
 - Prioritize more specific matches over generic ones
 - If multiple columns could match the same field, choose the most specific or complete one
 
+ENSURE THE FINAL JSON HAS NULL VALUES WHERE APPROPRIATE WITH THE CORRECT BOOLEAN OPPERATION ALSO ENSURE THAT THE EXAMPLES ARE EXTRACTED FROM THE DATA 
+
 Return ONLY this JSON structure with no additional text:
 
 """
@@ -167,36 +171,97 @@ Return ONLY this JSON structure with no additional text:
 
 primary_json_structure = """
 {
-  "required_fields": {
-    "phone_number": "Column Letter",
-    "email": "Column Letter",
-    "full_name": "Column Letter",
-    "last_name": "Column Letter or null",
-    "address_takes_up_1_column": true
-  },
-  "address_1_column_format": {
-    "address_column": "Column Letter or null",
-    "address_format": "",
-    "ideal_address_format": "",
-    "address_separator": ""
-  },
-  "if_multi_column_address": {
-    "street_address": "Column Letter or null",
-    "city": "Column Letter or null",
-    "postal": "Column Letter or null"
-  },
-  "additional_address_information": {
-    "province": "Column Letter or null",
-    "country": "Column Letter" or null""
-  },
-  "separate_shipping_and_billing_addresses": {
-    "shipping_address_column": "Column Letter or null",
-    "billing_address_column": "Column Letter or null"
-  },
-  "additional_fields": {
-    "Column Name 1": "Column Letter",
-    "Column Name 2": "Column Letter"
-  }
+    "required_fields": {
+        "phone_number": {
+            "column_letter": "A",
+            "column_name": "Phone Number",
+            "column_example_data": "432-567-9090, 123-456-7890, 098-876-5437"
+        },
+        "email": {
+            "column_letter": "B", 
+            "column_name": "Email Address",
+            "column_example_data": "john.doe@email.com, sarah.smith@company.org, mike.jones@domain.net"
+        },
+        "full_name": {
+            "column_letter": "C",
+            "column_name": "Full Name", 
+            "column_example_data": "John Smith, Sarah Johnson, Michael Davis"
+        },
+        "last_name": {
+            "column_letter": "D",
+            "column_name": "Last Name",
+            "column_example_data": "Smith, Johnson, Davis"
+        },
+        "address_takes_up_1_column": true
+    },
+    "address_1_column_format": {
+        "address_column": {
+            "column_letter": "E",
+            "column_name": "Address",
+            "column_example_data": "123 Main St, Toronto, M5V 2T6, 456 Oak Ave, Vancouver, V6B 1A1, 789 Pine Rd, Montreal, H3A 0G4"
+        },
+        "address_format": "Street, City, Postal Code",
+        "ideal_address_format": "Postal Code, Street, City",
+        "address_separator": ", "
+    },
+    "if_multi_column_address": {
+        "street_address": {
+            "column_letter": "E",
+            "column_name": "Street Address",
+            "column_example_data": "123 Main St, 456 Oak Ave, 789 Pine Rd"
+        },
+        "city": {
+            "column_letter": "F",
+            "column_name": "City",
+            "column_example_data": "Toronto, Vancouver, Montreal"
+        },
+        "postal": {
+            "column_letter": "G",
+            "column_name": "Postal Code",
+            "column_example_data": "M5V 2T6, V6B 1A1, H3A 0G4"
+        }
+    },
+    "additional_address_information": {
+        "province": {
+            "column_letter": "H",
+            "column_name": "Province/State",
+            "column_example_data": "Ontario, British Columbia, Quebec"
+        },
+        "country": {
+            "column_letter": "I",
+            "column_name": "Country",
+            "column_example_data": "Canada, United States, Mexico"
+        }
+    },
+    "separate_shipping_and_billing_addresses": {
+        "shipping_address_column": {
+            "column_letter": "E",
+            "column_name": "Shipping Address",
+            "column_example_data": "123 Main St, Toronto, M5V 2T6, 456 Oak Ave, Vancouver, V6B 1A1"
+        },
+        "billing_address_column": {
+            "column_letter": "J",
+            "column_name": "Billing Address", 
+            "column_example_data": "123 Main St, Toronto, M5V 2T6, 456 Oak Ave, Vancouver, V6B 1A1"
+        }
+    },
+    "additional_fields": {
+        "additional_field_1": {
+            "column_letter": "K",
+            "column_name": "Company Name",
+            "column_example_data": "Acme Corp, Smith Industries, Johnson & Associates"
+        },
+        "additional_field_2": {
+            "column_letter": "L",
+            "column_name": "Job Title",
+            "column_example_data": "Manager, Developer, Sales Representative"
+        },
+        "additional_field_3": {
+            "column_letter": "M",
+            "column_name": "Notes",
+            "column_example_data": "Preferred contact time: Evening, Gate code 1234, Special delivery instructions"
+        }
+    }
 }
 """
 

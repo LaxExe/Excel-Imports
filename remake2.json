@@ -1,0 +1,254 @@
+{
+    "clean_items": [
+        {
+            "missing_parts_of_address": true,
+            "email": "None",
+            "phone_number": "None",
+            "full_name": "2164613 Ontario Inc.",
+            "shipping_address": [
+                {
+                    "street_address": "473 Albert St.",
+                    "postal_code": "K1R 5B4",
+                    "city": "Ottawa",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "473 Albert St.",
+                    "postal_code": "K1R 5B4",
+                    "city": "Ottawa",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "additional_fields": "Customer: 2164613 Ontario Inc."
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "rodayotte@yahoo.ca",
+            "phone_number": "Phone:(613) 227-7997 Fax:(613) 256-8998",
+            "full_name": "2241497 Ontario Limited",
+            "shipping_address": [
+                {
+                    "street_address": "1931 Highway 7",
+                    "postal_code": "L4K 1V5",
+                    "city": "Concord",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "1931 Highway 7",
+                    "postal_code": "L4K 1V5",
+                    "city": "Concord",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "additional_fields": "Customer: 2241497 Ontario Limited"
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "Rodayotte@yahoo.ca, sveta@elmdevelopments.com, d.osypowich@elmdevelopments.com",
+            "phone_number": "Phone:(613) 227-7997 - Rod Fax:(613) 256-8998",
+            "full_name": "Rodayotte",
+            "shipping_address": [
+                {
+                    "street_address": "Almonte Plaza 430 Ontario St.",
+                    "postal_code": null,
+                    "city": "Almonte",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "c/o 2241497 Ontario Limited Concord Ontario L4K 1V5 c/o Jason D'Elia",
+                    "postal_code": "L4K 1V5",
+                    "city": "Concord",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "additional_fields": "Customer: Almonte Plaza Inc."
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "snovak@bergrealty.ca",
+            "phone_number": "Phone:613-831-0700",
+            "full_name": "Snovak",
+            "shipping_address": [
+                {
+                    "street_address": "Claridge Plaza 3",
+                    "postal_code": null,
+                    "city": null,
+                    "province_or_state_name": null,
+                    "country": null
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "106 Westover Crescent",
+                    "postal_code": "K2T 0K6",
+                    "city": "Ottawa",
+                    "province_or_state_name": "ON",
+                    "country": "Canada"
+                }
+            ],
+            "additional_fields": "Customer: 242 Rideau Street"
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "None",
+            "phone_number": "None",
+            "full_name": "None",
+            "shipping_address": [
+                {
+                    "street_address": "242 Rideau Street",
+                    "postal_code": "K1N 5Y3",
+                    "city": "Ottawa",
+                    "province_or_state_name": "ON",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": null,
+                    "postal_code": null,
+                    "city": null,
+                    "province_or_state_name": null,
+                    "country": null
+                }
+            ],
+            "additional_fields": "Customer: None"
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "None",
+            "phone_number": "None",
+            "full_name": "2553395 Ontario Inc.",
+            "shipping_address": [
+                {
+                    "street_address": "400 Earl Grey Dr., Unit B3",
+                    "postal_code": "K2T 1B9",
+                    "city": "Kanata",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "400 Earl Grey Dr., Unit B3",
+                    "postal_code": "K2T 1B9",
+                    "city": "Kanata",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "additional_fields": "Customer: 2553395 Ontario Inc."
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "invoices@hein.ca",
+            "phone_number": "None",
+            "full_name": "No Name",
+            "shipping_address": [
+                {
+                    "street_address": "Pembroke Regional Hospital",
+                    "postal_code": null,
+                    "city": null,
+                    "province_or_state_name": null,
+                    "country": null
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "275 Michael Cowpland Drive",
+                    "postal_code": "K2M 2G2",
+                    "city": null,
+                    "province_or_state_name": null,
+                    "country": null
+                }
+            ],
+            "additional_fields": "Customer: 275 Michael Cowpland Drive, K2M 2G2"
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "None",
+            "phone_number": "None",
+            "full_name": "None",
+            "shipping_address": [
+                {
+                    "street_address": null,
+                    "postal_code": null,
+                    "city": null,
+                    "province_or_state_name": null,
+                    "country": null
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": null,
+                    "postal_code": null,
+                    "city": null,
+                    "province_or_state_name": null,
+                    "country": null
+                }
+            ],
+            "additional_fields": "Customer: None"
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "None",
+            "phone_number": "None",
+            "full_name": "None",
+            "shipping_address": [
+                {
+                    "street_address": "Day Surgery & In Patient",
+                    "postal_code": null,
+                    "city": null,
+                    "province_or_state_name": null,
+                    "country": null
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": null,
+                    "postal_code": null,
+                    "city": null,
+                    "province_or_state_name": null,
+                    "country": null
+                }
+            ],
+            "additional_fields": "Customer: None"
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "None",
+            "phone_number": "None",
+            "full_name": "None",
+            "shipping_address": [
+                {
+                    "street_address": null,
+                    "postal_code": null,
+                    "city": null,
+                    "province_or_state_name": null,
+                    "country": null
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": null,
+                    "postal_code": null,
+                    "city": null,
+                    "province_or_state_name": null,
+                    "country": null
+                }
+            ],
+            "additional_fields": "Customer: None"
+        }
+    ]
+}

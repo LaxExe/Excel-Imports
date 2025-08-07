@@ -1,0 +1,254 @@
+{
+    "clean_items": [
+        {
+            "missing_parts_of_address": true,
+            "email": "None",
+            "phone_number": "None",
+            "full_name": "None",
+            "shipping_address": [
+                {
+                    "street_address": "Suite 105",
+                    "postal_code": null,
+                    "city": "Perth",
+                    "province_or_state_name": "Ontario",
+                    "country": null
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": null,
+                    "postal_code": null,
+                    "city": null,
+                    "province_or_state_name": null,
+                    "country": null
+                }
+            ],
+            "additional_fields": "Customer: None"
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "None",
+            "phone_number": "None",
+            "full_name": "415 Legget Leaseholds Inc.",
+            "shipping_address": [
+                {
+                    "street_address": "555 Legget Dr., Suite 206",
+                    "postal_code": "K2K 2X3",
+                    "city": "Kanata",
+                    "province_or_state_name": "Ontario",
+                    "country": null
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "555 Legget Dr., Suite 206",
+                    "postal_code": "K2K 2X3",
+                    "city": "Kanata",
+                    "province_or_state_name": "Ontario",
+                    "country": null
+                }
+            ],
+            "additional_fields": "Customer: 415 Legget Leaseholds Inc."
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "None",
+            "phone_number": "None",
+            "full_name": "4site Retail Services Inc.",
+            "shipping_address": [
+                {
+                    "street_address": "3 Adi Dassler Way",
+                    "postal_code": "N3L 0B9",
+                    "city": "Paris",
+                    "province_or_state_name": "Ontario",
+                    "country": null
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "3 Adi Dassler Way",
+                    "postal_code": "N3L 0B9",
+                    "city": "Paris",
+                    "province_or_state_name": "Ontario",
+                    "country": null
+                }
+            ],
+            "additional_fields": "Customer: 4Site Retail Services Inc."
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "ottawahandymanservices.ca@gmail.com",
+            "phone_number": "None",
+            "full_name": "Ottawahandymanservicesca",
+            "shipping_address": [
+                {
+                    "street_address": "112 Sorento St",
+                    "postal_code": "K2J 0B1",
+                    "city": "Nepean",
+                    "province_or_state_name": "ON",
+                    "country": null
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "112 Sorento St",
+                    "postal_code": "K2J 0B1",
+                    "city": "Nepean",
+                    "province_or_state_name": "ON",
+                    "country": null
+                }
+            ],
+            "additional_fields": "Customer: 5010645 Ontario Ltd."
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "stephspin@gmail.com",
+            "phone_number": "Phone:613-229-4485 - Charlie",
+            "full_name": "Stephspin",
+            "shipping_address": [
+                {
+                    "street_address": "52 Abbott St.",
+                    "postal_code": null,
+                    "city": "Smiths Falls",
+                    "province_or_state_name": "Ontario",
+                    "country": null
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "52 Abbott St.",
+                    "postal_code": null,
+                    "city": "Smiths Falls",
+                    "province_or_state_name": "Ontario",
+                    "country": null
+                }
+            ],
+            "additional_fields": "Customer: 52 Abbot St."
+        },
+        {
+            "missing_parts_of_address": false,
+            "email": "cneville@aquatopiaconservatory.com",
+            "phone_number": "Phone:613-225-7663",
+            "full_name": "No Name",
+            "shipping_address": [
+                {
+                    "street_address": "2710 March Rd.",
+                    "postal_code": "K0A 1L0",
+                    "city": "Ottawa",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "2710 March Rd.",
+                    "postal_code": "K0A 1L0",
+                    "city": "Ottawa",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "additional_fields": "Customer: 613-225-7663"
+        },
+        {
+            "missing_parts_of_address": false,
+            "email": "ccbelda@gmail.com",
+            "phone_number": "Phone:613-299-1979",
+            "full_name": "No Name",
+            "shipping_address": [
+                {
+                    "street_address": "16 Sheffield Street",
+                    "postal_code": "K7S 0A2",
+                    "city": "Arnprior",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "16 Sheffield Street",
+                    "postal_code": "K7S 0A2",
+                    "city": "Arnprior",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "additional_fields": "Customer: 613-299-1979"
+        },
+        {
+            "missing_parts_of_address": false,
+            "email": "beth@frecon.ca",
+            "phone_number": "Phone:613-445-2944",
+            "full_name": "No Name",
+            "shipping_address": [
+                {
+                    "street_address": "1235 South Russell Road, Box 278",
+                    "postal_code": "K4R 1E1",
+                    "city": "Russell",
+                    "province_or_state_name": "Ontario",
+                    "country": null
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "1235 South Russell Road, Box 278",
+                    "postal_code": "K4R 1E1",
+                    "city": "Russell",
+                    "province_or_state_name": "Ontario",
+                    "country": null
+                }
+            ],
+            "additional_fields": "Customer: 613-445-2944"
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "k.hanes@frecon.ca",
+            "phone_number": "None",
+            "full_name": "Khanes",
+            "shipping_address": [
+                {
+                    "street_address": "Ashbury College362 Mariposa Ave",
+                    "postal_code": null,
+                    "city": "Ottawa",
+                    "province_or_state_name": "Ontario",
+                    "country": null
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "1235 South Russell Rd.",
+                    "postal_code": "K4R 1E1",
+                    "city": "Russell",
+                    "province_or_state_name": "Ontario",
+                    "country": null
+                }
+            ],
+            "additional_fields": "Customer: Ashbury College"
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "accounting@frecon.ca, beth@frecon.ca, m.jones@frecon.ca",
+            "phone_number": "None",
+            "full_name": "Accounting",
+            "shipping_address": [
+                {
+                    "street_address": "Canterbury H.S.900 Canterbury Ave.",
+                    "postal_code": null,
+                    "city": "Ottawa",
+                    "province_or_state_name": "Ontario",
+                    "country": null
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "1235 South Russell Road, Box 278",
+                    "postal_code": "K4R 1E1",
+                    "city": "Russell",
+                    "province_or_state_name": "Ontario",
+                    "country": null
+                }
+            ],
+            "additional_fields": "Customer: Canterbury H.S."
+        }
+    ]
+}

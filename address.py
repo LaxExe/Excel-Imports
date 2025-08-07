@@ -92,7 +92,7 @@ def column_1_address_skip(address, format_str, separator, required_format):
     return result_string
 
 
-def column_multi_address(row, row_number, json_path="info.json"):
+def column_multi_address(row_dict, row_num, json_path):
     """
     Handles multi-column address rows.
 
@@ -133,7 +133,7 @@ def column_multi_address(row, row_number, json_path="info.json"):
     
     # Get additional address columns from the JSON configuration
     # These are secondary fields like province/state, country
-    additional_cols = info_json.get("additional_address_information", {})
+    additional_cols = row_dict.get("additional_address_information") or {}
 
     # Build unified address mapping that combines both main and additional fields
     # This creates a single dictionary that maps field names to their column letters
@@ -159,11 +159,11 @@ def column_multi_address(row, row_number, json_path="info.json"):
         if col_letter:  # Field exists in JSON configuration
             # Create the cell reference (e.g., "A2", "B2", "C2")
             # This tells us exactly which cell in the Excel row contains this address part
-            key = f"{col_letter}{row_number}"
+            key = f"{col_letter}{row_num}"
             
             # Get the value from the row dictionary and strip whitespace
             # If the cell doesn't exist, default to empty string
-            value = row.get(key, "").strip()
+            value = row_dict.get(key, "").strip()
 
             # Validate the address field value
             # Address parts should be between 2 and 40 characters
@@ -200,7 +200,7 @@ def column_multi_address(row, row_number, json_path="info.json"):
     # Try to fill missing fields using geopy before returning
     # If geopy can't fill a field, we leave it missing (don't send to AI)
     if needs_ai:
-        print(f"Attempting to fill missing address fields with geopy for row {row_number}...")
+        print(f"Attempting to fill missing address fields with geopy for row {row_num}...")
         geopy_result = fill_missing_address_with_geopy(result, needs_ai, address_fields)
         
         if isinstance(geopy_result, tuple) and len(geopy_result) == 2:
@@ -397,4 +397,4 @@ def street_and_city(street, city):
     return "No Results Found"
   except Exception as e:
     return "No Results Found"
- 
+

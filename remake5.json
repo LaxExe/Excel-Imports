@@ -1,0 +1,254 @@
+{
+    "clean_items": [
+        {
+            "missing_parts_of_address": true,
+            "email": "accounting@frecon.ca, beth@frecon.ca, m.jones@frecon.ca",
+            "phone_number": "",
+            "full_name": "Accounting",
+            "shipping_address": [
+                {
+                    "street_address": "1300 Kitchener Ave.",
+                    "postal_code": null,
+                    "city": "Ottawa",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "1235 South Russell Road, Box 278",
+                    "postal_code": "K4R 1E1",
+                    "city": "Russell",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "additional_fields": "Customer: Clifford Bowey Public School"
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "accounting@frecon.ca, beth@frecon.ca, m.jones@frecon.ca",
+            "phone_number": "",
+            "full_name": "Accounting",
+            "shipping_address": [
+                {
+                    "street_address": "480 Cope Drive",
+                    "postal_code": "K2V 0B8",
+                    "city": "Ottawa",
+                    "province_or_state_name": "Ontario",
+                    "country": null
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "1235 South Russell Road, Box 278",
+                    "postal_code": "K4R 1E1",
+                    "city": "Russell",
+                    "province_or_state_name": "Ontario",
+                    "country": null
+                }
+            ],
+            "additional_fields": "Customer: Fernbank School"
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "accounting@frecon.ca, beth@frecon.ca, m.jones@frecon.ca",
+            "phone_number": "Phone:613-445-2944",
+            "full_name": "Accounting",
+            "shipping_address": [
+                {
+                    "street_address": "2060 Ogilvie Rd",
+                    "postal_code": null,
+                    "city": "Ottawa",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "1235 South Russell Road, Box 278",
+                    "postal_code": "K4R 1E1",
+                    "city": "Russell",
+                    "province_or_state_name": "Ontario",
+                    "country": null
+                }
+            ],
+            "additional_fields": "Customer: Gloucester High School"
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "accounting@frecon.ca, beth@frecon.ca, m.jones@frecon.ca",
+            "phone_number": "",
+            "full_name": "Accounting",
+            "shipping_address": [
+                {
+                    "street_address": "2176 Huntley Rd",
+                    "postal_code": null,
+                    "city": "Stittsville",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "1235 South Russell Road, Box 278",
+                    "postal_code": "K4R 1E1",
+                    "city": "Russell",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "additional_fields": "Customer: Goulbourne Middle School"
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "accounting@frecon.ca, beth@frecon.ca, m.jones@frecon.ca",
+            "phone_number": "",
+            "full_name": "Accounting",
+            "shipping_address": [
+                {
+                    "street_address": "2025 Lanthier Dr",
+                    "postal_code": null,
+                    "city": "Ottawa",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "1235 South Russell Rd.",
+                    "postal_code": "K4R 1E1",
+                    "city": "Russell",
+                    "province_or_state_name": "Ontario",
+                    "country": null
+                }
+            ],
+            "additional_fields": "Customer: Innovative Community Support Services"
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "accounting@frecon.ca, beth@frecon.ca, m.jones@frecon.ca",
+            "phone_number": "",
+            "full_name": "Accounting",
+            "shipping_address": [
+                {
+                    "street_address": "170 Greenbank Rd. Nepean",
+                    "postal_code": "K2H 5V2",
+                    "city": null,
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "1235 South Russell Road, Box 278",
+                    "postal_code": "K4R 1E1",
+                    "city": "Russell",
+                    "province_or_state_name": "Ontario",
+                    "country": null
+                }
+            ],
+            "additional_fields": "Customer: Knoxdale Public School"
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "k.hanes@frecon.ca",
+            "phone_number": "",
+            "full_name": "Khanes",
+            "shipping_address": [
+                {
+                    "street_address": "2701 8th Line Rd",
+                    "postal_code": null,
+                    "city": "Metcalfe",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "1235 South Russell Rd.",
+                    "postal_code": "K4R 1E1",
+                    "city": "Russell",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "additional_fields": "Customer: Metcalfe Public School"
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "accounting@frecon.ca, beth@frecon.ca, m.jones@frecon.ca",
+            "phone_number": "Phone:613-445-2944",
+            "full_name": "Accounting",
+            "shipping_address": [
+                {
+                    "street_address": "1515 Tenth Line Rd.",
+                    "postal_code": null,
+                    "city": "Orleans",
+                    "province_or_state_name": "Ontario",
+                    "country": null
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "1235 South Russell Road, Box 278",
+                    "postal_code": "K4R 1E1",
+                    "city": "Russell",
+                    "province_or_state_name": "Ontario",
+                    "country": null
+                }
+            ],
+            "additional_fields": "Customer: Sir Wilfred Laurier School"
+        },
+        {
+            "missing_parts_of_address": false,
+            "email": "accounts@aquatria.ca",
+            "phone_number": "Phone:613-714-1110",
+            "full_name": "No Name",
+            "shipping_address": [
+                {
+                    "street_address": "11 Rue Aquatria",
+                    "postal_code": "K0A 1M0",
+                    "city": "Casselman",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "11 Rue Aquatria",
+                    "postal_code": "K0A 1M0",
+                    "city": "Casselman",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "additional_fields": "Customer: 613-714-1110"
+        },
+        {
+            "missing_parts_of_address": true,
+            "email": "scott@mminterior.ca",
+            "phone_number": "Phone:613-733-7507",
+            "full_name": "No Name",
+            "shipping_address": [
+                {
+                    "street_address": "255 Albert St",
+                    "postal_code": "K1P 6A9",
+                    "city": "Ottawa",
+                    "province_or_state_name": "Ontario",
+                    "country": "Canada"
+                }
+            ],
+            "billing_address": [
+                {
+                    "street_address": "861 Boyd Avenue",
+                    "postal_code": "K2A 2C0",
+                    "city": null,
+                    "province_or_state_name": null,
+                    "country": null
+                }
+            ],
+            "additional_fields": "Customer: 613-733-7507 1"
+        }
+    ]
+}

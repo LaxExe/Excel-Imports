@@ -4,7 +4,7 @@
             "missing_parts_of_address": false,
             "email": "invoices@tphinc.ca",
             "phone_number": "",
-            "full_name": "1070452 Ontario Inc.",
+            "full_name": "Invoices",
             "shipping_address": [
                 {
                     "street_address": "1528 Startop Road, Unit # 7",
@@ -23,13 +23,13 @@
                     "country": "Canada"
                 }
             ],
-            "additional_fields": "additional_field_1 : 1070452 Ontario Inc."
+            "additional_fields": "Customer: 1070452 Ontario Inc."
         },
         {
             "missing_parts_of_address": false,
             "email": "david@stoneworks.ca",
             "phone_number": "",
-            "full_name": "110213354 Canada Inc.",
+            "full_name": "David",
             "shipping_address": [
                 {
                     "street_address": "2742 ST.Joseph Blvd",
@@ -48,13 +48,13 @@
                     "country": "Canada"
                 }
             ],
-            "additional_fields": "additional_field_1 : 110213354 Canada Inc."
+            "additional_fields": "Customer: 110213354 Canada Inc."
         },
         {
             "missing_parts_of_address": false,
             "email": "karl@lakadd.com",
             "phone_number": "Phone:613-875-5275",
-            "full_name": "11445251 Canada Inc.",
+            "full_name": "Karl",
             "shipping_address": [
                 {
                     "street_address": "1755 Stamp Road",
@@ -73,7 +73,7 @@
                     "country": "Canada"
                 }
             ],
-            "additional_fields": "additional_field_1 : 11445251 Canada Inc."
+            "additional_fields": "Customer: 11445251 Canada Inc."
         },
         {
             "missing_parts_of_address": false,
@@ -98,13 +98,13 @@
                     "country": "Canada"
                 }
             ],
-            "additional_fields": "additional_field_1 : 1150107 Ontario Inc."
+            "additional_fields": "Customer: 1150107 Ontario Inc."
         },
         {
             "missing_parts_of_address": false,
             "email": "xavier@portesltr.com",
             "phone_number": "Phone:819-243-3306",
-            "full_name": "12131242 Canada Inc Ltr Portes/doors",
+            "full_name": "Xavier",
             "shipping_address": [
                 {
                     "street_address": "1448 rue Saint-Louis",
@@ -123,16 +123,16 @@
                     "country": "Canada"
                 }
             ],
-            "additional_fields": "additional_field_1 : 12131242 Canada Inc  LTR Portes/Doors"
+            "additional_fields": "Customer: 12131242 Canada Inc  LTR Portes/Doors"
         },
         {
             "missing_parts_of_address": false,
             "email": "1729.management@hotmail.ca",
             "phone_number": "Phone:613-224-4488",
-            "full_name": "122184 Ontario Ltd.",
+            "full_name": "1729management",
             "shipping_address": [
                 {
-                    "street_address": "1729 Bank street",
+                    "street_address": "122184 Ontario Ltd.1729 Bank street",
                     "postal_code": null,
                     "city": "ottawa",
                     "province_or_state_name": "Ontario",
@@ -148,13 +148,13 @@
                     "country": "Canada"
                 }
             ],
-            "additional_fields": "additional_field_1 : 122184 Ontario Ltd."
+            "additional_fields": "Customer: 122184 Ontario Ltd."
         },
         {
             "missing_parts_of_address": false,
             "email": "SWood@pattenhomes.com",
             "phone_number": "Phone:613-831-5674",
-            "full_name": "1332741 Ontario Inc",
+            "full_name": "Swood",
             "shipping_address": [
                 {
                     "street_address": "707 Ploughman Place",
@@ -173,13 +173,13 @@
                     "country": "Canada"
                 }
             ],
-            "additional_fields": "additional_field_1 : 1332741 Ontario Inc"
+            "additional_fields": "Customer: 1332741 Ontario Inc"
         },
         {
             "missing_parts_of_address": false,
             "email": "pph@pphinc.ca",
             "phone_number": "",
-            "full_name": "1528 Startop Rd, K1B 3W6 No Name",
+            "full_name": "No Name",
             "shipping_address": [
                 {
                     "street_address": "1528 Startop Rd",
@@ -198,13 +198,13 @@
                     "country": "Canada"
                 }
             ],
-            "additional_fields": "additional_field_1 : 1528 Startop Rd, K1B 3W6"
+            "additional_fields": "Customer: 1528 Startop Rd, K1B 3W6"
         },
         {
             "missing_parts_of_address": false,
             "email": "invoices@tphinc.ca",
             "phone_number": "",
-            "full_name": "1528 Startop Rd, K1b 3w6:tete Au Pied",
+            "full_name": "Invoices",
             "shipping_address": [
                 {
                     "street_address": "Tete au Pied2768 Laurier St",
@@ -223,13 +223,13 @@
                     "country": "Canada"
                 }
             ],
-            "additional_fields": "additional_field_1 : Tete au Pied"
+            "additional_fields": "Customer: Tete au Pied"
         },
         {
             "missing_parts_of_address": false,
             "email": "accounting@appletreemedicalgroup.com",
             "phone_number": "",
-            "full_name": "1595 Merivale Rd No Name",
+            "full_name": "No Name",
             "shipping_address": [
                 {
                     "street_address": "1595 Merivale Rd",
@@ -248,7 +248,7 @@
                     "country": "Canada"
                 }
             ],
-            "additional_fields": "additional_field_1 : 1595 Merivale Rd"
+            "additional_fields": "Customer: 1595 Merivale Rd"
         }
     ]
 }

@@ -79,6 +79,8 @@ def extract_country_code(address):
 
 
 def clean_phone_number(raw_phone, full_name, email, address):
+    full_name = full_name or ""
+    email = email or ""
     """
     Cleans and standardizes a phone number:
     - Preserves extensions like 'x123'
