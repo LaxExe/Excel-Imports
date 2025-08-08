@@ -4,7 +4,10 @@ import json
 def safe_str(val):
     if isinstance(val, (dict, list)):
         return json.dumps(val)
-    return str(val) if val is not None else ""
+    # Handle None values
+    if val is None:
+        return ""
+    return str(val)
 
 def export_to_excel(data, output_file):
     wb = Workbook()

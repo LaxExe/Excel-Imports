@@ -91,13 +91,21 @@ def clean_phone_number(raw_phone, full_name, email, address):
     - If completely invalid, returns original input 
     """
 
+    # Handle None or empty phone numbers first
+    if raw_phone is None:
+        return ""
+    
+    # Convert to string and strip whitespace for consistent processing
+    raw_str = str(raw_phone).strip()
+    
+    # Check if the string is empty after stripping or is "None"
+    if not raw_str or raw_str.lower() == "none":
+        return ""
+
     # If phone is empty but we have name and email, return empty string
     # This handles cases where phone is optional but other fields are present
     if (not raw_phone or str(raw_phone).strip() == "") and full_name.strip() and email.strip():
         return ""
-
-    # Convert to string and strip whitespace for consistent processing
-    raw_str = str(raw_phone).strip()
 
     # Check if the input contains any text (like "Phone:", "Mobile:", etc.)
     # If it has text, return the original data completely unchanged
@@ -148,7 +156,7 @@ def clean_phone_number(raw_phone, full_name, email, address):
         # Leading zeros are not valid in international format
         phone_str = phone_str.lstrip('0')
 
-    # If phone is too short after cleaning, return original instead of "INVALID"
+    # If phone is too short after cleaning, return original
     # Minimum length for a valid phone number is 7 digits
     if len(phone_str) < 7:
         return raw_str
@@ -178,7 +186,9 @@ def clean_phone_number(raw_phone, full_name, email, address):
             elif len(digits_only) == 9 and region == "US":
                 # Could be a valid number missing area code, return as is
                 return phone_str + extension
-            return raw_str  # Return original instead of "INVALID"
+            else:
+                # If all else fails, return the original input
+                return raw_str
             
     except phonenumbers.NumberParseException:
         # Last resort: if it's all digits and 10–15 digits, treat as raw
@@ -191,42 +201,10 @@ def clean_phone_number(raw_phone, full_name, email, address):
         # Some US numbers might be missing area code but still valid
         elif re.fullmatch(r"\d{9}", digits_only) and region == "US":
             return phone_str + extension
-            
-    """
-    Cleans and standardizes a phone number:
-    - Keeps the country code if present
-    - Infers country code from address if not present
-    - If phone is empty but name and email are present, returns empty string
-    - Returns phone number in +E.164 format if valid
-    """
+        else:
+            # If all else fails, return the original input
+            return raw_str
 
-    # If phone is empty and name/email present - return ""
-    if (not raw_phone or str(raw_phone).strip() == "") and full_name.strip() and email.strip():
-        return ""
-
-    phone_str = str(raw_phone).strip()
-    # Remove all non-numeric characters except '+'
-    phone_str = re.sub(r"[^\d+]", "", phone_str)
-
-    # If phone starts with '+', parse it directly
-    if phone_str.startswith("+"):
-        try:
-            parsed = phonenumbers.parse(phone_str, None)
-            if phonenumbers.is_valid_number(parsed):
-                return phonenumbers.format_number(parsed, phonenumbers.PhoneNumberFormat.E164)
-        except phonenumbers.NumberParseException:
-            return ""
-    else:
-        # Try to infer region from address
-        region = extract_country_code(address) or "US"
-        try:
-            parsed = phonenumbers.parse(phone_str, region)
-            if phonenumbers.is_valid_number(parsed):
-                return phonenumbers.format_number(parsed, phonenumbers.PhoneNumberFormat.E164)
-        except phonenumbers.NumberParseException:
-            return ""
-
-    return "MISSING"
 
 def clean_ai_response(response_text: str) -> str:
     text = response_text.strip()
