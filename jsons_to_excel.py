@@ -44,6 +44,9 @@ def build_full_address(address_info):
 def append_cleaned_json_to_excel(directory, output_excel):
  
   results = []
+  # Dictionary to collect discarded rows
+  discarded_rows = {}  
+  
   # If output_excel doesn't exist, exit the function
 
   # Otherwise, load the existing workbook
@@ -95,21 +98,84 @@ def append_cleaned_json_to_excel(directory, output_excel):
         full_shipping_address = shipping_address_info.get("full_address") or build_full_address(shipping_address_info)
         full_billing_address = billing_address_info.get("full_address") or build_full_address(billing_address_info)
 
+      # Get the name
+      name = item.get("full_name", "value-missing")
+      
+      #  Check if name is empty and set display_name
+      if name == "":
+          display_name = ""  
+          # TODO: Add color formatting for empty name cells
+      else:
+          display_name = name
 
+      # email --> name/number --> discard logic
+      # Check if we have the required identifiers
+      has_email = item.get("email") and item.get("email") not in [None, "None", "value-missing", ""]
+      has_name = name and name not in [None, "None", "value-missing", ""]
+      has_phone = item.get("phone_number") and item.get("phone_number") not in [None, "None", "value-missing", ""]
+
+      # Must have name AND (email OR phone)
+      if not has_name or (not has_email and not has_phone):
+          print(f"Row {count} discarded: Missing name or both email and phone")
+          
+          #  key - row # and value # (collect discarded rows)
+          discarded_rows[count] = {
+              "email": item.get("email", "value-missing"),
+              "phone_number": item.get("phone_number", "value-missing"),
+              "full_name": name,
+              "shipping_address": full_shipping_address,
+              "billing_address": full_billing_address,
+              "additional_fields": item.get("additional_fields", "value-missing")
+          }
+          continue  # Skip this row
+
+      # Append dict (for valid rows)
+      # If we get here, the data is GOOD - append to Excel
       row_data = {
-        "email": item.get("email", "value-missing"),
-        "phone_number": item.get("phone_number", "value-missing"),
-        "full_name": item.get("full_name", "value-missing"),
-        "shipping_address": full_shipping_address,
-        "billing_address": full_billing_address,
-        "additional_fields" : item.get("additional_fields", "value-missing")
+          "email": "" if item.get("email") in [None, "None", "value-missing"] else item.get("email", ""),
+          "phone_number": "" if item.get("phone_number") in [None, "None", "value-missing"] else item.get("phone_number", ""),
+          "full_name": display_name if display_name not in [None, "None", "value-missing", ""] else name,
+          "shipping_address": full_shipping_address,
+          "billing_address": full_billing_address,
+          "additional_fields": item.get("additional_fields", "")
       }
- 
-      ws.append([row_data.get(header, "") for header in headers])
+
+      # Ensure no None values remain in row_data
+      for key in row_data:
+          if row_data[key] is None:
+              row_data[key] = ""
+
+      # Add color formatting for empty name cells
+      if display_name == "":
+          # Find the "Full Name" column and add red background
+          try:
+              name_col_index = headers.index("Full Name") + 1
+              cell = ws.cell(row=next_row, column=name_col_index)
+              cell.fill = PatternFill(start_color="FFCCCC", end_color="FFCCCC", fill_type="solid")
+          except ValueError:
+              pass  # Column not found, skip coloring
+
+      # Append GOOD data to Excel - ensure no None values
+      excel_row = []
+      for header in headers:
+          value = row_data.get(header, "")
+          if value is None:
+              value = ""
+          excel_row.append(value)
+      
+      ws.append(excel_row)
       results.append(row_data)
       next_row += 1
  
+  
+  # Save discarded rows to a file for review
+  if discarded_rows:
+      with open("discarded_rows.json", "w") as f:
+          json.dump(discarded_rows, f, indent=2)
+      print(f"Discarded rows saved to discarded_rows.json")
+  
   wb.save(output_excel)
   print(results)
-  print(f"Data appended to {output_excel} successfully from {len(sorted_files)} remake files.")
+  
+  return results, discarded_rows  # Return both valid and discarded data
  
